@@ -18,6 +18,8 @@ class ReaderViewController: UIViewController {
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     var qrCodeFrameView: UIView?
     
+    @IBOutlet weak var stackView: UIStackView!
+    
     struct codeType {
         static let supportedTypes = [AVMetadataObject.ObjectType.upce,
                                      AVMetadataObject.ObjectType.code39,
@@ -38,6 +40,7 @@ class ReaderViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.darkGray
+        self.tabBarController?.tabBar.isHidden = true
         startSession()
     }
     
@@ -104,7 +107,7 @@ extension ReaderViewController: AVCaptureMetadataOutputObjectsDelegate {
         videoPreviewLayer?.frame = view.layer.bounds
         videoPreviewLayer?.videoGravity = .resizeAspectFill
         view.layer.addSublayer(videoPreviewLayer!)
-        
+        self.view.bringSubview(toFront: self.stackView)
         captureSession?.startRunning()
     }
     

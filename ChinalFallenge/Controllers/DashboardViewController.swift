@@ -12,9 +12,16 @@ class DashboardViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         
+        tabBarHidden()
     }
-
+    
+    func tabBarHidden() {
+        if self.tabBarController?.tabBar.isHidden == true {
+            tabBarController?.tabBar.isHidden = false
+        }
+    }
+    
+    
 
 }

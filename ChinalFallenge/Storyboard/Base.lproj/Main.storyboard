@@ -35,18 +35,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bvJ-7Q-5ag">
-                                <rect key="frame" x="129" y="537" width="117" height="36"/>
+                                <rect key="frame" x="147" y="568" width="80" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oow-UI-y10">
-                                        <rect key="frame" x="0.0" y="0.0" width="69" height="36"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="Dismiss"/>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oow-UI-y10">
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="eF0-Q1-ZVI"/>
+                                            <constraint firstAttribute="width" constant="40" id="hEI-a1-tvw"/>
+                                        </constraints>
+                                        <state key="normal" title="Dismiss" image="X"/>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cn0-Aq-JS0">
-                                        <rect key="frame" x="69" y="0.0" width="48" height="36"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <state key="normal" title="Torch"/>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cn0-Aq-JS0">
+                                        <rect key="frame" x="40" y="0.0" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="vCq-BE-78i"/>
+                                            <constraint firstAttribute="height" constant="40" id="zF3-qi-vDz"/>
+                                        </constraints>
+                                        <state key="normal" title="Torch" image="torch"/>
                                         <connections>
                                             <action selector="torchStatus:" destination="Xbw-T4-Y9f" eventType="touchUpInside" id="VKL-60-8Xb"/>
                                         </connections>
@@ -124,4 +130,8 @@
             <point key="canvasLocation" x="1254" y="-823"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="X" width="663" height="663"/>
+        <image name="torch" width="1530" height="1509"/>
+    </resources>
 </document>

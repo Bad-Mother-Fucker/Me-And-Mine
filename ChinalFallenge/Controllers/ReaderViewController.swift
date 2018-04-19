@@ -73,7 +73,7 @@ class ReaderViewController: UIViewController {
     }
     
     @IBAction func torchStatus(_ sender: UIButton) {
-        flashLight()
+        flash()
     }
     
     @IBAction func dismissFromReaderView(_ sender: UIButton) {
@@ -140,6 +140,7 @@ extension ReaderViewController: AVCaptureMetadataOutputObjectsDelegate {
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         captureSession?.stopRunning()
         
+        // Get the metadata object.
         if let metadataObject = metadataObjects.first {
             guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else {return}
             guard let stringValue = readableObject.stringValue else {return}
@@ -147,20 +148,16 @@ extension ReaderViewController: AVCaptureMetadataOutputObjectsDelegate {
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             
             found(code: stringValue)
-            found2(cod: stringValue, objReadable: readableObject)
         }
         dismiss(animated: true)
+        performSegue(withIdentifier: "addDetailsItems", sender: self)
     }
     
     func found(code: String) {
         print(code)
     }
     
-    func found2 (cod: String, objReadable: AVMetadataMachineReadableCodeObject) {
-        performSegue(withIdentifier: "addDetailsItems", sender: self)
-    }
-    
-    func flashLight() {
+    func flash() {
         guard let device = AVCaptureDevice.default(for: AVMediaType.video) else {return}
         if (device.hasTorch) {
             if device.isTorchAvailable {

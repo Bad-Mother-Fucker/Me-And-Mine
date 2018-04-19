@@ -147,12 +147,17 @@ extension ReaderViewController: AVCaptureMetadataOutputObjectsDelegate {
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             
             found(code: stringValue)
+            found2(cod: stringValue, objReadable: readableObject)
         }
         dismiss(animated: true)
     }
     
     func found(code: String) {
         print(code)
+    }
+    
+    func found2 (cod: String, objReadable: AVMetadataMachineReadableCodeObject) {
+        performSegue(withIdentifier: "addDetailsItems", sender: self)
     }
     
     func flashLight() {

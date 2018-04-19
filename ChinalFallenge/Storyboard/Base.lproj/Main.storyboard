@@ -77,11 +77,27 @@
                         <outlet property="stackViewDismiss" destination="nZw-3v-dJj" id="lax-SM-3DB"/>
                         <outlet property="stackViewTorch" destination="bvJ-7Q-5ag" id="V19-Ui-CNc"/>
                         <outlet property="torchOnOff" destination="cn0-Aq-JS0" id="uy0-0s-mEq"/>
+                        <segue destination="1ec-LS-RXo" kind="show" identifier="addDetailsItems" id="jiD-A4-ANY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bYt-Mf-Wdl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1253.5999999999999" y="-27.436281859070466"/>
+        </scene>
+        <!--Details New Item View Controller-->
+        <scene sceneID="Eub-aD-yKU">
+            <objects>
+                <viewController storyboardIdentifier="addDetailsItems" id="1ec-LS-RXo" customClass="DetailsNewItemViewController" customModule="ChinalFallenge" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Mlc-u6-9mE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="yOL-AU-e7E"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tDi-Hf-35s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1254" y="843"/>
         </scene>
         <!--My items-->
         <scene sceneID="1AD-7I-cML">

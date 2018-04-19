@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FC74449320889ABF00095D3D /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC74449220889ABF00095D3D /* MyTabBarController.swift */; };
+		FC7444952088A2F100095D3D /* DetailsNewItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7444942088A2F100095D3D /* DetailsNewItemViewController.swift */; };
 		FC8C44C020873514004160C6 /* HomeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8C44BF20873514004160C6 /* HomeCollectionViewController.swift */; };
 		FC8C44C420873A8A004160C6 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8C44C320873A8A004160C6 /* DashboardViewController.swift */; };
 		FC8C44CE20873F36004160C6 /* ReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8C44CD20873F36004160C6 /* ReaderViewController.swift */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		FC74449220889ABF00095D3D /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
+		FC7444942088A2F100095D3D /* DetailsNewItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsNewItemViewController.swift; sourceTree = "<group>"; };
 		FC8C44BF20873514004160C6 /* HomeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeCollectionViewController.swift; path = ChinalFallenge/Controllers/HomeCollectionViewController.swift; sourceTree = SOURCE_ROOT; };
 		FC8C44C320873A8A004160C6 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DashboardViewController.swift; path = ChinalFallenge/Controllers/DashboardViewController.swift; sourceTree = SOURCE_ROOT; };
 		FC8C44CD20873F36004160C6 /* ReaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReaderViewController.swift; path = ChinalFallenge/Controllers/ReaderViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -86,6 +88,7 @@
 				FC8C44C320873A8A004160C6 /* DashboardViewController.swift */,
 				FC8C44CD20873F36004160C6 /* ReaderViewController.swift */,
 				FC8C44BF20873514004160C6 /* HomeCollectionViewController.swift */,
+				FC7444942088A2F100095D3D /* DetailsNewItemViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -282,6 +285,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCC2E3A32080E22A000C3974 /* AppDelegate.swift in Sources */,
+				FC7444952088A2F100095D3D /* DetailsNewItemViewController.swift in Sources */,
 				FC8C44C020873514004160C6 /* HomeCollectionViewController.swift in Sources */,
 				FC8C44C420873A8A004160C6 /* DashboardViewController.swift in Sources */,
 				FC8C44CE20873F36004160C6 /* ReaderViewController.swift in Sources */,

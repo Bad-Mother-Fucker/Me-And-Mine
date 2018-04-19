@@ -47,6 +47,9 @@
                                         <rect key="frame" x="69" y="0.0" width="48" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="Torch"/>
+                                        <connections>
+                                            <action selector="torchStatus:" destination="Xbw-T4-Y9f" eventType="touchUpInside" id="VKL-60-8Xb"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -56,7 +59,9 @@
                     </view>
                     <tabBarItem key="tabBarItem" tag="1" title="Camera" id="LvR-Ql-CKd"/>
                     <connections>
+                        <outlet property="dismissReaderViewControll" destination="oow-UI-y10" id="bZb-A3-f7F"/>
                         <outlet property="stackView" destination="bvJ-7Q-5ag" id="3Q4-Qw-0dw"/>
+                        <outlet property="torchOnOff" destination="cn0-Aq-JS0" id="P8I-UO-VXC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bYt-Mf-Wdl" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -19,6 +19,8 @@ class ReaderViewController: UIViewController {
     var qrCodeFrameView: UIView?
     
     @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var dismissReaderViewControll: UIButton!
+    @IBOutlet weak var torchOnOff: UIButton!
     
     struct codeType {
         static let supportedTypes = [AVMetadataObject.ObjectType.upce,
@@ -42,6 +44,7 @@ class ReaderViewController: UIViewController {
         view.backgroundColor = UIColor.darkGray
         self.tabBarController?.tabBar.isHidden = true
         startSession()
+//        authorizationTorch()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,6 +70,12 @@ class ReaderViewController: UIViewController {
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
     }
+    
+    @IBAction func torchStatus(_ sender: UIButton) {
+        flashLight()
+    }
+    
+    
     
 }
 
@@ -135,6 +144,31 @@ extension ReaderViewController: AVCaptureMetadataOutputObjectsDelegate {
     func found(code: String) {
         print(code)
     }
+    
+    func flashLight() {
+        guard let device = AVCaptureDevice.default(for: AVMediaType.video) else {return}
+        if (device.hasTorch) {
+            if device.isTorchAvailable {
+                do {
+                    try device.lockForConfiguration()
+                    if (device.torchMode == .on) {
+                        device.torchMode = .off
+                    } else {
+                        device.torchMode = .on
+                    }
+                    device.unlockForConfiguration()
+                } catch {
+                    print("Torch could not be used")
+                    print(error)
+                }
+            }
+            else {
+                print("Torch is not available")
+            }
+        }
+    }
+    
+    
     
 }
 

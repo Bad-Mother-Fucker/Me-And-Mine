@@ -20,7 +20,7 @@ class ReaderViewController: UIViewController {
     
     @IBOutlet weak var stackViewDismiss: UIStackView!
     @IBOutlet weak var stackViewTorch: UIStackView!
-    @IBOutlet weak var dismissReaderViewControll: UIButton!
+    
     @IBOutlet weak var torchOnOff: UIButton!
     
     struct codeType {
@@ -43,9 +43,7 @@ class ReaderViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.darkGray
-        self.tabBarController?.tabBar.isHidden = true
         startSession()
-//        authorizationTorch()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,6 +52,8 @@ class ReaderViewController: UIViewController {
         if captureSession?.isRunning == false {
             captureSession?.startRunning()
         }
+        
+        hiddenTabBar()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -76,7 +76,15 @@ class ReaderViewController: UIViewController {
         flashLight()
     }
     
+    @IBAction func dismissFromReaderView(_ sender: UIButton) {
+        self.tabBarController?.selectedIndex = 0
+    }
     
+    func hiddenTabBar() {
+        if self.tabBarController?.tabBar.isHidden == false {
+            tabBarController?.tabBar.isHidden = true
+        }
+    }
     
 }
 

@@ -62,6 +62,9 @@
                                             <constraint firstAttribute="height" constant="30" id="eNX-ki-3hu"/>
                                         </constraints>
                                         <state key="normal" title="Dismiss" image="X"/>
+                                        <connections>
+                                            <action selector="dismissFromReaderView:" destination="Xbw-T4-Y9f" eventType="touchUpInside" id="jaO-OB-LO7"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -71,7 +74,6 @@
                     </view>
                     <tabBarItem key="tabBarItem" tag="1" title="Camera" id="LvR-Ql-CKd"/>
                     <connections>
-                        <outlet property="dismissReaderViewControll" destination="oow-UI-y10" id="bZb-A3-f7F"/>
                         <outlet property="stackViewDismiss" destination="nZw-3v-dJj" id="lax-SM-3DB"/>
                         <outlet property="stackViewTorch" destination="bvJ-7Q-5ag" id="V19-Ui-CNc"/>
                         <outlet property="torchOnOff" destination="cn0-Aq-JS0" id="uy0-0s-mEq"/>
@@ -116,10 +118,10 @@
             </objects>
             <point key="canvasLocation" x="2204" y="-27.436281859070466"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--My Tab Bar Controller-->
         <scene sceneID="4Iq-8u-CbN">
             <objects>
-                <tabBarController storyboardIdentifier="camera" automaticallyAdjustsScrollViewInsets="NO" id="Uh6-d5-Dll" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="camera" automaticallyAdjustsScrollViewInsets="NO" id="Uh6-d5-Dll" customClass="MyTabBarController" customModule="ChinalFallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="gbM-TA-Q45">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>

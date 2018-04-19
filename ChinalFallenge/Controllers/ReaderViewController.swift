@@ -18,7 +18,8 @@ class ReaderViewController: UIViewController {
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     var qrCodeFrameView: UIView?
     
-    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var stackViewDismiss: UIStackView!
+    @IBOutlet weak var stackViewTorch: UIStackView!
     @IBOutlet weak var dismissReaderViewControll: UIButton!
     @IBOutlet weak var torchOnOff: UIButton!
     
@@ -116,7 +117,8 @@ extension ReaderViewController: AVCaptureMetadataOutputObjectsDelegate {
         videoPreviewLayer?.frame = view.layer.bounds
         videoPreviewLayer?.videoGravity = .resizeAspectFill
         view.layer.addSublayer(videoPreviewLayer!)
-        self.view.bringSubview(toFront: self.stackView)
+        self.view.bringSubview(toFront: self.stackViewTorch)
+        self.view.bringSubview(toFront: self.stackViewDismiss)
         captureSession?.startRunning()
     }
     

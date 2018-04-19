@@ -34,20 +34,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bvJ-7Q-5ag">
-                                <rect key="frame" x="147" y="568" width="80" height="40"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="bvJ-7Q-5ag">
+                                <rect key="frame" x="0.0" y="20" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oow-UI-y10">
-                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="40" id="eF0-Q1-ZVI"/>
-                                            <constraint firstAttribute="width" constant="40" id="hEI-a1-tvw"/>
-                                        </constraints>
-                                        <state key="normal" title="Dismiss" image="X"/>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cn0-Aq-JS0">
-                                        <rect key="frame" x="40" y="0.0" width="40" height="40"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="vCq-BE-78i"/>
                                             <constraint firstAttribute="height" constant="40" id="zF3-qi-vDz"/>
@@ -59,6 +51,20 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nZw-3v-dJj">
+                                <rect key="frame" x="339" y="22" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oow-UI-y10">
+                                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="30" id="SDd-rk-kiK"/>
+                                            <constraint firstAttribute="height" constant="30" id="eNX-ki-3hu"/>
+                                        </constraints>
+                                        <state key="normal" title="Dismiss" image="X"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="5HV-SE-0NS"/>
@@ -66,8 +72,9 @@
                     <tabBarItem key="tabBarItem" tag="1" title="Camera" id="LvR-Ql-CKd"/>
                     <connections>
                         <outlet property="dismissReaderViewControll" destination="oow-UI-y10" id="bZb-A3-f7F"/>
-                        <outlet property="stackView" destination="bvJ-7Q-5ag" id="3Q4-Qw-0dw"/>
-                        <outlet property="torchOnOff" destination="cn0-Aq-JS0" id="P8I-UO-VXC"/>
+                        <outlet property="stackViewDismiss" destination="nZw-3v-dJj" id="lax-SM-3DB"/>
+                        <outlet property="stackViewTorch" destination="bvJ-7Q-5ag" id="V19-Ui-CNc"/>
+                        <outlet property="torchOnOff" destination="cn0-Aq-JS0" id="uy0-0s-mEq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bYt-Mf-Wdl" userLabel="First Responder" sceneMemberID="firstResponder"/>

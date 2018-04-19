@@ -45,28 +45,12 @@ class DetailsNewItemViewController: UIViewController, UINavigationControllerDele
         
     }
     
-    func saveData(sender: AnyObject) {
+    func saveData(sender: UIBarButtonItem) {
         
     }
     
-    func dismissViewDetails (sender: AnyObject) {
-        dismiss(animated: true, completion: nil)
+    func dismissViewDetails (sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
     }
-
-
-//    func dismissPop(sender: AnyObject) {
-//        self.dismiss(animated: true, completion: nil)
-//    }
-    
-//
-//
-//    navigationBar.items = [navigationItem]
-//
-//
-//
-//
-//    func btn_clicked(sender: UIBarButtonItem) {
-//        // Do something
-//    }
     
 }

@@ -42,7 +42,6 @@ class ReaderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.darkGray
         startSession()
     }
     
@@ -52,8 +51,9 @@ class ReaderViewController: UIViewController {
         if captureSession?.isRunning == false {
             captureSession?.startRunning()
         }
-        
-        hiddenTabBar()
+        tabBarController?.tabBar.isHidden = true
+        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancell.png"), style: .done, target: self, action: #selector(dismissCameraView))
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -77,13 +77,12 @@ class ReaderViewController: UIViewController {
     }
     
     @IBAction func dismissFromReaderView(_ sender: UIButton) {
-        self.tabBarController?.selectedIndex = 0
+        self.tabBarController?.selectedIndex = 1
     }
     
-    func hiddenTabBar() {
-        if self.tabBarController?.tabBar.isHidden == false {
-            tabBarController?.tabBar.isHidden = true
-        }
+    @objc func dismissCameraView() {
+        self.dismiss(animated: true, completion: nil)
+        self.tabBarController?.selectedIndex = 1
     }
     
 }
@@ -165,8 +164,10 @@ extension ReaderViewController: AVCaptureMetadataOutputObjectsDelegate {
                     try device.lockForConfiguration()
                     if (device.torchMode == .on) {
                         device.torchMode = .off
+                        self.torchOnOff.setImage(UIImage(named: "flashOn.png"), for: .normal)
                     } else {
                         device.torchMode = .on
+                        self.torchOnOff.setImage(UIImage(named: "flashOff.png"), for: .normal)
                     }
                     device.unlockForConfiguration()
                 } catch {
@@ -179,9 +180,6 @@ extension ReaderViewController: AVCaptureMetadataOutputObjectsDelegate {
             }
         }
     }
-    
-    
-    
 }
 
 

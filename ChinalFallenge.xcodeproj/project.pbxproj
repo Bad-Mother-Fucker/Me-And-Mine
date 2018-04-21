@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FC74449320889ABF00095D3D /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC74449220889ABF00095D3D /* MyTabBarController.swift */; };
 		FC7444952088A2F100095D3D /* DetailsNewItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7444942088A2F100095D3D /* DetailsNewItemViewController.swift */; };
+		FC7444972089DAB700095D3D /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7444962089DAB700095D3D /* MyTabBarController.swift */; };
+		FC74449B208B498500095D3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC74449A208B498500095D3D /* Assets.xcassets */; };
 		FC8C44C020873514004160C6 /* HomeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8C44BF20873514004160C6 /* HomeCollectionViewController.swift */; };
 		FC8C44C420873A8A004160C6 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8C44C320873A8A004160C6 /* DashboardViewController.swift */; };
 		FC8C44CE20873F36004160C6 /* ReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8C44CD20873F36004160C6 /* ReaderViewController.swift */; };
 		FCC2E3A32080E22A000C3974 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC2E3A22080E22A000C3974 /* AppDelegate.swift */; };
 		FCC2E3A82080E22A000C3974 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCC2E3A62080E22A000C3974 /* Main.storyboard */; };
-		FCC2E3AA2080E22A000C3974 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCC2E3A92080E22A000C3974 /* Assets.xcassets */; };
 		FCC2E3AD2080E22A000C3974 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCC2E3AB2080E22A000C3974 /* LaunchScreen.storyboard */; };
 		FCC2E3B82080E22A000C3974 /* ChinalFallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC2E3B72080E22A000C3974 /* ChinalFallengeTests.swift */; };
 		FCC2E3C32080E22A000C3974 /* ChinalFallengeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC2E3C22080E22A000C3974 /* ChinalFallengeUITests.swift */; };
@@ -38,15 +38,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		FC74449220889ABF00095D3D /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
 		FC7444942088A2F100095D3D /* DetailsNewItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsNewItemViewController.swift; sourceTree = "<group>"; };
+		FC7444962089DAB700095D3D /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
+		FC74449A208B498500095D3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC8C44BF20873514004160C6 /* HomeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeCollectionViewController.swift; path = ChinalFallenge/Controllers/HomeCollectionViewController.swift; sourceTree = SOURCE_ROOT; };
 		FC8C44C320873A8A004160C6 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DashboardViewController.swift; path = ChinalFallenge/Controllers/DashboardViewController.swift; sourceTree = SOURCE_ROOT; };
 		FC8C44CD20873F36004160C6 /* ReaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReaderViewController.swift; path = ChinalFallenge/Controllers/ReaderViewController.swift; sourceTree = SOURCE_ROOT; };
 		FCC2E39F2080E229000C3974 /* ChinalFallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChinalFallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCC2E3A22080E22A000C3974 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FCC2E3A72080E22A000C3974 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		FCC2E3A92080E22A000C3974 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FCC2E3AC2080E22A000C3974 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FCC2E3AE2080E22A000C3974 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCC2E3B32080E22A000C3974 /* ChinalFallengeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChinalFallengeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,6 +85,7 @@
 		FC129853208487C10095A2AF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				FC7444962089DAB700095D3D /* MyTabBarController.swift */,
 				FC8C44C320873A8A004160C6 /* DashboardViewController.swift */,
 				FC8C44CD20873F36004160C6 /* ReaderViewController.swift */,
 				FC8C44BF20873514004160C6 /* HomeCollectionViewController.swift */,
@@ -125,10 +126,9 @@
 		FCC2E3A12080E229000C3974 /* ChinalFallenge */ = {
 			isa = PBXGroup;
 			children = (
+				FC74449A208B498500095D3D /* Assets.xcassets */,
 				FCC2E3AE2080E22A000C3974 /* Info.plist */,
 				FCC2E3A22080E22A000C3974 /* AppDelegate.swift */,
-				FC74449220889ABF00095D3D /* MyTabBarController.swift */,
-				FCC2E3A92080E22A000C3974 /* Assets.xcassets */,
 				FC129854208488410095A2AF /* Storyboard */,
 				FC129853208487C10095A2AF /* Controllers */,
 			);
@@ -258,7 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCC2E3AD2080E22A000C3974 /* LaunchScreen.storyboard in Resources */,
-				FCC2E3AA2080E22A000C3974 /* Assets.xcassets in Resources */,
+				FC74449B208B498500095D3D /* Assets.xcassets in Resources */,
 				FCC2E3A82080E22A000C3974 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,7 +289,7 @@
 				FC8C44C020873514004160C6 /* HomeCollectionViewController.swift in Sources */,
 				FC8C44C420873A8A004160C6 /* DashboardViewController.swift in Sources */,
 				FC8C44CE20873F36004160C6 /* ReaderViewController.swift in Sources */,
-				FC74449320889ABF00095D3D /* MyTabBarController.swift in Sources */,
+				FC7444972089DAB700095D3D /* MyTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

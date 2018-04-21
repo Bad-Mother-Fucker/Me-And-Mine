@@ -27,16 +27,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     class func getAppDelegate() -> AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
     }
-
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+    
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+        let shortcut2 = UIMutableApplicationShortcutItem(type: "MyItems", localizedTitle: "My Items", localizedSubtitle: "", icon: UIApplicationShortcutIcon(type: .home), userInfo: nil)
+        application.shortcutItems = [shortcut2]
+        // application.shortcutItems?.append(shortcut2) same way to create a new quick button.
+        
         return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -45,7 +45,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -55,7 +54,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
+    
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        
+        completionHandler(false)
+        
+        if (shortcutItem.type == "Scan") {
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let cameraViewController = sb.instantiateViewController(withIdentifier: "cameraViewController") as! ReaderViewController
+            let root = UIApplication.shared.keyWindow?.rootViewController
+            
+            DispatchQueue.main.async {
+                root?.present(cameraViewController, animated: false, completion: {
+                    completionHandler(true)
+                })
+            }
+        } else if (shortcutItem.type == "MyItems") {
+            let sb = UIStoryboard(name: "Main", bundle: nil)
+            let collectionMyItems = sb.instantiateViewController(withIdentifier: "collectionMyItems") as! HomeCollectionViewController
+            let root = UIApplication.shared.keyWindow?.rootViewController
+            
+            DispatchQueue.main.async {
+                root?.present(collectionMyItems, animated: false, completion: {
+                    completionHandler(true)
+                })
+            }
+        }
+    }
+    
 }
+
+
+
+
+
+
+
 

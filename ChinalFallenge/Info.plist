@@ -2,6 +2,21 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIApplicationShortcutItems</key>
+	<array>
+		<dict>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>Scan QR/Bar Code</string>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationnShortcutIconTypeShare</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>Scan</string>
+			<key>UIApplicationShortcutItemIconFile</key>
+			<string>ScanQR/BarCode</string>
+			<key>UIApplicationShortcutItemUserInfo</key>
+			<string></string>
+		</dict>
+	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -23,7 +38,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>This device's camera will be used to scan the QR/Bar codes.</string>
+	<string>This device&apos;s camera will be used to scan the QR/Bar codes.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

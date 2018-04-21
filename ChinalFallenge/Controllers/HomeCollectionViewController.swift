@@ -14,8 +14,6 @@ class HomeCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -24,6 +22,7 @@ class HomeCollectionViewController: UICollectionViewController {
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
         collectionView?.delegate = self
+        showTabBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {

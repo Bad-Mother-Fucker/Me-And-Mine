@@ -59,25 +59,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         completionHandler(false)
         
-        if (shortcutItem.type == "Scan") {
-            let sb = UIStoryboard(name: "Main", bundle: nil)
-            let cameraViewController = sb.instantiateViewController(withIdentifier: "cameraViewController") as! ReaderViewController
-            let root = UIApplication.shared.keyWindow?.rootViewController
-            
-            DispatchQueue.main.async {
-                root?.present(cameraViewController, animated: false, completion: {
-                    completionHandler(true)
-                })
-            }
-        } else if (shortcutItem.type == "MyItems") {
-            let sb = UIStoryboard(name: "Main", bundle: nil)
-            let collectionMyItems = sb.instantiateViewController(withIdentifier: "collectionMyItems") as! HomeCollectionViewController
-            let root = UIApplication.shared.keyWindow?.rootViewController
-            
-            DispatchQueue.main.async {
-                root?.present(collectionMyItems, animated: false, completion: {
-                    completionHandler(true)
-                })
+        if let rootTabBar = UIApplication.shared.keyWindow?.rootViewController as? MyTabBarController {
+            if (shortcutItem.type == "Scan") {
+                DispatchQueue.main.async {
+                    rootTabBar.selectedIndex = 0
+                }
+            } else if (shortcutItem.type == "MyItems") {
+                DispatchQueue.main.async {
+                    rootTabBar.selectedIndex = 2
+                }
             }
         }
     }

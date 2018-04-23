@@ -12,6 +12,7 @@ import CoreData
 import UserNotifications
 import UserNotificationsUI
 
+
 class ReaderViewController: UIViewController {
     
     var captureSession: AVCaptureSession?
@@ -20,23 +21,10 @@ class ReaderViewController: UIViewController {
     
     @IBOutlet weak var stackViewDismiss: UIStackView!
     @IBOutlet weak var stackViewTorch: UIStackView!
-    
     @IBOutlet weak var torchOnOff: UIButton!
     
     struct codeType {
-        static let supportedTypes = [AVMetadataObject.ObjectType.upce,
-                                     AVMetadataObject.ObjectType.code39,
-                                     AVMetadataObject.ObjectType.code39Mod43,
-                                     AVMetadataObject.ObjectType.code93,
-                                     AVMetadataObject.ObjectType.code128,
-                                     AVMetadataObject.ObjectType.ean8,
-                                     AVMetadataObject.ObjectType.ean13,
-                                     AVMetadataObject.ObjectType.aztec,
-                                     AVMetadataObject.ObjectType.pdf417,
-                                     AVMetadataObject.ObjectType.itf14,
-                                     AVMetadataObject.ObjectType.dataMatrix,
-                                     AVMetadataObject.ObjectType.interleaved2of5,
-                                     AVMetadataObject.ObjectType.qr]
+        static let supportedTypes = [AVMetadataObject.ObjectType.upce, AVMetadataObject.ObjectType.code39, AVMetadataObject.ObjectType.code39Mod43, AVMetadataObject.ObjectType.code93, AVMetadataObject.ObjectType.code128, AVMetadataObject.ObjectType.ean8, AVMetadataObject.ObjectType.ean13, AVMetadataObject.ObjectType.aztec, AVMetadataObject.ObjectType.pdf417, AVMetadataObject.ObjectType.itf14, AVMetadataObject.ObjectType.dataMatrix, AVMetadataObject.ObjectType.interleaved2of5, AVMetadataObject.ObjectType.qr]
     }
     
     override func viewDidLoad() {
@@ -51,8 +39,9 @@ class ReaderViewController: UIViewController {
         if captureSession?.isRunning == false {
             captureSession?.startRunning()
         }
+        
         tabBarController?.tabBar.isHidden = true
-        navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationBar.isHidden = true
         navigationController?.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancell.png"), style: .done, target: self, action: #selector(dismissCameraView))
     }
     
@@ -84,7 +73,6 @@ class ReaderViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
         self.tabBarController?.selectedIndex = 1
     }
-    
 }
 
 extension ReaderViewController: AVCaptureMetadataOutputObjectsDelegate {
@@ -120,19 +108,37 @@ extension ReaderViewController: AVCaptureMetadataOutputObjectsDelegate {
             return
         }
         
-        videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession!)
-        videoPreviewLayer?.frame = view.layer.bounds
-        videoPreviewLayer?.videoGravity = .resizeAspectFill
-        view.layer.addSublayer(videoPreviewLayer!)
-        self.view.bringSubview(toFront: self.stackViewTorch)
-        self.view.bringSubview(toFront: self.stackViewDismiss)
-        captureSession?.startRunning()
+        DispatchQueue.main.async {
+            self.videoPreviewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession!)
+            self.videoPreviewLayer?.frame = self.view.layer.bounds
+            self.videoPreviewLayer?.videoGravity = .resizeAspectFill
+            self.view.layer.addSublayer(self.videoPreviewLayer!)
+            self.view.bringSubview(toFront: self.stackViewTorch)
+            self.view.bringSubview(toFront: self.stackViewDismiss)
+            self.captureSession?.startRunning()
+        }
+    }
+    
+    func alert() {
+        let alert = UIAlertController(title: "QR/Bar Code caught", message: "Step1: add info - Step2: capture new QR/Bar Code", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Step 1", style: .default, handler: { (action) in
+            self.performSegue(withIdentifier: "addDetailsItems", sender: self)
+            self.captureSession?.stopRunning()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Step 2", style: .default, handler: { (action) in
+            alert.dismiss(animated: true, completion: nil)
+            self.captureSession?.startRunning()
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
     }
     
     func failed() {
-        let allert = UIAlertController(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", preferredStyle: .alert)
-        allert.addAction(UIAlertAction(title: "Ok", style: .default))
-        present(allert,animated: true)
+        let alert = UIAlertController(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default))
+        self.present(alert,animated: true)
         captureSession = nil
     }
     
@@ -149,7 +155,8 @@ extension ReaderViewController: AVCaptureMetadataOutputObjectsDelegate {
             found(code: stringValue)
         }
         dismiss(animated: true)
-        performSegue(withIdentifier: "addDetailsItems", sender: self)
+        alert()
+        //performSegue(withIdentifier: "addDetailsItems", sender: self)
     }
     
     func found(code: String) {
@@ -159,6 +166,7 @@ extension ReaderViewController: AVCaptureMetadataOutputObjectsDelegate {
     func flash() {
         guard let device = AVCaptureDevice.default(for: AVMediaType.video) else {return}
         if (device.hasTorch) {
+            //Check if the device has the flashlight.
             if device.isTorchAvailable {
                 do {
                     try device.lockForConfiguration()
@@ -181,7 +189,6 @@ extension ReaderViewController: AVCaptureMetadataOutputObjectsDelegate {
         }
     }
 }
-
 
 
 

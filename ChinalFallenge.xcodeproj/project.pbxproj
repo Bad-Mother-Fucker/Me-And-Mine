@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FC04BB43208DE3FE00B6C2FF /* SlideAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC04BB42208DE3FD00B6C2FF /* SlideAnimator.swift */; };
 		FC7444952088A2F100095D3D /* DetailsNewItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7444942088A2F100095D3D /* DetailsNewItemViewController.swift */; };
 		FC7444972089DAB700095D3D /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7444962089DAB700095D3D /* MyTabBarController.swift */; };
 		FC74449B208B498500095D3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC74449A208B498500095D3D /* Assets.xcassets */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		FC04BB42208DE3FD00B6C2FF /* SlideAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideAnimator.swift; sourceTree = "<group>"; };
 		FC7444942088A2F100095D3D /* DetailsNewItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsNewItemViewController.swift; sourceTree = "<group>"; };
 		FC7444962089DAB700095D3D /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
 		FC74449A208B498500095D3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -82,6 +84,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FC04BB41208DE3DF00B6C2FF /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				FC04BB42208DE3FD00B6C2FF /* SlideAnimator.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
 		FC129853208487C10095A2AF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +139,7 @@
 				FC74449A208B498500095D3D /* Assets.xcassets */,
 				FCC2E3AE2080E22A000C3974 /* Info.plist */,
 				FCC2E3A22080E22A000C3974 /* AppDelegate.swift */,
+				FC04BB41208DE3DF00B6C2FF /* Sources */,
 				FC129854208488410095A2AF /* Storyboard */,
 				FC129853208487C10095A2AF /* Controllers */,
 			);
@@ -288,6 +299,7 @@
 				FC7444952088A2F100095D3D /* DetailsNewItemViewController.swift in Sources */,
 				FC8C44C020873514004160C6 /* HomeCollectionViewController.swift in Sources */,
 				FC8C44C420873A8A004160C6 /* DashboardViewController.swift in Sources */,
+				FC04BB43208DE3FE00B6C2FF /* SlideAnimator.swift in Sources */,
 				FC8C44CE20873F36004160C6 /* ReaderViewController.swift in Sources */,
 				FC7444972089DAB700095D3D /* MyTabBarController.swift in Sources */,
 			);

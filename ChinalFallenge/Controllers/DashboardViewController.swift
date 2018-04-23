@@ -9,14 +9,16 @@
 import UIKit
 
 class DashboardViewController: UIViewController {
-
+    
+    let slideAnimator = SlideAnimator()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         showTabBar()
     }
     
@@ -26,6 +28,4 @@ class DashboardViewController: UIViewController {
         }
     }
     
-    
-
 }

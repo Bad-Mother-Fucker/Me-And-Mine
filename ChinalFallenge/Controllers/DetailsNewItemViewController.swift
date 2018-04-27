@@ -12,22 +12,22 @@ import CoreData
 
 class DetailsNewItemViewController: UIViewController, UINavigationControllerDelegate {
     
+    var speechPassed: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        navigationController?.navigationBar.isHidden = false
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Dismiss", style: .done, target: self, action: #selector(dismissViewDetails))
-        navigationItem.title = "Add new info item!"
+        setNavigationControll()
     }
     
-    
-    
-    func saveData(sender: UIBarButtonItem) {
+    func setNavigationControll() {
+        navigationController?.navigationBar.isHidden = false
+        navigationItem.title = "Add new info item!"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Dismiss", style: .done, target: self, action: #selector(dismissViewDetails))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveData))
     }
     
     @objc func dismissViewDetails() {
@@ -35,4 +35,8 @@ class DetailsNewItemViewController: UIViewController, UINavigationControllerDele
         self.navigationController?.popViewController(animated: true)
     }
     
+    @objc func saveData() {
+        //Saving data with coreml
+        dismissViewDetails()
+    }
 }

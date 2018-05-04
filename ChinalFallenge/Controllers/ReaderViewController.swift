@@ -10,8 +10,6 @@ import UIKit
 import AVFoundation
 import CoreData
 import Speech
-import UserNotifications
-import UserNotificationsUI
 
 class ReaderViewController: UIViewController {
     
@@ -26,10 +24,21 @@ class ReaderViewController: UIViewController {
     private var recognitionTask: SFSpeechRecognitionTask?
     private let audioEngine = AVAudioEngine()
     
-    //Attributes for button on camera session
+    //Stack View
     @IBOutlet weak var stackViewDismiss: UIStackView!
     @IBOutlet weak var stackViewTorch: UIStackView!
+    @IBOutlet weak var coreMLStack: UIStackView!
+    @IBOutlet weak var OCRStack: UIStackView!
+    @IBOutlet weak var removeBackgroundStack: UIStackView!
+    @IBOutlet weak var speechRecognitionStack: UIStackView!
+    @IBOutlet weak var photoStack: UIStackView!
+    
+    //Buttons
     @IBOutlet weak var torchOnOff: UIButton!
+    @IBOutlet weak var coreMLButton: UIButton!
+    @IBOutlet weak var OCRButton: UIButton!
+    @IBOutlet weak var removeBackgroundButton: UIButton!
+    @IBOutlet weak var speechRecognitionButton: UIButton!
     
     //Attributes
     var speech: [String]?
@@ -81,6 +90,18 @@ class ReaderViewController: UIViewController {
         self.tabBarController?.selectedIndex = 1
     }
     
+    @IBAction func takePhotoButton(_ sender: UIButton) {
+        //nascondere bottone torcia e bottone dismiss
+        self.coreMLButton.setImage(UIImage(named: "coreml.png"), for: .normal)
+        self.OCRButton.setImage(UIImage(named: "ocr.png"), for: .normal)
+        self.removeBackgroundButton.setImage(UIImage(named: "forbici.png"), for: .normal)
+        self.speechRecognitionButton.setImage(UIImage(named: "speech.png"), for: .normal)
+        self.view.addSubview(self.coreMLStack)
+        self.view.addSubview(self.OCRStack)
+        self.view.addSubview(self.removeBackgroundStack)
+        self.view.addSubview(self.speechRecognitionStack)
+    }
+    
     @objc func dismissCameraView() {
         self.dismiss(animated: true, completion: nil)
         self.tabBarController?.selectedIndex = 1
@@ -104,6 +125,75 @@ class ReaderViewController: UIViewController {
         }
     }
 }
+
+// ############### READER VIEW CONTROLLER EXTENSION ###############
+
+extension ReaderViewController {
+    
+    //FLASHLIGHT FUNCTION
+    func flash() {
+        guard let device = AVCaptureDevice.default(for: AVMediaType.video) else {return}
+        if (device.hasTorch) {
+            //Check if the device has the flashlight.
+            if device.isTorchAvailable {
+                do {
+                    try device.lockForConfiguration()
+                    if (device.torchMode == .on) {
+                        device.torchMode = .off
+                        self.torchOnOff.setImage(UIImage(named: "flashOff.png"), for: .normal)
+                    } else {
+                        device.torchMode = .on
+                        self.torchOnOff.setImage(UIImage(named: "flashOn.png"), for: .normal)
+                    }
+                    device.unlockForConfiguration()
+                } catch {
+                    print("Torch could not be used")
+                    print(error)
+                }
+            }
+            else {
+                print("Torch is not available")
+            }
+        }
+    }
+    
+    //ALERT FUNCTION
+    func alert() {
+        let alert = UIAlertController(title: "QR/Bar Code caught", message: "Step1: add info - Step2: capture new QR/Bar Code", preferredStyle: .alert)
+        
+        alert.addAction(UIAlertAction(title: "Step1", style: .default, handler: { (action) in
+            self.performSegue(withIdentifier: "addDetailsItems", sender: self)
+            self.captureSession?.stopRunning()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Step2", style: .default, handler: { (action) in
+            alert.dismiss(animated: true, completion: nil)
+            self.captureSession?.startRunning()
+        }))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    //FAILED FUNCTION
+    func failed() {
+        let alert = UIAlertController(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default))
+        self.present(alert,animated: true)
+        captureSession = nil
+    }
+    
+    //FOCUS FUNCTION
+    func autoFocusMode() {
+        guard let cameraFocus = AVCaptureDevice.default(for: AVMediaType.video) else {return}
+        if cameraFocus.isFocusModeSupported(.continuousAutoFocus) {
+            try! cameraFocus.lockForConfiguration()
+            cameraFocus.focusMode = .continuousAutoFocus
+            cameraFocus.unlockForConfiguration()
+        }
+    }
+}
+
+// ############### CAMERA SESSION ###############
 
 extension ReaderViewController: AVCaptureMetadataOutputObjectsDelegate {
     
@@ -140,6 +230,7 @@ extension ReaderViewController: AVCaptureMetadataOutputObjectsDelegate {
             self.view.layer.addSublayer(self.videoPreviewLayer!)
             self.view.bringSubview(toFront: self.stackViewTorch)
             self.view.bringSubview(toFront: self.stackViewDismiss)
+            self.view.bringSubview(toFront: self.photoStack)
             self.captureSession?.startRunning()
         }
     }
@@ -160,70 +251,7 @@ extension ReaderViewController: AVCaptureMetadataOutputObjectsDelegate {
     }
 }
 
-extension ReaderViewController {
-    
-    //FLASHLIGHT FUNCTION
-    func flash() {
-        guard let device = AVCaptureDevice.default(for: AVMediaType.video) else {return}
-        if (device.hasTorch) {
-            //Check if the device has the flashlight.
-            if device.isTorchAvailable {
-                do {
-                    try device.lockForConfiguration()
-                    if (device.torchMode == .on) {
-                        device.torchMode = .off
-                        self.torchOnOff.setImage(UIImage(named: "flashOff.png"), for: .normal)
-                    } else {
-                        device.torchMode = .on
-                        self.torchOnOff.setImage(UIImage(named: "flashOn.png"), for: .normal)
-                    }
-                    device.unlockForConfiguration()
-                } catch {
-                    print("Torch could not be used")
-                    print(error)
-                }
-            }
-            else {
-                print("Torch is not available")
-            }
-        }
-    }
-    
-    //ALERT FUNCTION
-    func alert() {
-        let alert = UIAlertController(title: "QR/Bar Code caught", message: "Step1: add info - Step2: capture new QR/Bar Code", preferredStyle: .alert)
-
-        alert.addAction(UIAlertAction(title: "Step1", style: .default, handler: { (action) in
-            self.performSegue(withIdentifier: "addDetailsItems", sender: self)
-            self.captureSession?.stopRunning()
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Step2", style: .default, handler: { (action) in
-            alert.dismiss(animated: true, completion: nil)
-            self.captureSession?.startRunning()
-        }))
-        
-        self.present(alert, animated: true, completion: nil)
-    }
-    
-    //FAILED FUNCTION
-    func failed() {
-        let alert = UIAlertController(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default))
-        self.present(alert,animated: true)
-        captureSession = nil
-    }
-    
-    //FOCUS FUNCTION
-    func autoFocusMode() {
-        guard let cameraFocus = AVCaptureDevice.default(for: AVMediaType.video) else {return}
-        if cameraFocus.isFocusModeSupported(.continuousAutoFocus) {
-            try! cameraFocus.lockForConfiguration()
-            cameraFocus.focusMode = .continuousAutoFocus
-            cameraFocus.unlockForConfiguration()
-        }
-    }
-}
+// ############### SPEECH RECOGNITION ###############
 
 extension ReaderViewController: SFSpeechRecognizerDelegate, AVAudioRecorderDelegate {
     
@@ -302,6 +330,7 @@ extension ReaderViewController: SFSpeechRecognizerDelegate, AVAudioRecorderDeleg
     
     
 }
+
 
 
 

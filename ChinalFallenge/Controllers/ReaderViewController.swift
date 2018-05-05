@@ -13,18 +13,18 @@ import Speech
 
 class ReaderViewController: UIViewController {
     
-    //Attributes for QR/Bar code reader
+    //ATTRIBUTES FOR CAMERA
     var captureSession: AVCaptureSession?
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
-    var qrCodeFrameView: UIView?
+    var capturePhotoOutput: AVCapturePhotoOutput?
     
-    //Attributes for speech recognition
+    //ATTRIBUTES FOR SPEECH RECOGNITION
     private let speechRecognizer = SFSpeechRecognizer.init(locale: Locale.current)
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
     private let audioEngine = AVAudioEngine()
     
-    //Stack View
+    //STACK VIEW
     @IBOutlet weak var stackViewDismiss: UIStackView!
     @IBOutlet weak var stackViewTorch: UIStackView!
     @IBOutlet weak var coreMLStack: UIStackView!
@@ -33,24 +33,27 @@ class ReaderViewController: UIViewController {
     @IBOutlet weak var speechRecognitionStack: UIStackView!
     @IBOutlet weak var photoStack: UIStackView!
     
-    //Buttons
+    //BUTTONS
     @IBOutlet weak var torchOnOff: UIButton!
+    @IBOutlet weak var dismissButton: UIButton!
     @IBOutlet weak var coreMLButton: UIButton!
     @IBOutlet weak var OCRButton: UIButton!
     @IBOutlet weak var removeBackgroundButton: UIButton!
     @IBOutlet weak var speechRecognitionButton: UIButton!
+    @IBOutlet weak var photoButton: UIButton!
     
-    //Attributes
+    //OTHER ATTRIBUTES
     var speech: [String]?
     
-    //Type for QR/Bar code
+    //TYPE QR/BAR CODE SCANNING
     struct codeType {
         static let supportedTypes = [AVMetadataObject.ObjectType.upce, AVMetadataObject.ObjectType.code39, AVMetadataObject.ObjectType.code39Mod43, AVMetadataObject.ObjectType.code93, AVMetadataObject.ObjectType.code128, AVMetadataObject.ObjectType.ean8, AVMetadataObject.ObjectType.ean13, AVMetadataObject.ObjectType.aztec, AVMetadataObject.ObjectType.pdf417, AVMetadataObject.ObjectType.itf14, AVMetadataObject.ObjectType.dataMatrix, AVMetadataObject.ObjectType.interleaved2of5, AVMetadataObject.ObjectType.qr]
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        startSession()
+        setCameraSession()
+        instantiatePhotoOutput()
         autoFocusMode()
         requestAuthorization()
     }
@@ -82,33 +85,46 @@ class ReaderViewController: UIViewController {
         navigationController?.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancell.png"), style: .done, target: self, action: #selector(dismissCameraView))
     }
     
-    @IBAction func torchStatus(_ sender: UIButton) {
-        flash()
+    func setFlashDismissPhotoButtons() {
+        self.dismissButton.setBackgroundImage(UIImage(named: "dismiss.png"), for: .normal)
+        self.torchOnOff.setBackgroundImage(UIImage(named: "flashOff.png"), for: .normal)
+        self.photoButton.setBackgroundImage(UIImage(named: "photoButton.png"), for: .normal)
+        self.view.bringSubview(toFront: self.stackViewDismiss)
+        self.view.bringSubview(toFront: self.stackViewTorch)
+        self.view.bringSubview(toFront: self.photoStack)
     }
     
-    @IBAction func dismissFromReaderView(_ sender: UIButton) {
-        self.tabBarController?.selectedIndex = 1
-    }
-    
-    @IBAction func takePhotoButton(_ sender: UIButton) {
-        //nascondere bottone torcia e bottone dismiss
-        self.coreMLButton.setImage(UIImage(named: "coreml.png"), for: .normal)
-        self.OCRButton.setImage(UIImage(named: "ocr.png"), for: .normal)
-        self.removeBackgroundButton.setImage(UIImage(named: "forbici.png"), for: .normal)
-        self.speechRecognitionButton.setImage(UIImage(named: "speech.png"), for: .normal)
+    func setFrameworksButton() {
+        self.coreMLButton.setBackgroundImage(UIImage(named: "coreml.png"), for: .normal)
+        self.OCRButton.setBackgroundImage(UIImage(named: "ocr.png"), for: .normal)
+        self.removeBackgroundButton.setBackgroundImage(UIImage(named: "forbici.png"), for: .normal)
+        self.speechRecognitionButton.setBackgroundImage(UIImage(named: "microphone.png"), for: .normal)
         self.view.addSubview(self.coreMLStack)
         self.view.addSubview(self.OCRStack)
         self.view.addSubview(self.removeBackgroundStack)
         self.view.addSubview(self.speechRecognitionStack)
     }
     
-    @objc func dismissCameraView() {
-        self.dismiss(animated: true, completion: nil)
+    //AACTION FLASHLIGHT
+    @IBAction func torchStatus(_ sender: UIButton) {
+        flash()
+    }
+    
+    //ACTION DISMISS
+    @IBAction func dismissFromReaderView(_ sender: UIButton) {
         self.tabBarController?.selectedIndex = 1
     }
     
-    func found(code: String) {
-        print(code)
+    //ACTION TAKE PHOTO BUTTON
+    @IBAction func takePhotoButton(_ sender: UIButton) {
+        //nascondere bottone torcia e bottone dismiss
+        setFrameworksButton()
+        onTapTakePhoto()
+    }
+    
+    @objc func dismissCameraView() {
+        self.dismiss(animated: true, completion: nil)
+        self.tabBarController?.selectedIndex = 1
     }
     
     //FUNCTIONS FOR CAPTURE SESSION USED BY ViewWillDisappear
@@ -129,7 +145,7 @@ class ReaderViewController: UIViewController {
 // ############### READER VIEW CONTROLLER EXTENSION ###############
 
 extension ReaderViewController {
-    
+
     //FLASHLIGHT FUNCTION
     func flash() {
         guard let device = AVCaptureDevice.default(for: AVMediaType.video) else {return}
@@ -191,14 +207,18 @@ extension ReaderViewController {
             cameraFocus.unlockForConfiguration()
         }
     }
+    
+    func found(code: String) {
+        print(code)
+    }
 }
 
 // ############### CAMERA SESSION ###############
 
-extension ReaderViewController: AVCaptureMetadataOutputObjectsDelegate {
+extension ReaderViewController: AVCapturePhotoCaptureDelegate, AVCaptureMetadataOutputObjectsDelegate {
     
-    //START SESSION CAMERA FUNCTION
-    func startSession() {
+    //SET CAMERA ON THE VIEW.
+    func setCameraSession() {
         captureSession = AVCaptureSession()
         guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else {return}
         let videoInput: AVCaptureDeviceInput
@@ -213,6 +233,62 @@ extension ReaderViewController: AVCaptureMetadataOutputObjectsDelegate {
             failed()
             return
         }
+        //HANDLE SECOND THREAD
+        DispatchQueue.main.async {
+            self.videoPreviewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession!)
+            self.videoPreviewLayer?.frame = self.view.layer.bounds
+            self.videoPreviewLayer?.videoGravity = .resizeAspectFill
+            self.view.layer.addSublayer(self.videoPreviewLayer!)
+            self.setFlashDismissPhotoButtons()
+            self.captureSession?.startRunning()
+        }
+    }
+    
+    func instantiatePhotoOutput() {
+        capturePhotoOutput = AVCapturePhotoOutput()
+        capturePhotoOutput?.isHighResolutionCaptureEnabled = true
+        // Set the output on the capture session
+        if (captureSession?.canAddOutput(capturePhotoOutput!))! {
+            captureSession?.addOutput(capturePhotoOutput!)
+        } else {
+            return
+        }
+    }
+    
+    //CALLED WHEN THE USER TAP THE BUTTON "TAKE A PHOTO"
+    func onTapTakePhoto() {
+        guard let capturePhotoOutput = self.capturePhotoOutput else {return} // Make sure capturePhotoOutput is valid
+        let photoSettings = AVCapturePhotoSettings() // Get an instance of AVCapturePhotoSettings class
+        
+        // Set photo settings for our need
+        photoSettings.isAutoStillImageStabilizationEnabled = true
+        photoSettings.isHighResolutionPhotoEnabled = true
+        photoSettings.flashMode = .auto
+        
+        // Call capturePhoto method by passing our photo settings and a delegate implementing AVCapturePhotoCaptureDelegate
+        capturePhotoOutput.capturePhoto(with: photoSettings, delegate: self)
+    }
+    
+    //PHOTO OUTPUT FUNCTION
+    func photoOutput(_ captureOutput: AVCapturePhotoOutput, didFinishProcessingPhoto photoSampleBuffer: CMSampleBuffer?, previewPhoto previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
+        // get captured image - Make sure we get some photo sample buffer
+        guard error == nil,let photoSampleBuffer = photoSampleBuffer else {
+            print("Error capturing photo: \(String(describing: error))")
+            return
+        }
+        // Convert photo same buffer to a jpeg image data by using // AVCapturePhotoOutput
+        guard let imageData = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: photoSampleBuffer, previewPhotoSampleBuffer: previewPhotoSampleBuffer) else {return}
+        
+        // Initialise a UIImage with our image data
+        let capturedImage = UIImage.init(data: imageData , scale: 1.0)
+        if let image = capturedImage {
+            // Save our captured image to photos album -- CHANGE HERE TO SAVE ONLY IN OUR APP USING CORE DATA.
+            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+        }
+    }
+    
+    //SET QR CODE METADATA OBJECT FUNCTION
+    func setMetadataObject() {
         //GET METADATA OBJECT
         let metadataOutput = AVCaptureMetadataOutput()
         if (captureSession?.canAddOutput(metadataOutput))! {
@@ -222,16 +298,6 @@ extension ReaderViewController: AVCaptureMetadataOutputObjectsDelegate {
         } else {
             failed()
             return
-        }
-        DispatchQueue.main.async {
-            self.videoPreviewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession!)
-            self.videoPreviewLayer?.frame = self.view.layer.bounds
-            self.videoPreviewLayer?.videoGravity = .resizeAspectFill
-            self.view.layer.addSublayer(self.videoPreviewLayer!)
-            self.view.bringSubview(toFront: self.stackViewTorch)
-            self.view.bringSubview(toFront: self.stackViewDismiss)
-            self.view.bringSubview(toFront: self.photoStack)
-            self.captureSession?.startRunning()
         }
     }
     
@@ -327,8 +393,6 @@ extension ReaderViewController: SFSpeechRecognizerDelegate, AVAudioRecorderDeleg
         self.recognitionRequest?.endAudio()
         debugPrint("stop recording.")
     }
-    
-    
 }
 
 

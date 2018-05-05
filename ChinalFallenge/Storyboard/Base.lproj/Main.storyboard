@@ -34,46 +34,133 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="bvJ-7Q-5ag">
-                                <rect key="frame" x="286" y="601" width="50" height="50"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nZw-3v-dJj">
+                                <rect key="frame" x="26" y="64" width="35" height="35"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cn0-Aq-JS0">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oow-UI-y10">
+                                        <rect key="frame" x="0.0" y="0.0" width="35" height="35"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="K63-ed-wvb"/>
-                                            <constraint firstAttribute="width" constant="50" id="dVL-MW-JGk"/>
+                                            <constraint firstAttribute="height" constant="35" id="GHD-6s-ISN"/>
+                                            <constraint firstAttribute="width" constant="35" id="udg-F3-JTz"/>
                                         </constraints>
-                                        <state key="normal" image="flashOff"/>
-                                        <connections>
-                                            <action selector="torchStatus:" destination="Xbw-T4-Y9f" eventType="touchUpInside" id="VKL-60-8Xb"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nZw-3v-dJj">
-                                <rect key="frame" x="16" y="64" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oow-UI-y10">
-                                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="GHD-6s-ISN"/>
-                                            <constraint firstAttribute="width" constant="30" id="udg-F3-JTz"/>
-                                        </constraints>
-                                        <state key="normal" image="cancell"/>
                                         <connections>
                                             <action selector="dismissFromReaderView:" destination="Xbw-T4-Y9f" eventType="touchUpInside" id="jaO-OB-LO7"/>
                                         </connections>
                                     </button>
                                 </subviews>
                             </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="bvJ-7Q-5ag">
+                                <rect key="frame" x="26" y="592" width="40" height="40"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cn0-Aq-JS0">
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="K63-ed-wvb"/>
+                                            <constraint firstAttribute="width" constant="40" id="dVL-MW-JGk"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="torchStatus:" destination="Xbw-T4-Y9f" eventType="touchUpInside" id="VKL-60-8Xb"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UbJ-Oa-1tV">
+                                <rect key="frame" x="313" y="76" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WEU-qm-in1">
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="6s7-QT-ja0"/>
+                                            <constraint firstAttribute="width" constant="40" id="YH0-CQ-1oV"/>
+                                        </constraints>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eab-ul-7aM">
+                                <rect key="frame" x="313" y="122" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uu4-cf-Qch">
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="8lW-u4-Dlx"/>
+                                            <constraint firstAttribute="width" constant="40" id="L4m-LX-dYt"/>
+                                        </constraints>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dWa-Ns-fyY">
+                                <rect key="frame" x="313" y="170" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zDS-h9-Yp0">
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="3Hw-yG-apo"/>
+                                            <constraint firstAttribute="width" constant="40" id="r1j-9X-pcf"/>
+                                        </constraints>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="prG-WE-wgT">
+                                <rect key="frame" x="313" y="218" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Yn-qe-13t">
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="puC-3c-Anl"/>
+                                            <constraint firstAttribute="width" constant="40" id="zwi-aU-gWY"/>
+                                        </constraints>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mo0-oS-qfy">
+                                <rect key="frame" x="157" y="577" width="70" height="70"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fGI-bm-Jmh">
+                                        <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="70" id="o0i-ze-leL"/>
+                                            <constraint firstAttribute="height" constant="70" id="vaG-kX-BaV"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="takePhotoButton:" destination="Xbw-T4-Y9f" eventType="touchUpInside" id="uNu-Rq-8tw"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="Ebm-Ed-XhO"/>
+                                    <constraint firstAttribute="width" constant="70" id="HX0-b7-7iy"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="bvJ-7Q-5ag" firstAttribute="centerY" secondItem="mo0-oS-qfy" secondAttribute="centerY" id="2Be-oM-016"/>
+                            <constraint firstItem="nZw-3v-dJj" firstAttribute="top" secondItem="5HV-SE-0NS" secondAttribute="top" id="Nbc-tY-upl"/>
+                            <constraint firstItem="5HV-SE-0NS" firstAttribute="trailing" secondItem="mo0-oS-qfy" secondAttribute="trailing" constant="148" id="bMn-mh-6bJ"/>
+                            <constraint firstItem="nZw-3v-dJj" firstAttribute="leading" secondItem="bvJ-7Q-5ag" secondAttribute="leading" id="ga9-eq-xQe"/>
+                            <constraint firstItem="mo0-oS-qfy" firstAttribute="leading" secondItem="bvJ-7Q-5ag" secondAttribute="trailing" constant="91" id="jB1-qp-A6F"/>
+                            <constraint firstAttribute="bottom" secondItem="mo0-oS-qfy" secondAttribute="bottom" constant="20" id="l7z-SZ-r4D"/>
+                            <constraint firstItem="mo0-oS-qfy" firstAttribute="top" secondItem="5HV-SE-0NS" secondAttribute="top" constant="513" id="qPJ-Kr-C4V"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="5HV-SE-0NS"/>
                     </view>
                     <navigationItem key="navigationItem" id="4pJ-nj-N0b"/>
                     <connections>
+                        <outlet property="OCRButton" destination="uu4-cf-Qch" id="ZdO-mU-OAy"/>
+                        <outlet property="OCRStack" destination="eab-ul-7aM" id="6ie-MI-E20"/>
+                        <outlet property="coreMLButton" destination="WEU-qm-in1" id="M3n-bo-Uaf"/>
+                        <outlet property="coreMLStack" destination="UbJ-Oa-1tV" id="6Yg-MV-lVU"/>
+                        <outlet property="dismissButton" destination="oow-UI-y10" id="zZX-Jg-vBR"/>
+                        <outlet property="photoButton" destination="fGI-bm-Jmh" id="xJ6-j5-x33"/>
+                        <outlet property="photoStack" destination="mo0-oS-qfy" id="JIf-At-Lk4"/>
+                        <outlet property="removeBackgroundButton" destination="zDS-h9-Yp0" id="R4L-R1-267"/>
+                        <outlet property="removeBackgroundStack" destination="dWa-Ns-fyY" id="ecy-lX-bmo"/>
+                        <outlet property="speechRecognitionButton" destination="8Yn-qe-13t" id="UWo-BR-tKf"/>
+                        <outlet property="speechRecognitionStack" destination="prG-WE-wgT" id="2ji-QH-pWU"/>
                         <outlet property="stackViewDismiss" destination="nZw-3v-dJj" id="lax-SM-3DB"/>
                         <outlet property="stackViewTorch" destination="bvJ-7Q-5ag" id="V19-Ui-CNc"/>
                         <outlet property="torchOnOff" destination="cn0-Aq-JS0" id="uy0-0s-mEq"/>
@@ -184,8 +271,4 @@
             <point key="canvasLocation" x="333.60000000000002" y="-27.436281859070466"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="cancell" width="100" height="100"/>
-        <image name="flashOff" width="100" height="100"/>
-    </resources>
 </document>

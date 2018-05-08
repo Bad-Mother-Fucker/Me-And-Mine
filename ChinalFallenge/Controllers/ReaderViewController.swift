@@ -17,21 +17,28 @@ class ReaderViewController: UIViewController {
     var captureSession: AVCaptureSession?
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     var capturePhotoOutput: AVCapturePhotoOutput?
-    
+    var imageView: UIImageView!
     //ATTRIBUTES FOR SPEECH RECOGNITION
     private let speechRecognizer = SFSpeechRecognizer.init(locale: Locale.current)
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
     private let audioEngine = AVAudioEngine()
     
-    //STACK VIEW
-    @IBOutlet weak var stackViewDismiss: UIStackView!
-    @IBOutlet weak var stackViewTorch: UIStackView!
-    @IBOutlet weak var coreMLStack: UIStackView!
-    @IBOutlet weak var OCRStack: UIStackView!
-    @IBOutlet weak var removeBackgroundStack: UIStackView!
-    @IBOutlet weak var speechRecognitionStack: UIStackView!
-    @IBOutlet weak var photoStack: UIStackView!
+//    //STACK VIEW
+//    @IBOutlet weak var stackViewDismiss: UIStackView!
+//    @IBOutlet weak var stackViewTorch: UIStackView!
+//    @IBOutlet weak var coreMLStack: UIStackView!
+//    @IBOutlet weak var OCRStack: UIStackView!
+//    @IBOutlet weak var removeBackgroundStack: UIStackView!
+//    @IBOutlet weak var speechRecognitionStack: UIStackView!
+//    @IBOutlet weak var photoStack: UIStackView!
+    
+    @IBOutlet weak var buttonsStackView: UIStackView!
+    
+// TEXT VIEW
+    
+    @IBOutlet weak var SpeechText: UITextView!
+    
     
     //BUTTONS
     @IBOutlet weak var torchOnOff: UIButton!
@@ -42,6 +49,9 @@ class ReaderViewController: UIViewController {
     @IBOutlet weak var speechRecognitionButton: UIButton!
     @IBOutlet weak var photoButton: UIButton!
     
+    @IBOutlet weak var dismissPhoto: UIButton!
+
+   
     //OTHER ATTRIBUTES
     var speech: [String]?
     
@@ -56,13 +66,15 @@ class ReaderViewController: UIViewController {
         instantiatePhotoOutput()
         autoFocusMode()
         requestAuthorization()
+        self.imageView = UIImageView(frame: self.view.frame)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNavigationControll()
-        startRecordingSpeech()
+        
         checkCaptureSessionOff()
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -75,8 +87,16 @@ class ReaderViewController: UIViewController {
         return true
     }
     
+    @IBAction func startSpeech(_ sender: UIButton) {
+        startRecordingSpeech()
+    }
+    
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
+    }
+    @IBAction func dismissPhoto(_ sender: UIButton) {
+        self.imageView.removeFromSuperview()
+        self.dismissPhoto.isHidden = true
     }
     
     func setNavigationControll() {
@@ -89,9 +109,12 @@ class ReaderViewController: UIViewController {
         self.dismissButton.setBackgroundImage(UIImage(named: "dismiss.png"), for: .normal)
         self.torchOnOff.setBackgroundImage(UIImage(named: "flashOff.png"), for: .normal)
         self.photoButton.setBackgroundImage(UIImage(named: "photoButton.png"), for: .normal)
-        self.view.bringSubview(toFront: self.stackViewDismiss)
-        self.view.bringSubview(toFront: self.stackViewTorch)
-        self.view.bringSubview(toFront: self.photoStack)
+//        self.view.bringSubview(toFront: self.stackViewDismiss)
+//        self.view.bringSubview(toFront: self.stackViewTorch)
+//        self.view.bringSubview(toFront: self.photoStack)
+        self.view.bringSubview(toFront: self.photoButton)
+        self.view.bringSubview(toFront: self.dismissButton)
+        self.view.bringSubview(toFront: self.torchOnOff)
     }
     
     func setFrameworksButton() {
@@ -99,10 +122,13 @@ class ReaderViewController: UIViewController {
         self.OCRButton.setBackgroundImage(UIImage(named: "ocr.png"), for: .normal)
         self.removeBackgroundButton.setBackgroundImage(UIImage(named: "forbici.png"), for: .normal)
         self.speechRecognitionButton.setBackgroundImage(UIImage(named: "microphone.png"), for: .normal)
-        self.view.addSubview(self.coreMLStack)
-        self.view.addSubview(self.OCRStack)
-        self.view.addSubview(self.removeBackgroundStack)
-        self.view.addSubview(self.speechRecognitionStack)
+//        self.view.addSubview(self.coreMLStack)
+//        self.view.addSubview(self.OCRStack)
+//        self.view.addSubview(self.removeBackgroundStack)
+//        self.view.addSubview(self.speechRecognitionStack)
+        self.view.addSubview(imageView)
+        self.view.addSubview(buttonsStackView)
+        
     }
     
     //AACTION FLASHLIGHT
@@ -270,20 +296,21 @@ extension ReaderViewController: AVCapturePhotoCaptureDelegate, AVCaptureMetadata
     }
     
     //PHOTO OUTPUT FUNCTION
-    func photoOutput(_ captureOutput: AVCapturePhotoOutput, didFinishProcessingPhoto photoSampleBuffer: CMSampleBuffer?, previewPhoto previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
+    func photoOutput(_ captureOutput: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error:Error?) {
         // get captured image - Make sure we get some photo sample buffer
-        guard error == nil,let photoSampleBuffer = photoSampleBuffer else {
+        guard error == nil else {
             print("Error capturing photo: \(String(describing: error))")
             return
         }
         // Convert photo same buffer to a jpeg image data by using // AVCapturePhotoOutput
-        guard let imageData = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: photoSampleBuffer, previewPhotoSampleBuffer: previewPhotoSampleBuffer) else {return}
+        guard let imageData = photo.fileDataRepresentation() else {return}
         
         // Initialise a UIImage with our image data
         let capturedImage = UIImage.init(data: imageData , scale: 1.0)
         if let image = capturedImage {
             // Save our captured image to photos album -- CHANGE HERE TO SAVE ONLY IN OUR APP USING CORE DATA.
             UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+            self.imageView.image = image
         }
     }
     
@@ -362,6 +389,7 @@ extension ReaderViewController: SFSpeechRecognizerDelegate, AVAudioRecorderDeleg
             var isFinal = false
             if (speechResult != nil) {
                 isFinal = (speechResult?.isFinal)!
+                self.SpeechText.text = speechResult?.bestTranscription.formattedString
             }
             if (error != nil || isFinal) {
                 //qui salvo ciò che dico

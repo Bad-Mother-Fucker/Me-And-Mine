@@ -18,27 +18,19 @@ class ReaderViewController: UIViewController {
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     var capturePhotoOutput: AVCapturePhotoOutput?
     var imageView: UIImageView!
+    
     //ATTRIBUTES FOR SPEECH RECOGNITION
     private let speechRecognizer = SFSpeechRecognizer.init(locale: Locale.current)
     private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     private var recognitionTask: SFSpeechRecognitionTask?
     private let audioEngine = AVAudioEngine()
+    var flagOnSpeech = false
     
-//    //STACK VIEW
-//    @IBOutlet weak var stackViewDismiss: UIStackView!
-//    @IBOutlet weak var stackViewTorch: UIStackView!
-//    @IBOutlet weak var coreMLStack: UIStackView!
-//    @IBOutlet weak var OCRStack: UIStackView!
-//    @IBOutlet weak var removeBackgroundStack: UIStackView!
-//    @IBOutlet weak var speechRecognitionStack: UIStackView!
-//    @IBOutlet weak var photoStack: UIStackView!
-    
+    //STACK VIEW
     @IBOutlet weak var buttonsStackView: UIStackView!
     
-// TEXT VIEW
-    
+    //TEXT VIEW
     @IBOutlet weak var SpeechText: UITextView!
-    
     
     //BUTTONS
     @IBOutlet weak var torchOnOff: UIButton!
@@ -48,10 +40,8 @@ class ReaderViewController: UIViewController {
     @IBOutlet weak var removeBackgroundButton: UIButton!
     @IBOutlet weak var speechRecognitionButton: UIButton!
     @IBOutlet weak var photoButton: UIButton!
-    
     @IBOutlet weak var dismissPhoto: UIButton!
 
-   
     //OTHER ATTRIBUTES
     var speech: [String]?
     
@@ -60,6 +50,7 @@ class ReaderViewController: UIViewController {
         static let supportedTypes = [AVMetadataObject.ObjectType.upce, AVMetadataObject.ObjectType.code39, AVMetadataObject.ObjectType.code39Mod43, AVMetadataObject.ObjectType.code93, AVMetadataObject.ObjectType.code128, AVMetadataObject.ObjectType.ean8, AVMetadataObject.ObjectType.ean13, AVMetadataObject.ObjectType.aztec, AVMetadataObject.ObjectType.pdf417, AVMetadataObject.ObjectType.itf14, AVMetadataObject.ObjectType.dataMatrix, AVMetadataObject.ObjectType.interleaved2of5, AVMetadataObject.ObjectType.qr]
     }
     
+    //VIEW DID LOAD
     override func viewDidLoad() {
         super.viewDidLoad()
         setCameraSession()
@@ -67,68 +58,52 @@ class ReaderViewController: UIViewController {
         autoFocusMode()
         requestAuthorization()
         self.imageView = UIImageView(frame: self.view.frame)
+        
+        //Hide keyboard tapping everywhere
+        let tapGestureDismissKeyboard = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tapGestureDismissKeyboard)
     }
     
+    //VIEW WILL APPEAR
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNavigationControll()
-        
-        checkCaptureSessionOff()
-        
+        checkCaptureSession()
+        self.SpeechText.isSelectable = false
     }
     
+    //VIEW WILL DISAPPEAR
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         stopRecordingSpeech()
-        checkCaptureSessionOn()
+        checkCaptureSession()
     }
     
     override var prefersStatusBarHidden: Bool {
         return true
     }
     
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
     @IBAction func startSpeech(_ sender: UIButton) {
-        startRecordingSpeech()
+        if (self.flagOnSpeech == false) {
+            startRecordingSpeech()
+            self.flagOnSpeech = true
+        } else {
+            stopRecordingSpeech()
+            self.flagOnSpeech = false
+        }
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
     }
+    
     @IBAction func dismissPhoto(_ sender: UIButton) {
-        self.imageView.removeFromSuperview()
-        self.dismissPhoto.isHidden = true
-    }
-    
-    func setNavigationControll() {
-        tabBarController?.tabBar.isHidden = true
-        navigationController?.navigationBar.isHidden = true
-        navigationController?.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "cancell.png"), style: .done, target: self, action: #selector(dismissCameraView))
-    }
-    
-    func setFlashDismissPhotoButtons() {
-        self.dismissButton.setBackgroundImage(UIImage(named: "dismiss.png"), for: .normal)
-        self.torchOnOff.setBackgroundImage(UIImage(named: "flashOff.png"), for: .normal)
-        self.photoButton.setBackgroundImage(UIImage(named: "photoButton.png"), for: .normal)
-//        self.view.bringSubview(toFront: self.stackViewDismiss)
-//        self.view.bringSubview(toFront: self.stackViewTorch)
-//        self.view.bringSubview(toFront: self.photoStack)
-        self.view.bringSubview(toFront: self.photoButton)
-        self.view.bringSubview(toFront: self.dismissButton)
-        self.view.bringSubview(toFront: self.torchOnOff)
-    }
-    
-    func setFrameworksButton() {
-        self.coreMLButton.setBackgroundImage(UIImage(named: "coreml.png"), for: .normal)
-        self.OCRButton.setBackgroundImage(UIImage(named: "ocr.png"), for: .normal)
-        self.removeBackgroundButton.setBackgroundImage(UIImage(named: "forbici.png"), for: .normal)
-        self.speechRecognitionButton.setBackgroundImage(UIImage(named: "microphone.png"), for: .normal)
-//        self.view.addSubview(self.coreMLStack)
-//        self.view.addSubview(self.OCRStack)
-//        self.view.addSubview(self.removeBackgroundStack)
-//        self.view.addSubview(self.speechRecognitionStack)
-        self.view.addSubview(imageView)
-        self.view.addSubview(buttonsStackView)
-        
+        captureSession?.startRunning()
+        self.view.removeFromSuperview()
     }
     
     //AACTION FLASHLIGHT
@@ -136,41 +111,55 @@ class ReaderViewController: UIViewController {
         flash()
     }
     
-    //ACTION DISMISS
-    @IBAction func dismissFromReaderView(_ sender: UIButton) {
-        self.tabBarController?.selectedIndex = 1
-    }
-    
     //ACTION TAKE PHOTO BUTTON
     @IBAction func takePhotoButton(_ sender: UIButton) {
         //nascondere bottone torcia e bottone dismiss
         setFrameworksButton()
         onTapTakePhoto()
+        captureSession?.stopRunning()
     }
     
-    @objc func dismissCameraView() {
+    @IBAction func dismissButton(_ sender: UIButton) {
         self.dismiss(animated: true, completion: nil)
         self.tabBarController?.selectedIndex = 1
-    }
-    
-    //FUNCTIONS FOR CAPTURE SESSION USED BY ViewWillDisappear
-    func checkCaptureSessionOn() {
-        if captureSession?.isRunning == true {
-            captureSession?.stopRunning()
-        }
-    }
-    
-    //FUNCTIONS FOR CAPTURE SESSION USED BY ViewDidDisappear
-    func checkCaptureSessionOff() {
-        if captureSession?.isRunning == false {
-            captureSession?.startRunning()
-        }
     }
 }
 
 // ############### READER VIEW CONTROLLER EXTENSION ###############
 
 extension ReaderViewController {
+    
+    func setNavigationControll() {
+        tabBarController?.tabBar.isHidden = true
+        navigationController?.navigationBar.isHidden = true
+    }
+    
+    //FUNCTIONS FOR CHECK ON CAPTURE SESSION
+    func checkCaptureSession() {
+        if captureSession?.isRunning == false {
+            captureSession?.startRunning()
+        } else {
+            captureSession?.stopRunning()
+        }
+    }
+    
+    func setFlashDismissTakePhotoButtons() {
+        self.dismissButton.setBackgroundImage(UIImage(named: "dismiss.png"), for: .normal)
+        self.torchOnOff.setBackgroundImage(UIImage(named: "flashOff.png"), for: .normal)
+        self.photoButton.setBackgroundImage(UIImage(named: "photoButton.png"), for: .normal)
+        self.view.bringSubview(toFront: self.dismissButton) //DISMISS BUTTON
+        self.view.bringSubview(toFront: self.photoButton)   //TAKE PHOTO BUTTON
+        self.view.bringSubview(toFront: self.torchOnOff)    //FLASHLIGHT BUTTON
+    }
+    
+    func setFrameworksButton() {
+        self.coreMLButton.setBackgroundImage(UIImage(named: "coreml.png"), for: .normal)
+        self.OCRButton.setBackgroundImage(UIImage(named: "ocr.png"), for: .normal)
+        self.removeBackgroundButton.setBackgroundImage(UIImage(named: "forbici.png"), for: .normal)
+        self.speechRecognitionButton.setBackgroundImage(UIImage(named: "microphone.png"), for: .normal)
+        self.view.addSubview(imageView)
+        self.view.addSubview(buttonsStackView)
+    }
 
     //FLASHLIGHT FUNCTION
     func flash() {
@@ -265,7 +254,7 @@ extension ReaderViewController: AVCapturePhotoCaptureDelegate, AVCaptureMetadata
             self.videoPreviewLayer?.frame = self.view.layer.bounds
             self.videoPreviewLayer?.videoGravity = .resizeAspectFill
             self.view.layer.addSublayer(self.videoPreviewLayer!)
-            self.setFlashDismissPhotoButtons()
+            self.setFlashDismissTakePhotoButtons()
             self.captureSession?.startRunning()
         }
     }
@@ -389,10 +378,10 @@ extension ReaderViewController: SFSpeechRecognizerDelegate, AVAudioRecorderDeleg
             var isFinal = false
             if (speechResult != nil) {
                 isFinal = (speechResult?.isFinal)!
-                self.SpeechText.text = speechResult?.bestTranscription.formattedString
             }
             if (error != nil || isFinal) {
-                //qui salvo ciò che dico
+                let speech = speechResult?.bestTranscription.formattedString
+                self.handleSpeechText(speech!)
                 debugPrint(speechResult?.bestTranscription.formattedString as Any)
                 inputNode.removeTap(onBus: 0)
                 self.recognitionRequest = nil
@@ -421,11 +410,44 @@ extension ReaderViewController: SFSpeechRecognizerDelegate, AVAudioRecorderDeleg
         self.recognitionRequest?.endAudio()
         debugPrint("stop recording.")
     }
+    
+    func handleSpeechText(_ speech: String) {
+        self.view.addSubview(self.SpeechText)
+        self.SpeechText.text = speech
+        self.SpeechText.isEditable = true
+    }
+    
 }
 
+// ############### HANDLE TEXT VIEW ###############
 
-
-
+extension ReaderViewController: UITextViewDelegate {
+    func moveTextView(textView: UITextView, moveDistance: Int, up: Bool) {
+        let moveDuration = 0.3
+        let movement: CGFloat = CGFloat(up ? moveDistance : -moveDistance)
+        
+        UIView.beginAnimations("animatedTextView", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(moveDuration)
+        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+        UIView.commitAnimations()
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        moveTextView(textView: textView, moveDistance: -250, up: true)
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        moveTextView(textView: textView, moveDistance: -250, up: false)
+    }
+    
+//    NEED?
+//    func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
+//        textView.resignFirstResponder()
+//        return true
+//    }
+    
+}
 
 
 

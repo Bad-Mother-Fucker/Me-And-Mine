@@ -77,7 +77,7 @@
                                     <constraint firstAttribute="width" secondItem="zyn-4k-Phv" secondAttribute="height" multiplier="1:1" id="WdN-0Z-yif"/>
                                 </constraints>
                                 <connections>
-                                    <action selector="dismissFromReaderView:" destination="Xbw-T4-Y9f" eventType="touchUpInside" id="ozU-nc-zU5"/>
+                                    <action selector="dismissButton:" destination="Xbw-T4-Y9f" eventType="touchUpInside" id="GKo-ps-y94"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LAW-XX-HQU">
@@ -89,54 +89,50 @@
                                     <action selector="takePhotoButton:" destination="Xbw-T4-Y9f" eventType="touchUpInside" id="QBy-Qn-hkh"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8XQ-zR-KdH">
-                                <rect key="frame" x="16" y="407" width="343" height="127"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FBY-Uk-5KJ">
-                                <rect key="frame" x="68" y="94" width="48" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Done"/>
-                                <connections>
-                                    <action selector="dismissPhoto:" destination="Xbw-T4-Y9f" eventType="touchUpInside" id="CCk-qA-NqV"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CEe-g3-u46">
                                 <rect key="frame" x="172" y="94" width="30" height="30"/>
                                 <connections>
                                     <action selector="torchStatus:" destination="Xbw-T4-Y9f" eventType="touchUpInside" id="m20-Qc-7Ww"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8XQ-zR-KdH">
+                                <rect key="frame" x="16" y="502" width="343" height="64"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="DD4-wM-ldQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <connections>
+                                    <outlet property="delegate" destination="Xbw-T4-Y9f" id="28O-eJ-Ym9"/>
+                                </connections>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="LAW-XX-HQU" firstAttribute="leading" secondItem="5HV-SE-0NS" secondAttribute="leading" constant="155" id="Ebx-ds-mx3"/>
                             <constraint firstItem="CEe-g3-u46" firstAttribute="top" secondItem="5HV-SE-0NS" secondAttribute="top" constant="30" id="NyA-bf-SKq"/>
-                            <constraint firstItem="8XQ-zR-KdH" firstAttribute="top" secondItem="CEe-g3-u46" secondAttribute="bottom" constant="283" id="O1G-a8-zC0"/>
                             <constraint firstItem="zyn-4k-Phv" firstAttribute="top" secondItem="5HV-SE-0NS" secondAttribute="top" constant="30" id="OOn-PK-dhE"/>
                             <constraint firstItem="VQC-Te-XvM" firstAttribute="leading" secondItem="CEe-g3-u46" secondAttribute="trailing" constant="127" id="QL5-TK-JFT"/>
                             <constraint firstItem="5HV-SE-0NS" firstAttribute="bottom" secondItem="LAW-XX-HQU" secondAttribute="bottom" constant="12" id="UOE-vT-lXb"/>
                             <constraint firstItem="zyn-4k-Phv" firstAttribute="leading" secondItem="5HV-SE-0NS" secondAttribute="leading" constant="24" id="XLD-P4-0og"/>
-                            <constraint firstItem="8XQ-zR-KdH" firstAttribute="centerX" secondItem="LAW-XX-HQU" secondAttribute="centerX" id="Ymf-O2-nqS"/>
+                            <constraint firstItem="5HV-SE-0NS" firstAttribute="trailing" secondItem="8XQ-zR-KdH" secondAttribute="trailing" constant="16" id="YMb-FP-CAc"/>
                             <constraint firstItem="5HV-SE-0NS" firstAttribute="trailing" secondItem="VQC-Te-XvM" secondAttribute="trailing" constant="16" id="bit-ca-geo"/>
                             <constraint firstItem="5HV-SE-0NS" firstAttribute="trailing" secondItem="LAW-XX-HQU" secondAttribute="trailing" constant="156" id="fvM-9n-hNA"/>
                             <constraint firstItem="VQC-Te-XvM" firstAttribute="top" secondItem="5HV-SE-0NS" secondAttribute="top" constant="30" id="lUe-tB-Jhf"/>
                             <constraint firstItem="CEe-g3-u46" firstAttribute="leading" secondItem="zyn-4k-Phv" secondAttribute="trailing" constant="118" id="nqF-yQ-x3a"/>
-                            <constraint firstItem="8XQ-zR-KdH" firstAttribute="trailing" secondItem="VQC-Te-XvM" secondAttribute="trailing" id="tVa-90-YXr"/>
-                            <constraint firstItem="LAW-XX-HQU" firstAttribute="top" secondItem="8XQ-zR-KdH" secondAttribute="bottom" constant="8" symbolic="YES" id="uq1-GY-QiQ"/>
+                            <constraint firstItem="8XQ-zR-KdH" firstAttribute="leading" secondItem="5HV-SE-0NS" secondAttribute="leading" constant="16" id="rPw-ok-rtB"/>
+                            <constraint firstItem="5HV-SE-0NS" firstAttribute="bottom" secondItem="8XQ-zR-KdH" secondAttribute="bottom" constant="52" id="xb8-b5-DVV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5HV-SE-0NS"/>
                     </view>
                     <navigationItem key="navigationItem" id="4pJ-nj-N0b"/>
                     <connections>
                         <outlet property="OCRButton" destination="pQw-7u-XDV" id="RXp-P3-lfa"/>
-                        <outlet property="SpeechText" destination="8XQ-zR-KdH" id="FOB-ZV-A2S"/>
+                        <outlet property="SpeechText" destination="8XQ-zR-KdH" id="rfx-3v-6o9"/>
                         <outlet property="buttonsStackView" destination="VQC-Te-XvM" id="eww-Fx-hpU"/>
                         <outlet property="coreMLButton" destination="J4d-6T-9FT" id="S7J-KO-lrY"/>
                         <outlet property="dismissButton" destination="zyn-4k-Phv" id="Ghw-wv-6Oa"/>
-                        <outlet property="dismissPhoto" destination="FBY-Uk-5KJ" id="AKv-Hl-Sx5"/>
                         <outlet property="photoButton" destination="LAW-XX-HQU" id="UWe-MH-qh8"/>
                         <outlet property="removeBackgroundButton" destination="l0Q-rg-h6r" id="0Si-6C-byN"/>
                         <outlet property="speechRecognitionButton" destination="Sid-wM-ikO" id="g61-Mf-y51"/>
@@ -163,7 +159,7 @@
             </objects>
             <point key="canvasLocation" x="334" y="1607"/>
         </scene>
-        <!--My items-->
+        <!--Shared-->
         <scene sceneID="1AD-7I-cML">
             <objects>
                 <collectionViewController storyboardIdentifier="collectionMyItems" id="PW0-2x-eS4" customClass="HomeCollectionViewController" customModule="ChinalFallenge" customModuleProvider="target" sceneMemberID="viewController">
@@ -192,7 +188,7 @@
                             <outlet property="delegate" destination="PW0-2x-eS4" id="WWZ-0u-b45"/>
                         </connections>
                     </collectionView>
-                    <tabBarItem key="tabBarItem" tag="2" title="My items" id="WnH-KV-SwR"/>
+                    <tabBarItem key="tabBarItem" tag="2" title="Shared" id="WnH-KV-SwR"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I9b-y9-0l4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

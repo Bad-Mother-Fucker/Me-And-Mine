@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
-        let shortcut2 = UIMutableApplicationShortcutItem(type: "MyItems", localizedTitle: "My Items", localizedSubtitle: "", icon: UIApplicationShortcutIcon(type: .home), userInfo: nil)
+        let shortcut2 = UIMutableApplicationShortcutItem(type: "Shared", localizedTitle: "Shared", localizedSubtitle: "", icon: UIApplicationShortcutIcon(type: .home), userInfo: nil)
         application.shortcutItems = [shortcut2]
         // application.shortcutItems?.append(shortcut2) same way to create a new quick button.
         
@@ -64,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 DispatchQueue.main.async {
                     rootTabBar.selectedIndex = 0
                 }
-            } else if (shortcutItem.type == "MyItems") {
+            } else if (shortcutItem.type == "Shared") {
                 DispatchQueue.main.async {
                     rootTabBar.selectedIndex = 2
                 }

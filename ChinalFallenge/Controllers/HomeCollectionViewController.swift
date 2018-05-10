@@ -12,23 +12,18 @@ private let reuseIdentifier = "Cell"
 
 class HomeCollectionViewController: UICollectionViewController {
     
+    let viewIdentifier = "SharedView"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
-        // Register cell classes
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
         collectionView?.delegate = self
-        showTabBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        showTabBar()
+        tabBarController?.tabBar.isHidden = false
     }
     
     // MARK: UICollectionViewDataSource
@@ -50,11 +45,4 @@ class HomeCollectionViewController: UICollectionViewController {
         
         return cell
     }
-    
-    func showTabBar() {
-        if self.tabBarController?.tabBar.isHidden == true {
-            tabBarController?.tabBar.isHidden = false
-        }
-    }
-    
 }

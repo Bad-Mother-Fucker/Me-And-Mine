@@ -75,7 +75,6 @@ class ReaderViewController: UIViewController {
     //VIEW WILL DISAPPEAR
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        stopRecordingSpeech()
         checkCaptureSession()
     }
     
@@ -83,10 +82,12 @@ class ReaderViewController: UIViewController {
         return true
     }
     
+    //FUNCTION TO HIDE KEYBOARD
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
     
+    //BUTTON TO RECORD SPEECH
     @IBAction func startSpeech(_ sender: UIButton) {
         if (self.flagOnSpeech == false) {
             startRecordingSpeech()
@@ -102,8 +103,8 @@ class ReaderViewController: UIViewController {
     }
     
     @IBAction func dismissPhoto(_ sender: UIButton) {
+        //Non si vede il bottone e si deve eliminare la foto appena scattata
         captureSession?.startRunning()
-        self.view.removeFromSuperview()
     }
     
     //AACTION FLASHLIGHT
@@ -188,6 +189,16 @@ extension ReaderViewController {
         }
     }
     
+    //FOCUS FUNCTION
+    func autoFocusMode() {
+        guard let cameraFocus = AVCaptureDevice.default(for: AVMediaType.video) else {return}
+        if cameraFocus.isFocusModeSupported(.continuousAutoFocus) {
+            try! cameraFocus.lockForConfiguration()
+            cameraFocus.focusMode = .continuousAutoFocus
+            cameraFocus.unlockForConfiguration()
+        }
+    }
+    
     //ALERT FUNCTION
     func alert() {
         let alert = UIAlertController(title: "QR/Bar Code caught", message: "Step1: add info - Step2: capture new QR/Bar Code", preferredStyle: .alert)
@@ -204,28 +215,6 @@ extension ReaderViewController {
         
         self.present(alert, animated: true, completion: nil)
     }
-    
-    //FAILED FUNCTION
-    func failed() {
-        let alert = UIAlertController(title: "Scanning not supported", message: "Your device does not support scanning a code from an item. Please use a device with a camera.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: .default))
-        self.present(alert,animated: true)
-        captureSession = nil
-    }
-    
-    //FOCUS FUNCTION
-    func autoFocusMode() {
-        guard let cameraFocus = AVCaptureDevice.default(for: AVMediaType.video) else {return}
-        if cameraFocus.isFocusModeSupported(.continuousAutoFocus) {
-            try! cameraFocus.lockForConfiguration()
-            cameraFocus.focusMode = .continuousAutoFocus
-            cameraFocus.unlockForConfiguration()
-        }
-    }
-    
-    func found(code: String) {
-        print(code)
-    }
 }
 
 // ############### CAMERA SESSION ###############
@@ -239,15 +228,10 @@ extension ReaderViewController: AVCapturePhotoCaptureDelegate, AVCaptureMetadata
         let videoInput: AVCaptureDeviceInput
         do {
             videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
-        } catch {
-            return
-        }
+        } catch {return}
         if (captureSession?.canAddInput(videoInput))! {
             captureSession?.addInput(videoInput)
-        } else {
-            failed()
-            return
-        }
+        } else {return}
         //HANDLE SECOND THREAD
         DispatchQueue.main.async {
             self.videoPreviewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession!)
@@ -265,9 +249,7 @@ extension ReaderViewController: AVCapturePhotoCaptureDelegate, AVCaptureMetadata
         // Set the output on the capture session
         if (captureSession?.canAddOutput(capturePhotoOutput!))! {
             captureSession?.addOutput(capturePhotoOutput!)
-        } else {
-            return
-        }
+        } else {return}
     }
     
     //CALLED WHEN THE USER TAP THE BUTTON "TAKE A PHOTO"
@@ -311,10 +293,7 @@ extension ReaderViewController: AVCapturePhotoCaptureDelegate, AVCaptureMetadata
             captureSession?.addOutput(metadataOutput)
             metadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
             metadataOutput.metadataObjectTypes = codeType.supportedTypes
-        } else {
-            failed()
-            return
-        }
+        } else {return}
     }
     
     //METADATA OUTPUT FUNCTION
@@ -324,9 +303,8 @@ extension ReaderViewController: AVCapturePhotoCaptureDelegate, AVCaptureMetadata
         if let metadataObject = metadataObjects.first {
             guard let readableObject = metadataObject as? AVMetadataMachineReadableCodeObject else {return}
             guard let stringValue = readableObject.stringValue else {return}
+            print(stringValue)
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-            
-            found(code: stringValue)
         }
         dismiss(animated: true)
         alert()
@@ -440,14 +418,27 @@ extension ReaderViewController: UITextViewDelegate {
     func textViewDidEndEditing(_ textView: UITextView) {
         moveTextView(textView: textView, moveDistance: -250, up: false)
     }
-    
-//    NEED?
-//    func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
-//        textView.resignFirstResponder()
-//        return true
-//    }
-    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

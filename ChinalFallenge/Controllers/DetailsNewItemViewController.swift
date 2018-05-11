@@ -12,8 +12,6 @@ import CoreData
 
 class DetailsNewItemViewController: UIViewController, UINavigationControllerDelegate {
     
-    var speechPassed: String?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }

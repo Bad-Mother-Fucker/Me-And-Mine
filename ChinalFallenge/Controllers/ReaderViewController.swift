@@ -18,6 +18,8 @@ class ReaderViewController: UIViewController {
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     var capturePhotoOutput: AVCapturePhotoOutput?
     var imageView: UIImageView!
+    let photoSettings = AVCapturePhotoSettings()
+    var flashMode = AVCaptureDevice.FlashMode.off
     
     //ATTRIBUTES FOR SPEECH RECOGNITION
     private let speechRecognizer = SFSpeechRecognizer.init(locale: Locale.current)
@@ -28,6 +30,7 @@ class ReaderViewController: UIViewController {
     
     //STACK VIEW
     @IBOutlet weak var buttonsStackView: UIStackView!
+    @IBOutlet weak var dismissAndTorchStackView: UIStackView!
     
     //TEXT VIEW
     @IBOutlet weak var SpeechText: UITextView!
@@ -109,14 +112,14 @@ class ReaderViewController: UIViewController {
     
     //AACTION FLASHLIGHT
     @IBAction func torchStatus(_ sender: UIButton) {
-        flash()
+        flashLight()
     }
     
     //ACTION TAKE PHOTO BUTTON
     @IBAction func takePhotoButton(_ sender: UIButton) {
         //nascondere bottone torcia e bottone dismiss
-        setFrameworksButton()
         onTapTakePhoto()
+        setFrameworksButton()
         captureSession?.stopRunning()
     }
     
@@ -146,44 +149,39 @@ extension ReaderViewController {
     
     func setFlashDismissTakePhotoButtons() {
         self.dismissButton.setBackgroundImage(UIImage(named: "dismiss.png"), for: .normal)
-        self.torchOnOff.setBackgroundImage(UIImage(named: "flashOff.png"), for: .normal)
+        self.torchOnOff.setImage(UIImage(named: "FlashOff.png"), for: .normal)
         self.photoButton.setBackgroundImage(UIImage(named: "photoButton.png"), for: .normal)
-        self.view.bringSubview(toFront: self.dismissButton) //DISMISS BUTTON
+        self.view.addSubview(dismissAndTorchStackView)
         self.view.bringSubview(toFront: self.photoButton)   //TAKE PHOTO BUTTON
-        self.view.bringSubview(toFront: self.torchOnOff)    //FLASHLIGHT BUTTON
     }
     
     func setFrameworksButton() {
         self.coreMLButton.setBackgroundImage(UIImage(named: "coreml.png"), for: .normal)
         self.OCRButton.setBackgroundImage(UIImage(named: "ocr.png"), for: .normal)
-        self.removeBackgroundButton.setBackgroundImage(UIImage(named: "forbici.png"), for: .normal)
         self.speechRecognitionButton.setBackgroundImage(UIImage(named: "microphone.png"), for: .normal)
+        self.removeBackgroundButton.setBackgroundImage(UIImage(named: "forbici.png"), for: .normal)
         self.view.addSubview(imageView)
         self.view.addSubview(buttonsStackView)
     }
 
     //FLASHLIGHT FUNCTION
-    func flash() {
-        guard let device = AVCaptureDevice.default(for: AVMediaType.video) else {return}
-        if (device.hasTorch) {
+    func flashLight() {
+        guard let device = AVCaptureDevice.default(for: .video) else {return}
+        if (device.hasFlash) {
             //Check if the device has the flashlight.
-            if device.isTorchAvailable {
-                do {
-                    try device.lockForConfiguration()
-                    if (device.torchMode == .on) {
-                        device.torchMode = .off
-                        self.torchOnOff.setImage(UIImage(named: "flashOff.png"), for: .normal)
-                    } else {
-                        device.torchMode = .on
-                        self.torchOnOff.setImage(UIImage(named: "flashOn.png"), for: .normal)
-                    }
-                    device.unlockForConfiguration()
-                } catch {
-                    print("Torch could not be used")
-                    print(error)
+            if device.isFlashAvailable {
+                switch self.flashMode {
+                case .auto:
+                    self.flashMode = .on
+                    self.torchOnOff.setImage(#imageLiteral(resourceName: "FlashOn"), for: .normal)
+                case .on:
+                    self.flashMode = .off
+                    self.torchOnOff.setImage(#imageLiteral(resourceName: "FlashOff"), for: .normal)
+                case .off:
+                    self.flashMode = .auto
+                    self.torchOnOff.setImage(#imageLiteral(resourceName: "FlashAuto"), for: .normal)
                 }
-            }
-            else {
+            } else {
                 print("Torch is not available")
             }
         }
@@ -255,15 +253,15 @@ extension ReaderViewController: AVCapturePhotoCaptureDelegate, AVCaptureMetadata
     //CALLED WHEN THE USER TAP THE BUTTON "TAKE A PHOTO"
     func onTapTakePhoto() {
         guard let capturePhotoOutput = self.capturePhotoOutput else {return} // Make sure capturePhotoOutput is valid
-        let photoSettings = AVCapturePhotoSettings() // Get an instance of AVCapturePhotoSettings class
-        
         // Set photo settings for our need
+        photoSettings.flashMode = self.flashMode
         photoSettings.isAutoStillImageStabilizationEnabled = true
         photoSettings.isHighResolutionPhotoEnabled = true
-        photoSettings.flashMode = .auto
-        
+        let settings = AVCapturePhotoSettings.init(from: self.photoSettings)
         // Call capturePhoto method by passing our photo settings and a delegate implementing AVCapturePhotoCaptureDelegate
-        capturePhotoOutput.capturePhoto(with: photoSettings, delegate: self)
+        capturePhotoOutput.capturePhoto(with: settings, delegate: self)
+        
+        debugPrint("[DEBUG] okay flashmode: \(photoSettings.flashMode)")
     }
     
     //PHOTO OUTPUT FUNCTION
@@ -356,10 +354,10 @@ extension ReaderViewController: SFSpeechRecognizerDelegate, AVAudioRecorderDeleg
             var isFinal = false
             if (speechResult != nil) {
                 isFinal = (speechResult?.isFinal)!
-            }
-            if (error != nil || isFinal) {
                 let speech = speechResult?.bestTranscription.formattedString
                 self.handleSpeechText(speech!)
+            }
+            if (error != nil || isFinal) {
                 debugPrint(speechResult?.bestTranscription.formattedString as Any)
                 inputNode.removeTap(onBus: 0)
                 self.recognitionRequest = nil

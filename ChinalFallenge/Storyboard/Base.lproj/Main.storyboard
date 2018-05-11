@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -72,15 +73,6 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zyn-4k-Phv">
-                                <rect key="frame" x="24" y="94" width="30" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="zyn-4k-Phv" secondAttribute="height" multiplier="1:1" id="WdN-0Z-yif"/>
-                                </constraints>
-                                <connections>
-                                    <action selector="dismissButton:" destination="Xbw-T4-Y9f" eventType="touchUpInside" id="GKo-ps-y94"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LAW-XX-HQU">
                                 <rect key="frame" x="155" y="542" width="64" height="64"/>
                                 <constraints>
@@ -88,12 +80,6 @@
                                 </constraints>
                                 <connections>
                                     <action selector="takePhotoButton:" destination="Xbw-T4-Y9f" eventType="touchUpInside" id="QBy-Qn-hkh"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CEe-g3-u46">
-                                <rect key="frame" x="172" y="94" width="30" height="30"/>
-                                <connections>
-                                    <action selector="torchStatus:" destination="Xbw-T4-Y9f" eventType="touchUpInside" id="m20-Qc-7Ww"/>
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="8XQ-zR-KdH">
@@ -108,20 +94,47 @@
                                     <outlet property="delegate" destination="Xbw-T4-Y9f" id="28O-eJ-Ym9"/>
                                 </connections>
                             </textView>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="MI7-j0-Opd">
+                                <rect key="frame" x="16" y="94" width="165" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zyn-4k-Phv">
+                                        <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="3mu-PK-4RD"/>
+                                            <constraint firstAttribute="width" constant="30" id="R0n-xM-3eP"/>
+                                            <constraint firstAttribute="width" secondItem="zyn-4k-Phv" secondAttribute="height" multiplier="1:1" id="WdN-0Z-yif"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="dismissButton:" destination="Xbw-T4-Y9f" eventType="touchUpInside" id="GKo-ps-y94"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CEe-g3-u46">
+                                        <rect key="frame" x="130" y="0.0" width="35" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="4pe-Xv-57s"/>
+                                            <constraint firstAttribute="width" constant="35" id="AdZ-66-Blh"/>
+                                        </constraints>
+                                        <connections>
+                                            <action selector="torchStatus:" destination="Xbw-T4-Y9f" eventType="touchUpInside" id="m20-Qc-7Ww"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="CEe-g3-u46" firstAttribute="baseline" secondItem="zyn-4k-Phv" secondAttribute="baseline" id="JGH-gq-c5f"/>
+                                    <constraint firstItem="CEe-g3-u46" firstAttribute="firstBaseline" secondItem="zyn-4k-Phv" secondAttribute="firstBaseline" id="wlQ-qv-IAC"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="MI7-j0-Opd" firstAttribute="leading" secondItem="5HV-SE-0NS" secondAttribute="leading" constant="16" id="6pU-SQ-2oY"/>
                             <constraint firstItem="LAW-XX-HQU" firstAttribute="leading" secondItem="5HV-SE-0NS" secondAttribute="leading" constant="155" id="Ebx-ds-mx3"/>
-                            <constraint firstItem="CEe-g3-u46" firstAttribute="top" secondItem="5HV-SE-0NS" secondAttribute="top" constant="30" id="NyA-bf-SKq"/>
-                            <constraint firstItem="zyn-4k-Phv" firstAttribute="top" secondItem="5HV-SE-0NS" secondAttribute="top" constant="30" id="OOn-PK-dhE"/>
-                            <constraint firstItem="VQC-Te-XvM" firstAttribute="leading" secondItem="CEe-g3-u46" secondAttribute="trailing" constant="127" id="QL5-TK-JFT"/>
                             <constraint firstItem="5HV-SE-0NS" firstAttribute="bottom" secondItem="LAW-XX-HQU" secondAttribute="bottom" constant="12" id="UOE-vT-lXb"/>
-                            <constraint firstItem="zyn-4k-Phv" firstAttribute="leading" secondItem="5HV-SE-0NS" secondAttribute="leading" constant="24" id="XLD-P4-0og"/>
                             <constraint firstItem="5HV-SE-0NS" firstAttribute="trailing" secondItem="8XQ-zR-KdH" secondAttribute="trailing" constant="16" id="YMb-FP-CAc"/>
                             <constraint firstItem="5HV-SE-0NS" firstAttribute="trailing" secondItem="VQC-Te-XvM" secondAttribute="trailing" constant="16" id="bit-ca-geo"/>
+                            <constraint firstItem="MI7-j0-Opd" firstAttribute="top" secondItem="5HV-SE-0NS" secondAttribute="top" constant="30" id="f15-fV-sQr"/>
                             <constraint firstItem="5HV-SE-0NS" firstAttribute="trailing" secondItem="LAW-XX-HQU" secondAttribute="trailing" constant="156" id="fvM-9n-hNA"/>
                             <constraint firstItem="VQC-Te-XvM" firstAttribute="top" secondItem="5HV-SE-0NS" secondAttribute="top" constant="30" id="lUe-tB-Jhf"/>
-                            <constraint firstItem="CEe-g3-u46" firstAttribute="leading" secondItem="zyn-4k-Phv" secondAttribute="trailing" constant="118" id="nqF-yQ-x3a"/>
                             <constraint firstItem="8XQ-zR-KdH" firstAttribute="leading" secondItem="5HV-SE-0NS" secondAttribute="leading" constant="16" id="rPw-ok-rtB"/>
                             <constraint firstItem="5HV-SE-0NS" firstAttribute="bottom" secondItem="8XQ-zR-KdH" secondAttribute="bottom" constant="52" id="xb8-b5-DVV"/>
                         </constraints>
@@ -133,6 +146,7 @@
                         <outlet property="SpeechText" destination="8XQ-zR-KdH" id="rfx-3v-6o9"/>
                         <outlet property="buttonsStackView" destination="VQC-Te-XvM" id="eww-Fx-hpU"/>
                         <outlet property="coreMLButton" destination="J4d-6T-9FT" id="S7J-KO-lrY"/>
+                        <outlet property="dismissAndTorchStackView" destination="MI7-j0-Opd" id="8rr-PM-8mX"/>
                         <outlet property="dismissButton" destination="zyn-4k-Phv" id="Ghw-wv-6Oa"/>
                         <outlet property="photoButton" destination="LAW-XX-HQU" id="UWe-MH-qh8"/>
                         <outlet property="removeBackgroundButton" destination="l0Q-rg-h6r" id="0Si-6C-byN"/>

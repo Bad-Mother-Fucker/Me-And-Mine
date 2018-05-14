@@ -39,7 +39,7 @@ extension ReaderViewController: AVCapturePhotoCaptureDelegate, AVCaptureMetadata
         let videoInput = try? AVCaptureDeviceInput(device: bestDevice(in: .back))
         if (captureSession?.canAddInput(videoInput!))! {
             captureSession?.addInput(videoInput!)
-            instantiatePhotoOutput()
+            setPhotoOutput()
             captureSession?.commitConfiguration()
         } else {return}
         //HANDLE SECOND THREAD
@@ -59,7 +59,7 @@ extension ReaderViewController: AVCapturePhotoCaptureDelegate, AVCaptureMetadata
     }
     
     
-    func instantiatePhotoOutput() {
+    func setPhotoOutput() {
         capturePhotoOutput = AVCapturePhotoOutput()
         capturePhotoOutput?.isHighResolutionCaptureEnabled = true
         // Set the output on the capture session

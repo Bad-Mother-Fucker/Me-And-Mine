@@ -15,7 +15,7 @@ import Speech
 extension ReaderViewController: SFSpeechRecognizerDelegate, AVAudioRecorderDelegate {
     
     //REQUEST AUTHORIZATION FOR SPEECH RECOGNITION
-    func requestAuthorization() {
+    func requestSpeechAuthorization() {
         SFSpeechRecognizer.requestAuthorization { (authorization) in
             switch authorization {
             case .authorized:

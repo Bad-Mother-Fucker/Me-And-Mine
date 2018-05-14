@@ -15,6 +15,7 @@ class ReaderViewController: UIViewController {
     
     //ATTRIBUTES FOR CAMERA
     var captureSession: AVCaptureSession?
+    let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInTrueDepthCamera, .builtInDualCamera, .builtInWideAngleCamera], mediaType: .video, position: .unspecified)
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     var capturePhotoOutput: AVCapturePhotoOutput?
     var imageView: UIImageView!
@@ -28,24 +29,17 @@ class ReaderViewController: UIViewController {
     let audioEngine = AVAudioEngine()
     var flagOnSpeech = false
     
-    //STACK VIEW
-    @IBOutlet weak var buttonsStackView: UIStackView!
-    @IBOutlet weak var dismissAndTorchStackView: UIStackView!
+    //VIEW
+    @IBOutlet weak var cameraView: UIView!
     
     //TEXT VIEW
     @IBOutlet weak var SpeechText: UITextView!
-    
-    //BUTTONS
-    @IBOutlet weak var torchOnOff: UIButton!
-    @IBOutlet weak var dismissButton: UIButton!
-    @IBOutlet weak var coreMLButton: UIButton!
-    @IBOutlet weak var OCRButton: UIButton!
-    @IBOutlet weak var removeBackgroundButton: UIButton!
-    @IBOutlet weak var speechRecognitionButton: UIButton!
-    @IBOutlet weak var photoButton: UIButton!
 
     //OTHER ATTRIBUTES
     var speech: [String]?
+    
+    //BUTTONS
+    @IBOutlet weak var photoButton: UIButton!
     
     //TYPE QR/BAR CODE SCANNING
     struct codeType {
@@ -56,14 +50,8 @@ class ReaderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setCameraSession()
-        instantiatePhotoOutput()
-        autoFocusMode()
-        requestAuthorization()
-        self.imageView = UIImageView(frame: self.view.frame)
-        
-        //Hide keyboard tapping everywhere
-        let tapGestureDismissKeyboard = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tapGestureDismissKeyboard)
+        requestCameraAuthorization()
+        gestureDismissKeyboard()
     }
     
     //VIEW WILL APPEAR
@@ -71,12 +59,14 @@ class ReaderViewController: UIViewController {
         super.viewWillAppear(animated)
         setNavigationAndTabBarController()
         checkCaptureSession()
-        self.SpeechText.isSelectable = false
+        settingTextView()
+        setButtonOnCameraView()
+        self.imageView = UIImageView(frame: self.cameraView.frame)
     }
     
     //FUNCTION TO HIDE KEYBOARD
     @objc func dismissKeyboard() {
-        view.endEditing(true)
+        self.cameraView.endEditing(true)
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -87,45 +77,12 @@ class ReaderViewController: UIViewController {
         return .portrait
     }
     
-    
-    //BUTTON TO RECORD SPEECH
-    @IBAction func startSpeech(_ sender: UIButton) {
-        if (self.flagOnSpeech == false) {
-            startRecordingSpeech()
-            self.flagOnSpeech = true
-        } else {
-            stopRecordingSpeech()
-            self.flagOnSpeech = false
-        }
-    }
-    
-    //AACTION FLASHLIGHT
-    @IBAction func torchStatus(_ sender: UIButton) {
-        switch self.flashMode {
-        case .auto:
-            self.flashMode = .on
-            self.torchOnOff.setImage(#imageLiteral(resourceName: "FlashOn"), for: .normal)
-        case .on:
-            self.flashMode = .off
-            self.torchOnOff.setImage(#imageLiteral(resourceName: "FlashOff"), for: .normal)
-        case .off:
-            self.flashMode = .auto
-            self.torchOnOff.setImage(#imageLiteral(resourceName: "FlashAuto"), for: .normal)
-        }
-    }
-    
-    //ACTION TAKE PHOTO BUTTON
-    @IBAction func takePhotoButton(_ sender: UIButton) {
-        //nascondere bottone torcia e bottone dismiss
-        onTapTakePhoto()
+    @IBAction func takePhoto(_ sender: Any) {
         captureSession?.stopRunning()
-        setFrameworksButton()
+        onTapTakePhoto()
+        setSwipeGestureFrameworks()
     }
     
-    @IBAction func dismissButton(_ sender: UIButton) {
-        self.dismiss(animated: true, completion: nil)
-        self.tabBarController?.selectedIndex = 1
-    }
 }
 
 // ############### HANDLE TEXT VIEW ###############

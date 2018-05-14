@@ -6,6 +6,8 @@
 	<string>Saving photo in photo album</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>We want to record you.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This device&apos;s camera will be used to take photos.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>We use the microphone to allow speech recognition.</string>
 	<key>UIApplicationShortcutItems</key>
@@ -43,8 +45,6 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSCameraUsageDescription</key>
-	<string>This device&apos;s camera will be used to scan the QR/Bar codes.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

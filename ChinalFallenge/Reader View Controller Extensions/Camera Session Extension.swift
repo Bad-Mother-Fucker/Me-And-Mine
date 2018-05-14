@@ -13,35 +13,59 @@ import UIKit
 
 extension ReaderViewController: AVCapturePhotoCaptureDelegate, AVCaptureMetadataOutputObjectsDelegate {
     
+    func requestCameraAuthorization() {
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .authorized: // The user has previously granted access to the camera.
+            self.setCameraSession()
+            
+        case .notDetermined: // The user has not yet been asked for camera access.
+            AVCaptureDevice.requestAccess(for: .video) { granted in
+                if granted {
+                    self.setCameraSession()
+                }
+            }
+        case .denied: // The user has previously denied access.
+            return
+        case .restricted: // The user can't grant access due to restrictions.
+            return
+        }
+    }
+    
     //SET CAMERA ON THE VIEW.
     func setCameraSession() {
         captureSession = AVCaptureSession()
-        guard let videoCaptureDevice = AVCaptureDevice.default(for: .video) else {return}
-        let videoInput: AVCaptureDeviceInput
-        do {
-            videoInput = try AVCaptureDeviceInput(device: videoCaptureDevice)
-        } catch {return}
-        if (captureSession?.canAddInput(videoInput))! {
-            captureSession?.addInput(videoInput)
+    
+        captureSession?.beginConfiguration()
+        let videoInput = try? AVCaptureDeviceInput(device: bestDevice(in: .back))
+        if (captureSession?.canAddInput(videoInput!))! {
+            captureSession?.addInput(videoInput!)
+            instantiatePhotoOutput()
+            captureSession?.commitConfiguration()
         } else {return}
         //HANDLE SECOND THREAD
         DispatchQueue.main.async {
             self.videoPreviewLayer = AVCaptureVideoPreviewLayer(session: self.captureSession!)
-            self.videoPreviewLayer?.frame = self.view.layer.bounds
+            self.videoPreviewLayer?.frame = self.cameraView.layer.bounds
             self.videoPreviewLayer?.videoGravity = .resizeAspectFill
-            self.view.layer.addSublayer(self.videoPreviewLayer!)
-            self.setFlashDismissTakePhotoButtons()
+            self.cameraView.layer.addSublayer(self.videoPreviewLayer!)
             self.captureSession?.startRunning()
         }
     }
+    
+    func bestDevice(in position: AVCaptureDevice.Position) -> AVCaptureDevice {
+        let devices = self.discoverySession.devices
+        guard !devices.isEmpty else {fatalError("Missing capture devices.")}
+        return devices.first(where: {device in device.position == position })!
+    }
+    
     
     func instantiatePhotoOutput() {
         capturePhotoOutput = AVCapturePhotoOutput()
         capturePhotoOutput?.isHighResolutionCaptureEnabled = true
         // Set the output on the capture session
-        if (captureSession?.canAddOutput(capturePhotoOutput!))! {
-            captureSession?.addOutput(capturePhotoOutput!)
-        } else {return}
+        guard (self.captureSession?.canAddOutput(capturePhotoOutput!))! else {return}
+        self.captureSession?.sessionPreset = .photo
+        self.captureSession?.addOutput(capturePhotoOutput!)
     }
     
     //CALLED WHEN THE USER TAP THE BUTTON "TAKE A PHOTO"
@@ -51,20 +75,16 @@ extension ReaderViewController: AVCapturePhotoCaptureDelegate, AVCaptureMetadata
         photoSettings.flashMode = self.flashMode
         photoSettings.isAutoStillImageStabilizationEnabled = true
         photoSettings.isHighResolutionPhotoEnabled = true
-        let settings = AVCapturePhotoSettings.init(from: self.photoSettings)
+        let settings = AVCapturePhotoSettings.init(from: photoSettings)
         // Call capturePhoto method by passing our photo settings and a delegate implementing AVCapturePhotoCaptureDelegate
         capturePhotoOutput.capturePhoto(with: settings, delegate: self)
-        
-        debugPrint("[DEBUG] okay flashmode: \(photoSettings.flashMode)")
+        print("save?")
     }
     
     //PHOTO OUTPUT FUNCTION
     func photoOutput(_ captureOutput: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error:Error?) {
         // get captured image - Make sure we get some photo sample buffer
-        guard error == nil else {
-            print("Error capturing photo: \(String(describing: error))")
-            return
-        }
+        guard error != nil else {print("Error capturing photo: \(error!)"); return}
         // Convert photo same buffer to a jpeg image data by using // AVCapturePhotoOutput
         guard let imageData = photo.fileDataRepresentation() else {return}
         

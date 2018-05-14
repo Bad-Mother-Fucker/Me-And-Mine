@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		FC04BB43208DE3FE00B6C2FF /* SlideAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC04BB42208DE3FD00B6C2FF /* SlideAnimator.swift */; };
+		FC4B790920A989B200A6AC4A /* Speech Recognition Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B790620A989B200A6AC4A /* Speech Recognition Extension.swift */; };
+		FC4B790A20A989B200A6AC4A /* Camera Session Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B790720A989B200A6AC4A /* Camera Session Extension.swift */; };
+		FC4B790B20A989B200A6AC4A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B790820A989B200A6AC4A /* Extensions.swift */; };
 		FC7444952088A2F100095D3D /* DetailsNewItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7444942088A2F100095D3D /* DetailsNewItemViewController.swift */; };
 		FC7444972089DAB700095D3D /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7444962089DAB700095D3D /* MyTabBarController.swift */; };
 		FC74449B208B498500095D3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC74449A208B498500095D3D /* Assets.xcassets */; };
@@ -19,9 +22,6 @@
 		FCC2E3AD2080E22A000C3974 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCC2E3AB2080E22A000C3974 /* LaunchScreen.storyboard */; };
 		FCC2E3B82080E22A000C3974 /* ChinalFallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC2E3B72080E22A000C3974 /* ChinalFallengeTests.swift */; };
 		FCC2E3C32080E22A000C3974 /* ChinalFallengeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC2E3C22080E22A000C3974 /* ChinalFallengeUITests.swift */; };
-		FCFE7D8F20A60A54000B5AAE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFE7D8E20A60A54000B5AAE /* Extensions.swift */; };
-		FCFE7D9120A60B5B000B5AAE /* Speech Recognition Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFE7D9020A60B5B000B5AAE /* Speech Recognition Extension.swift */; };
-		FCFE7D9320A60C1A000B5AAE /* Camera Session Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFE7D9220A60C1A000B5AAE /* Camera Session Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +43,9 @@
 
 /* Begin PBXFileReference section */
 		FC04BB42208DE3FD00B6C2FF /* SlideAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideAnimator.swift; sourceTree = "<group>"; };
+		FC4B790620A989B200A6AC4A /* Speech Recognition Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Speech Recognition Extension.swift"; sourceTree = "<group>"; };
+		FC4B790720A989B200A6AC4A /* Camera Session Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Camera Session Extension.swift"; sourceTree = "<group>"; };
+		FC4B790820A989B200A6AC4A /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FC7444942088A2F100095D3D /* DetailsNewItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsNewItemViewController.swift; sourceTree = "<group>"; };
 		FC7444962089DAB700095D3D /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
 		FC74449A208B498500095D3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -60,9 +63,6 @@
 		FCC2E3BE2080E22A000C3974 /* ChinalFallengeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChinalFallengeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCC2E3C22080E22A000C3974 /* ChinalFallengeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChinalFallengeUITests.swift; sourceTree = "<group>"; };
 		FCC2E3C42080E22A000C3974 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FCFE7D8E20A60A54000B5AAE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		FCFE7D9020A60B5B000B5AAE /* Speech Recognition Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Speech Recognition Extension.swift"; sourceTree = "<group>"; };
-		FCFE7D9220A60C1A000B5AAE /* Camera Session Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Camera Session Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,11 +119,20 @@
 			path = Storyboard;
 			sourceTree = "<group>";
 		};
+		FC4B790520A9895400A6AC4A /* Reader View Controller Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FC4B790820A989B200A6AC4A /* Extensions.swift */,
+				FC4B790720A989B200A6AC4A /* Camera Session Extension.swift */,
+				FC4B790620A989B200A6AC4A /* Speech Recognition Extension.swift */,
+			);
+			path = "Reader View Controller Extensions";
+			sourceTree = "<group>";
+		};
 		FCC2E3962080E229000C3974 = {
 			isa = PBXGroup;
 			children = (
 				FCC2E3A12080E229000C3974 /* ChinalFallenge */,
-				FCFE7D8D20A60A2C000B5AAE /* Reader View Controller Extensions */,
 				FCC2E3B62080E22A000C3974 /* ChinalFallengeTests */,
 				FCC2E3C12080E22A000C3974 /* ChinalFallengeUITests */,
 				FCC2E3A02080E229000C3974 /* Products */,
@@ -146,9 +155,10 @@
 				FC74449A208B498500095D3D /* Assets.xcassets */,
 				FCC2E3AE2080E22A000C3974 /* Info.plist */,
 				FCC2E3A22080E22A000C3974 /* AppDelegate.swift */,
-				FC04BB41208DE3DF00B6C2FF /* Sources */,
 				FC129854208488410095A2AF /* Storyboard */,
+				FC04BB41208DE3DF00B6C2FF /* Sources */,
 				FC129853208487C10095A2AF /* Controllers */,
+				FC4B790520A9895400A6AC4A /* Reader View Controller Extensions */,
 			);
 			path = ChinalFallenge;
 			sourceTree = "<group>";
@@ -169,16 +179,6 @@
 				FCC2E3C42080E22A000C3974 /* Info.plist */,
 			);
 			path = ChinalFallengeUITests;
-			sourceTree = "<group>";
-		};
-		FCFE7D8D20A60A2C000B5AAE /* Reader View Controller Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				FCFE7D8E20A60A54000B5AAE /* Extensions.swift */,
-				FCFE7D9020A60B5B000B5AAE /* Speech Recognition Extension.swift */,
-				FCFE7D9220A60C1A000B5AAE /* Camera Session Extension.swift */,
-			);
-			path = "Reader View Controller Extensions";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -314,14 +314,14 @@
 			files = (
 				FCC2E3A32080E22A000C3974 /* AppDelegate.swift in Sources */,
 				FC7444952088A2F100095D3D /* DetailsNewItemViewController.swift in Sources */,
-				FCFE7D9120A60B5B000B5AAE /* Speech Recognition Extension.swift in Sources */,
+				FC4B790A20A989B200A6AC4A /* Camera Session Extension.swift in Sources */,
 				FC8C44C020873514004160C6 /* HomeCollectionViewController.swift in Sources */,
-				FCFE7D8F20A60A54000B5AAE /* Extensions.swift in Sources */,
-				FCFE7D9320A60C1A000B5AAE /* Camera Session Extension.swift in Sources */,
 				FC8C44C420873A8A004160C6 /* DashboardViewController.swift in Sources */,
+				FC4B790B20A989B200A6AC4A /* Extensions.swift in Sources */,
 				FC04BB43208DE3FE00B6C2FF /* SlideAnimator.swift in Sources */,
 				FC8C44CE20873F36004160C6 /* ReaderViewController.swift in Sources */,
 				FC7444972089DAB700095D3D /* MyTabBarController.swift in Sources */,
+				FC4B790920A989B200A6AC4A /* Speech Recognition Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

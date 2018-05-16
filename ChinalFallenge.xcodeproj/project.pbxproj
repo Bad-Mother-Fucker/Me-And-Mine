@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FC04BB43208DE3FE00B6C2FF /* SlideAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC04BB42208DE3FD00B6C2FF /* SlideAnimator.swift */; };
+		FC28807220AA313100A03300 /* Text View Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC28807120AA313100A03300 /* Text View Extension.swift */; };
 		FC4B790920A989B200A6AC4A /* Speech Recognition Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B790620A989B200A6AC4A /* Speech Recognition Extension.swift */; };
 		FC4B790A20A989B200A6AC4A /* Camera Session Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B790720A989B200A6AC4A /* Camera Session Extension.swift */; };
 		FC4B790B20A989B200A6AC4A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B790820A989B200A6AC4A /* Extensions.swift */; };
@@ -17,6 +18,7 @@
 		FC8C44C020873514004160C6 /* HomeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8C44BF20873514004160C6 /* HomeCollectionViewController.swift */; };
 		FC8C44C420873A8A004160C6 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8C44C320873A8A004160C6 /* DashboardViewController.swift */; };
 		FC8C44CE20873F36004160C6 /* ReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8C44CD20873F36004160C6 /* ReaderViewController.swift */; };
+		FCAB744120AB6F7F00E3E9AF /* VideoPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAB744020AB6F7F00E3E9AF /* VideoPreviewView.swift */; };
 		FCC2E3A32080E22A000C3974 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC2E3A22080E22A000C3974 /* AppDelegate.swift */; };
 		FCC2E3A82080E22A000C3974 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCC2E3A62080E22A000C3974 /* Main.storyboard */; };
 		FCC2E3AD2080E22A000C3974 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCC2E3AB2080E22A000C3974 /* LaunchScreen.storyboard */; };
@@ -43,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		FC04BB42208DE3FD00B6C2FF /* SlideAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideAnimator.swift; sourceTree = "<group>"; };
+		FC28807120AA313100A03300 /* Text View Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text View Extension.swift"; sourceTree = "<group>"; };
 		FC4B790620A989B200A6AC4A /* Speech Recognition Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Speech Recognition Extension.swift"; sourceTree = "<group>"; };
 		FC4B790720A989B200A6AC4A /* Camera Session Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Camera Session Extension.swift"; sourceTree = "<group>"; };
 		FC4B790820A989B200A6AC4A /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -52,6 +55,7 @@
 		FC8C44BF20873514004160C6 /* HomeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeCollectionViewController.swift; path = ChinalFallenge/Controllers/HomeCollectionViewController.swift; sourceTree = SOURCE_ROOT; };
 		FC8C44C320873A8A004160C6 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DashboardViewController.swift; path = ChinalFallenge/Controllers/DashboardViewController.swift; sourceTree = SOURCE_ROOT; };
 		FC8C44CD20873F36004160C6 /* ReaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReaderViewController.swift; path = ChinalFallenge/Controllers/ReaderViewController.swift; sourceTree = SOURCE_ROOT; };
+		FCAB744020AB6F7F00E3E9AF /* VideoPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VideoPreviewView.swift; path = ChinalFallenge/Sources/VideoPreviewView.swift; sourceTree = SOURCE_ROOT; };
 		FCC2E39F2080E229000C3974 /* ChinalFallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChinalFallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCC2E3A22080E22A000C3974 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FCC2E3A72080E22A000C3974 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -94,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				FC04BB42208DE3FD00B6C2FF /* SlideAnimator.swift */,
+				FCAB744020AB6F7F00E3E9AF /* VideoPreviewView.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -125,6 +130,7 @@
 				FC4B790820A989B200A6AC4A /* Extensions.swift */,
 				FC4B790720A989B200A6AC4A /* Camera Session Extension.swift */,
 				FC4B790620A989B200A6AC4A /* Speech Recognition Extension.swift */,
+				FC28807120AA313100A03300 /* Text View Extension.swift */,
 			);
 			path = "Reader View Controller Extensions";
 			sourceTree = "<group>";
@@ -312,6 +318,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC28807220AA313100A03300 /* Text View Extension.swift in Sources */,
 				FCC2E3A32080E22A000C3974 /* AppDelegate.swift in Sources */,
 				FC7444952088A2F100095D3D /* DetailsNewItemViewController.swift in Sources */,
 				FC4B790A20A989B200A6AC4A /* Camera Session Extension.swift in Sources */,
@@ -320,6 +327,7 @@
 				FC4B790B20A989B200A6AC4A /* Extensions.swift in Sources */,
 				FC04BB43208DE3FE00B6C2FF /* SlideAnimator.swift in Sources */,
 				FC8C44CE20873F36004160C6 /* ReaderViewController.swift in Sources */,
+				FCAB744120AB6F7F00E3E9AF /* VideoPreviewView.swift in Sources */,
 				FC7444972089DAB700095D3D /* MyTabBarController.swift in Sources */,
 				FC4B790920A989B200A6AC4A /* Speech Recognition Extension.swift in Sources */,
 			);

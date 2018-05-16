@@ -32,7 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let shortcut2 = UIMutableApplicationShortcutItem(type: "Shared", localizedTitle: "Shared", localizedSubtitle: "", icon: UIApplicationShortcutIcon(type: .home), userInfo: nil)
         application.shortcutItems = [shortcut2]
         // application.shortcutItems?.append(shortcut2) same way to create a new quick button.
-        
         return true
     }
 
@@ -71,7 +70,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-    
 }
 
 

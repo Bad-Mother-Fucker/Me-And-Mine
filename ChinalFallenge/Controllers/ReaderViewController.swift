@@ -15,9 +15,10 @@ class ReaderViewController: UIViewController {
     
     //ATTRIBUTES FOR CAMERA
     var captureSession: AVCaptureSession?
+    var videoDeviceInput: AVCaptureDeviceInput?
     let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInTrueDepthCamera, .builtInDualCamera, .builtInWideAngleCamera], mediaType: .video, position: .unspecified)
-    var videoPreviewLayer: AVCaptureVideoPreviewLayer?
-    var capturePhotoOutput: AVCapturePhotoOutput?
+    var isCaptureSessionConfigured = false // Instance proprerty on this view controller class
+    var photoOutput: AVCapturePhotoOutput?
     var imageView: UIImageView!
     let photoSettings = AVCapturePhotoSettings()
     var flashMode = AVCaptureDevice.FlashMode.off
@@ -30,16 +31,31 @@ class ReaderViewController: UIViewController {
     var flagOnSpeech = false
     
     //VIEW
-    @IBOutlet weak var cameraView: UIView!
+    @IBOutlet weak var cameraView: VideoPreviewView!
     
     //TEXT VIEW
     @IBOutlet weak var SpeechText: UITextView!
-
+    
+    //COLLECTION VIEW
+    @IBOutlet weak var frameworksCollectionView: UICollectionView!
+    
     //OTHER ATTRIBUTES
     var speech: [String]?
+    let sessionQueue = DispatchQueue(label: "session queue") //Communicate with the session and other session objects on this queue.
+    var setupResult: SessionSetupResult = .success
+    var isSessionRunning = false
+    
+    //ENUM
+    enum SessionSetupResult {
+        case success
+        case notAuthorized
+        case configurationFailed
+    }
     
     //BUTTONS
     @IBOutlet weak var photoButton: UIButton!
+    @IBOutlet weak var dismissButton: UIButton!
+    @IBOutlet weak var flashlightButton: UIButton!
     
     //TYPE QR/BAR CODE SCANNING
     struct codeType {
@@ -49,19 +65,27 @@ class ReaderViewController: UIViewController {
     //VIEW DID LOAD
     override func viewDidLoad() {
         super.viewDidLoad()
-        setCameraSession()
-        requestCameraAuthorization()
-        gestureDismissKeyboard()
+        cameraAuthorization()
+        
     }
     
     //VIEW WILL APPEAR
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNavigationAndTabBarController()
-        checkCaptureSession()
+        session()
         settingTextView()
+        gestureDismissKeyboard()
         setButtonOnCameraView()
         self.imageView = UIImageView(frame: self.cameraView.frame)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if self.setupResult == .success {
+            self.captureSession?.stopRunning()
+            self.isSessionRunning = (self.captureSession?.isRunning)!
+        }
     }
     
     //FUNCTION TO HIDE KEYBOARD
@@ -83,30 +107,21 @@ class ReaderViewController: UIViewController {
         setSwipeGestureFrameworks()
     }
     
-}
-
-// ############### HANDLE TEXT VIEW ###############
-
-extension ReaderViewController: UITextViewDelegate {
-    func moveTextView(textView: UITextView, moveDistance: Int, up: Bool) {
-        let moveDuration = 0.3
-        let movement: CGFloat = CGFloat(up ? moveDistance : -moveDistance)
-        
-        UIView.beginAnimations("animatedTextView", context: nil)
-        UIView.setAnimationBeginsFromCurrentState(true)
-        UIView.setAnimationDuration(moveDuration)
-        self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
-        UIView.commitAnimations()
+    @IBAction func dismissFromCameraViewButton(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+        self.tabBarController?.selectedIndex = 1
     }
     
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        moveTextView(textView: textView, moveDistance: -250, up: true)
+    @IBAction func flashlightOnOff(_ sender: Any) {
+        setFlashlight()
     }
     
-    func textViewDidEndEditing(_ textView: UITextView) {
-        moveTextView(textView: textView, moveDistance: -250, up: false)
+    @IBAction func frameworkFunction(_ sender: Any) {
+        print("button tapped!")
     }
 }
+
+
 
 
 

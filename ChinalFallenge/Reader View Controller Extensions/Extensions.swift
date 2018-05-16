@@ -33,36 +33,34 @@ extension ReaderViewController {
     func setButtonOnCameraView() {
         self.photoButton.setBackgroundImage(#imageLiteral(resourceName: "buttonCamera"), for: .normal)
         self.cameraView.bringSubview(toFront: photoButton)
+        self.dismissButton.setBackgroundImage(#imageLiteral(resourceName: "exitButton"), for: .normal)
+        self.cameraView.bringSubview(toFront: dismissButton)
+        self.flashlightButton.setBackgroundImage(#imageLiteral(resourceName: "flashOff"), for: .normal)
+        self.cameraView.bringSubview(toFront: flashlightButton)
+        self.frameworksCollectionView.isHidden = true
     }
     
     func setSwipeGestureFrameworks() {
         self.photoButton.isHidden = true
+        self.dismissButton.isHidden = true
+        self.flashlightButton.isHidden = true
+        self.frameworksCollectionView.isHidden = false
+        self.frameworksCollectionView.backgroundColor = UIColor.clear.withAlphaComponent(0)
+        self.cameraView.bringSubview(toFront: self.frameworksCollectionView)
     }
     
-    //FUNCTIONS FOR CHECK ON CAPTURE SESSION
-    func checkCaptureSession() {
-        if captureSession?.isRunning == false {
-            captureSession?.startRunning()
-        } else {
-            captureSession?.stopRunning()
+    func setFlashlight() {
+        switch self.flashMode {
+        case .off:
+            self.flashMode = .auto
+            self.flashlightButton.setBackgroundImage(#imageLiteral(resourceName: "flashAuto"), for: .normal)
+        case .auto:
+            self.flashMode = .on
+            self.flashlightButton.setBackgroundImage(#imageLiteral(resourceName: "flashOn"), for: .normal)
+        case .on:
+            self.flashMode = .off
+            self.flashlightButton.setBackgroundImage(#imageLiteral(resourceName: "flashOff"), for: .normal)
         }
-    }
-    
-    //ALERT FUNCTION
-    func alert() {
-        let alert = UIAlertController(title: "QR/Bar Code caught", message: "Step1: add info - Step2: capture new QR/Bar Code", preferredStyle: .alert)
-        
-        alert.addAction(UIAlertAction(title: "Step1", style: .default, handler: { (action) in
-            self.performSegue(withIdentifier: "addDetailsItems", sender: self)
-            self.captureSession?.stopRunning()
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Step2", style: .default, handler: { (action) in
-            alert.dismiss(animated: true, completion: nil)
-            self.captureSession?.startRunning()
-        }))
-        
-        self.present(alert, animated: true, completion: nil)
     }
 }
 

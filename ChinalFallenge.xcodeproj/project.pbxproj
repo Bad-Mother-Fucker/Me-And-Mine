@@ -13,10 +13,7 @@
 		FC4B790A20A989B200A6AC4A /* Camera Session Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B790720A989B200A6AC4A /* Camera Session Extension.swift */; };
 		FC4B790B20A989B200A6AC4A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B790820A989B200A6AC4A /* Extensions.swift */; };
 		FC7444952088A2F100095D3D /* DetailsNewItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7444942088A2F100095D3D /* DetailsNewItemViewController.swift */; };
-		FC7444972089DAB700095D3D /* MyTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7444962089DAB700095D3D /* MyTabBarController.swift */; };
 		FC74449B208B498500095D3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC74449A208B498500095D3D /* Assets.xcassets */; };
-		FC8C44C020873514004160C6 /* HomeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8C44BF20873514004160C6 /* HomeCollectionViewController.swift */; };
-		FC8C44C420873A8A004160C6 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8C44C320873A8A004160C6 /* DashboardViewController.swift */; };
 		FC8C44CE20873F36004160C6 /* ReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8C44CD20873F36004160C6 /* ReaderViewController.swift */; };
 		FCAB744120AB6F7F00E3E9AF /* VideoPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAB744020AB6F7F00E3E9AF /* VideoPreviewView.swift */; };
 		FCAB744320AD728400E3E9AF /* frameworksCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAB744220AD728400E3E9AF /* frameworksCell.swift */; };
@@ -26,6 +23,9 @@
 		FCC2E3AD2080E22A000C3974 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCC2E3AB2080E22A000C3974 /* LaunchScreen.storyboard */; };
 		FCC2E3B82080E22A000C3974 /* ChinalFallengeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC2E3B72080E22A000C3974 /* ChinalFallengeTests.swift */; };
 		FCC2E3C32080E22A000C3974 /* ChinalFallengeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC2E3C22080E22A000C3974 /* ChinalFallengeUITests.swift */; };
+		FCCA8B4B20AF6768006BE120 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCA8B4A20AF6768006BE120 /* DiscoverViewController.swift */; };
+		FCCA8B4D20AF722E006BE120 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCA8B4C20AF722E006BE120 /* ShareViewController.swift */; };
+		FCF1369820AF43110048718D /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF1369720AF43110048718D /* Singleton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,10 +52,7 @@
 		FC4B790720A989B200A6AC4A /* Camera Session Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Camera Session Extension.swift"; sourceTree = "<group>"; };
 		FC4B790820A989B200A6AC4A /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FC7444942088A2F100095D3D /* DetailsNewItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsNewItemViewController.swift; sourceTree = "<group>"; };
-		FC7444962089DAB700095D3D /* MyTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTabBarController.swift; sourceTree = "<group>"; };
 		FC74449A208B498500095D3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		FC8C44BF20873514004160C6 /* HomeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HomeCollectionViewController.swift; path = ChinalFallenge/Controllers/HomeCollectionViewController.swift; sourceTree = SOURCE_ROOT; };
-		FC8C44C320873A8A004160C6 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DashboardViewController.swift; path = ChinalFallenge/Controllers/DashboardViewController.swift; sourceTree = SOURCE_ROOT; };
 		FC8C44CD20873F36004160C6 /* ReaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReaderViewController.swift; path = ChinalFallenge/Controllers/ReaderViewController.swift; sourceTree = SOURCE_ROOT; };
 		FCAB744020AB6F7F00E3E9AF /* VideoPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VideoPreviewView.swift; path = ChinalFallenge/Sources/VideoPreviewView.swift; sourceTree = SOURCE_ROOT; };
 		FCAB744220AD728400E3E9AF /* frameworksCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = frameworksCell.swift; path = ChinalFallenge/Sources/frameworksCell.swift; sourceTree = SOURCE_ROOT; };
@@ -71,6 +68,9 @@
 		FCC2E3BE2080E22A000C3974 /* ChinalFallengeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChinalFallengeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCC2E3C22080E22A000C3974 /* ChinalFallengeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChinalFallengeUITests.swift; sourceTree = "<group>"; };
 		FCC2E3C42080E22A000C3974 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FCCA8B4A20AF6768006BE120 /* DiscoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DiscoverViewController.swift; path = ChinalFallenge/Controllers/DiscoverViewController.swift; sourceTree = SOURCE_ROOT; };
+		FCCA8B4C20AF722E006BE120 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		FCF1369720AF43110048718D /* Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,10 +111,9 @@
 		FC129853208487C10095A2AF /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FC7444962089DAB700095D3D /* MyTabBarController.swift */,
-				FC8C44C320873A8A004160C6 /* DashboardViewController.swift */,
+				FCCA8B4A20AF6768006BE120 /* DiscoverViewController.swift */,
+				FCCA8B4C20AF722E006BE120 /* ShareViewController.swift */,
 				FC8C44CD20873F36004160C6 /* ReaderViewController.swift */,
-				FC8C44BF20873514004160C6 /* HomeCollectionViewController.swift */,
 				FC7444942088A2F100095D3D /* DetailsNewItemViewController.swift */,
 			);
 			path = Controllers;
@@ -169,6 +168,7 @@
 				FCC2E3A22080E22A000C3974 /* AppDelegate.swift */,
 				FC129854208488410095A2AF /* Storyboard */,
 				FC04BB41208DE3DF00B6C2FF /* Sources */,
+				FCF1369420AF3C550048718D /* Singledon */,
 				FC129853208487C10095A2AF /* Controllers */,
 				FC4B790520A9895400A6AC4A /* Reader View Controller Extensions */,
 			);
@@ -191,6 +191,14 @@
 				FCC2E3C42080E22A000C3974 /* Info.plist */,
 			);
 			path = ChinalFallengeUITests;
+			sourceTree = "<group>";
+		};
+		FCF1369420AF3C550048718D /* Singledon */ = {
+			isa = PBXGroup;
+			children = (
+				FCF1369720AF43110048718D /* Singleton.swift */,
+			);
+			path = Singledon;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -324,19 +332,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCCA8B4D20AF722E006BE120 /* ShareViewController.swift in Sources */,
 				FCAB744520AD730200E3E9AF /* Frameworks Collection View Extension.swift in Sources */,
 				FC28807220AA313100A03300 /* Text View Extension.swift in Sources */,
 				FCC2E3A32080E22A000C3974 /* AppDelegate.swift in Sources */,
 				FC7444952088A2F100095D3D /* DetailsNewItemViewController.swift in Sources */,
 				FCAB744320AD728400E3E9AF /* frameworksCell.swift in Sources */,
+				FCCA8B4B20AF6768006BE120 /* DiscoverViewController.swift in Sources */,
 				FC4B790A20A989B200A6AC4A /* Camera Session Extension.swift in Sources */,
-				FC8C44C020873514004160C6 /* HomeCollectionViewController.swift in Sources */,
-				FC8C44C420873A8A004160C6 /* DashboardViewController.swift in Sources */,
 				FC4B790B20A989B200A6AC4A /* Extensions.swift in Sources */,
 				FC04BB43208DE3FE00B6C2FF /* SlideAnimator.swift in Sources */,
 				FC8C44CE20873F36004160C6 /* ReaderViewController.swift in Sources */,
 				FCAB744120AB6F7F00E3E9AF /* VideoPreviewView.swift in Sources */,
-				FC7444972089DAB700095D3D /* MyTabBarController.swift in Sources */,
+				FCF1369820AF43110048718D /* Singleton.swift in Sources */,
 				FC4B790920A989B200A6AC4A /* Speech Recognition Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

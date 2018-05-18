@@ -33,7 +33,7 @@ extension ReaderViewController {
     func setButtonOnCameraView() {
         self.photoButton.setBackgroundImage(#imageLiteral(resourceName: "buttonCamera"), for: .normal)
         self.photoButton.isHidden = false
-        self.dismissButton.setBackgroundImage(#imageLiteral(resourceName: "exitButton"), for: .normal)
+        self.dismissButton.setBackgroundImage(#imageLiteral(resourceName: "arrowRight"), for: .normal)
         self.dismissButton.isHidden = false
         self.flashlightButton.setBackgroundImage(#imageLiteral(resourceName: "flashOff"), for: .normal)
         self.flashlightButton.isHidden = false

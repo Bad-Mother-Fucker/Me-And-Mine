@@ -184,3 +184,4 @@ extension ReaderViewController: AVCapturePhotoCaptureDelegate, AVCaptureMetadata
         dismiss(animated: true)
     }
 }
+

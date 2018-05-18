@@ -77,6 +77,7 @@ class ReaderViewController: UIViewController {
     //VIEW WILL APPEAR
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        UIApplication.shared.isStatusBarHidden = true
         setNavigationAndTabBarController()
         session()
         settingTextView()
@@ -97,9 +98,9 @@ class ReaderViewController: UIViewController {
         self.cameraView.endEditing(true)
     }
     
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
+//    override var prefersStatusBarHidden: Bool {
+//        return true
+//    } I don't need this method anymore becase I do the same in viewWillAppear with the line: UIApplication.shared...
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
@@ -112,8 +113,8 @@ class ReaderViewController: UIViewController {
     }
     
     @IBAction func dismissFromCameraViewButton(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-        self.tabBarController?.selectedIndex = 1
+        self.performSegue(withIdentifier: "unwindToDiscoverView", sender: self)
+        
     }
     
     @IBAction func flashlightOnOff(_ sender: Any) {

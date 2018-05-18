@@ -13,31 +13,48 @@ import AVFoundation
 class VideoPreviewView: UIView {
     
     var videoPreviewLayer: AVCaptureVideoPreviewLayer {
-        return layer as! AVCaptureVideoPreviewLayer
+        guard let layer = layer as? AVCaptureVideoPreviewLayer else {
+            fatalError("Expected `AVCaptureVideoPreviewLayer` type for layer. Check PreviewView.layerClass implementation.")
+        }
+        
+        return layer
     }
+    
     var session: AVCaptureSession? {
-        get { return videoPreviewLayer.session }
-        set { videoPreviewLayer.session = newValue }
+        get {
+            return videoPreviewLayer.session
+        }
+        set {
+            videoPreviewLayer.session = newValue
+        }
     }
+    
+    // MARK: UIView
     
     override class var layerClass: AnyClass {
         return AVCaptureVideoPreviewLayer.self
     }
     
-    private var orientationMap: [UIDeviceOrientation : AVCaptureVideoOrientation] = [
-        .portrait           : .portrait,
-        .portraitUpsideDown : .portraitUpsideDown,
-        .landscapeLeft      : .landscapeLeft,
-        .landscapeRight     : .landscapeRight,
-        ]
+}
+
+extension AVCaptureVideoOrientation {
+    init?(deviceOrientation: UIDeviceOrientation) {
+        switch deviceOrientation {
+        case .portrait: self = .portrait
+        case .portraitUpsideDown: self = .portraitUpsideDown
+        case .landscapeLeft: self = .landscapeRight
+        case .landscapeRight: self = .landscapeLeft
+        default: return nil
+        }
+    }
     
-    func updateVideoOrientationForDeviceOrientation() {
-        if let videoPreviewLayerConnection = videoPreviewLayer.connection {
-            let deviceOrientation = UIDevice.current.orientation
-            guard let newVideoOrientation = orientationMap[deviceOrientation],
-                deviceOrientation.isPortrait || deviceOrientation.isLandscape
-                else { return }
-            videoPreviewLayerConnection.videoOrientation = newVideoOrientation
+    init?(interfaceOrientation: UIInterfaceOrientation) {
+        switch interfaceOrientation {
+        case .portrait: self = .portrait
+        case .portraitUpsideDown: self = .portraitUpsideDown
+        case .landscapeLeft: self = .landscapeLeft
+        case .landscapeRight: self = .landscapeRight
+        default: return nil
         }
     }
 }

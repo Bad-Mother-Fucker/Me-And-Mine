@@ -32,6 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let shortcut2 = UIMutableApplicationShortcutItem(type: "Shared", localizedTitle: "Shared", localizedSubtitle: "", icon: UIApplicationShortcutIcon(type: .home), userInfo: nil)
         application.shortcutItems = [shortcut2]
         // application.shortcutItems?.append(shortcut2) same way to create a new quick button.
+        
+        UIApplication.shared.isStatusBarHidden = false
         return true
     }
 
@@ -58,14 +60,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         completionHandler(false)
         
-        if let rootTabBar = UIApplication.shared.keyWindow?.rootViewController as? MyTabBarController {
+        if let rootTabBar = UIApplication.shared.keyWindow?.rootViewController as? UITabBarController {
             if (shortcutItem.type == "Scan") {
                 DispatchQueue.main.async {
                     rootTabBar.selectedIndex = 0
                 }
             } else if (shortcutItem.type == "Shared") {
                 DispatchQueue.main.async {
-                    rootTabBar.selectedIndex = 2
+                    rootTabBar.selectedIndex = 1
                 }
             }
         }

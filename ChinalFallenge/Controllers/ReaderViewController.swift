@@ -19,19 +19,18 @@ class ReaderViewController: UIViewController {
     let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInTrueDepthCamera, .builtInDualCamera, .builtInWideAngleCamera], mediaType: .video, position: .unspecified)
     var isCaptureSessionConfigured = false // Instance proprerty on this view controller class
     var photoOutput: AVCapturePhotoOutput?
-    var imageView: UIImageView!
     let photoSettings = AVCapturePhotoSettings()
-    var flashMode = AVCaptureDevice.FlashMode.off
+   
     
     //ATTRIBUTES FOR SPEECH RECOGNITION
     let speechRecognizer = SFSpeechRecognizer.init(locale: Locale.current)
     var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     var recognitionTask: SFSpeechRecognitionTask?
     let audioEngine = AVAudioEngine()
-    var flagOnSpeech = false
     
     //VIEW
     @IBOutlet weak var cameraView: VideoPreviewView!
+    @IBOutlet weak var trashButton: UIButton!
     
     //TEXT VIEW
     @IBOutlet weak var SpeechText: UITextView!
@@ -44,6 +43,10 @@ class ReaderViewController: UIViewController {
     let sessionQueue = DispatchQueue(label: "session queue") //Communicate with the session and other session objects on this queue.
     var setupResult: SessionSetupResult = .success
     var isSessionRunning = false
+    var imageView: UIImageView!
+    var flashMode = AVCaptureDevice.FlashMode.off
+    var flagOnSpeech = false
+    let nameFrameworks = ["Smart Read","Dictation","Extract"]
     
     //ENUM
     enum SessionSetupResult {
@@ -66,7 +69,9 @@ class ReaderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         cameraAuthorization()
-        
+        setButtonOnCameraView()
+        frameworksCollectionView.delegate = self
+        frameworksCollectionView.dataSource = self
     }
     
     //VIEW WILL APPEAR
@@ -76,7 +81,6 @@ class ReaderViewController: UIViewController {
         session()
         settingTextView()
         gestureDismissKeyboard()
-        setButtonOnCameraView()
         self.imageView = UIImageView(frame: self.cameraView.frame)
     }
     
@@ -104,7 +108,7 @@ class ReaderViewController: UIViewController {
     @IBAction func takePhoto(_ sender: Any) {
         captureSession?.stopRunning()
         onTapTakePhoto()
-        setSwipeGestureFrameworks()
+        setSwipeGestureFrameworksAndOtherButtons()
     }
     
     @IBAction func dismissFromCameraViewButton(_ sender: Any) {
@@ -116,9 +120,13 @@ class ReaderViewController: UIViewController {
         setFlashlight()
     }
     
-    @IBAction func frameworkFunction(_ sender: Any) {
-        print("button tapped!")
+    @IBAction func trushFunction(_ sender: Any) {
+        captureSession?.startRunning()
+        setButtonOnCameraView()
+        self.imageView.removeFromSuperview()
+        self.imageView.image = nil
     }
+    
 }
 
 

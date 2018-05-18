@@ -93,5 +93,4 @@ extension ReaderViewController: SFSpeechRecognizerDelegate, AVAudioRecorderDeleg
         self.SpeechText.text = speech
         self.SpeechText.isEditable = true
     }
-    
 }

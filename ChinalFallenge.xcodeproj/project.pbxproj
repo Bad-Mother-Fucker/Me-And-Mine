@@ -19,6 +19,8 @@
 		FC8C44C420873A8A004160C6 /* DashboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8C44C320873A8A004160C6 /* DashboardViewController.swift */; };
 		FC8C44CE20873F36004160C6 /* ReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8C44CD20873F36004160C6 /* ReaderViewController.swift */; };
 		FCAB744120AB6F7F00E3E9AF /* VideoPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAB744020AB6F7F00E3E9AF /* VideoPreviewView.swift */; };
+		FCAB744320AD728400E3E9AF /* frameworksCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAB744220AD728400E3E9AF /* frameworksCell.swift */; };
+		FCAB744520AD730200E3E9AF /* Frameworks Collection View Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAB744420AD730200E3E9AF /* Frameworks Collection View Extension.swift */; };
 		FCC2E3A32080E22A000C3974 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC2E3A22080E22A000C3974 /* AppDelegate.swift */; };
 		FCC2E3A82080E22A000C3974 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCC2E3A62080E22A000C3974 /* Main.storyboard */; };
 		FCC2E3AD2080E22A000C3974 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCC2E3AB2080E22A000C3974 /* LaunchScreen.storyboard */; };
@@ -56,6 +58,8 @@
 		FC8C44C320873A8A004160C6 /* DashboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DashboardViewController.swift; path = ChinalFallenge/Controllers/DashboardViewController.swift; sourceTree = SOURCE_ROOT; };
 		FC8C44CD20873F36004160C6 /* ReaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReaderViewController.swift; path = ChinalFallenge/Controllers/ReaderViewController.swift; sourceTree = SOURCE_ROOT; };
 		FCAB744020AB6F7F00E3E9AF /* VideoPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VideoPreviewView.swift; path = ChinalFallenge/Sources/VideoPreviewView.swift; sourceTree = SOURCE_ROOT; };
+		FCAB744220AD728400E3E9AF /* frameworksCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = frameworksCell.swift; path = ChinalFallenge/Sources/frameworksCell.swift; sourceTree = SOURCE_ROOT; };
+		FCAB744420AD730200E3E9AF /* Frameworks Collection View Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Frameworks Collection View Extension.swift"; sourceTree = "<group>"; };
 		FCC2E39F2080E229000C3974 /* ChinalFallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChinalFallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCC2E3A22080E22A000C3974 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FCC2E3A72080E22A000C3974 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -99,6 +103,7 @@
 			children = (
 				FC04BB42208DE3FD00B6C2FF /* SlideAnimator.swift */,
 				FCAB744020AB6F7F00E3E9AF /* VideoPreviewView.swift */,
+				FCAB744220AD728400E3E9AF /* frameworksCell.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -131,6 +136,7 @@
 				FC4B790720A989B200A6AC4A /* Camera Session Extension.swift */,
 				FC4B790620A989B200A6AC4A /* Speech Recognition Extension.swift */,
 				FC28807120AA313100A03300 /* Text View Extension.swift */,
+				FCAB744420AD730200E3E9AF /* Frameworks Collection View Extension.swift */,
 			);
 			path = "Reader View Controller Extensions";
 			sourceTree = "<group>";
@@ -318,9 +324,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCAB744520AD730200E3E9AF /* Frameworks Collection View Extension.swift in Sources */,
 				FC28807220AA313100A03300 /* Text View Extension.swift in Sources */,
 				FCC2E3A32080E22A000C3974 /* AppDelegate.swift in Sources */,
 				FC7444952088A2F100095D3D /* DetailsNewItemViewController.swift in Sources */,
+				FCAB744320AD728400E3E9AF /* frameworksCell.swift in Sources */,
 				FC4B790A20A989B200A6AC4A /* Camera Session Extension.swift in Sources */,
 				FC8C44C020873514004160C6 /* HomeCollectionViewController.swift in Sources */,
 				FC8C44C420873A8A004160C6 /* DashboardViewController.swift in Sources */,

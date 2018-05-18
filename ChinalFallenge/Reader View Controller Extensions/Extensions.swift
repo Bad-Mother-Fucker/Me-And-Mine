@@ -32,21 +32,23 @@ extension ReaderViewController {
     
     func setButtonOnCameraView() {
         self.photoButton.setBackgroundImage(#imageLiteral(resourceName: "buttonCamera"), for: .normal)
-        self.cameraView.bringSubview(toFront: photoButton)
+        self.photoButton.isHidden = false
         self.dismissButton.setBackgroundImage(#imageLiteral(resourceName: "exitButton"), for: .normal)
-        self.cameraView.bringSubview(toFront: dismissButton)
+        self.dismissButton.isHidden = false
         self.flashlightButton.setBackgroundImage(#imageLiteral(resourceName: "flashOff"), for: .normal)
-        self.cameraView.bringSubview(toFront: flashlightButton)
+        self.flashlightButton.isHidden = false
         self.frameworksCollectionView.isHidden = true
+        self.trashButton.isHidden = true
     }
     
-    func setSwipeGestureFrameworks() {
+    func setSwipeGestureFrameworksAndOtherButtons() {
         self.photoButton.isHidden = true
         self.dismissButton.isHidden = true
         self.flashlightButton.isHidden = true
+        self.frameworksCollectionView.backgroundColor = UIColor.white.withAlphaComponent(0)
         self.frameworksCollectionView.isHidden = false
-        self.frameworksCollectionView.backgroundColor = UIColor.clear.withAlphaComponent(0)
-        self.cameraView.bringSubview(toFront: self.frameworksCollectionView)
+        self.trashButton.setBackgroundImage(#imageLiteral(resourceName: "trashButton"), for: .normal)
+        self.trashButton.isHidden = false
     }
     
     func setFlashlight() {
@@ -62,5 +64,17 @@ extension ReaderViewController {
             self.flashlightButton.setBackgroundImage(#imageLiteral(resourceName: "flashOff"), for: .normal)
         }
     }
+    
+    @objc func startSpeech() {
+        startRecordingSpeech()
+    }
+    
+    @objc func stopSpeech() {
+        stopRecordingSpeech()
+    }
+    
 }
+
+
+
 

@@ -52,11 +52,12 @@ extension ReaderViewController: AVCapturePhotoCaptureDelegate, AVCaptureMetadata
         
         do {
             let videoDeviceInput = try AVCaptureDeviceInput(device: bestDevice(in: .back))
-
+            
             if (session.canAddInput(videoDeviceInput)) {
                 session.addInput(videoDeviceInput)
                 self.videoDeviceInput = videoDeviceInput
                 self.cameraView.session = session
+                self.cameraView.videoPreviewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
                 DispatchQueue.main.async {
                     let statusBarOrientation = UIApplication.shared.statusBarOrientation
                     var initialVideoOrientation: AVCaptureVideoOrientation = .portrait
@@ -66,7 +67,6 @@ extension ReaderViewController: AVCapturePhotoCaptureDelegate, AVCaptureMetadata
                         }
                     }
                     self.cameraView.videoPreviewLayer.connection?.videoOrientation = initialVideoOrientation
-                    self.cameraView.videoPreviewLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
                 }
             } else {
                 print("Could not add video device input to the session")
@@ -85,8 +85,6 @@ extension ReaderViewController: AVCapturePhotoCaptureDelegate, AVCaptureMetadata
         if (session.canAddOutput(photoOutput!)) {
             session.addOutput(photoOutput!)
             self.photoOutput?.isHighResolutionCaptureEnabled = true
-            //self.photoOutput?.isDepthDataDeliveryEnabled = (photoOutput?.isDepthDataDeliverySupported)!
-            //depthDataDeliveryMode = photoOutput.isDepthDataDeliverySupported ? .on : .off
         } else {
             print("Could not add photo output to the session")
             setupResult = .configurationFailed
@@ -113,7 +111,7 @@ extension ReaderViewController: AVCapturePhotoCaptureDelegate, AVCaptureMetadata
                         self.dismiss(animated: true, completion: nil)
                         self.tabBarController?.selectedIndex = 1
                     }))
-
+                    
                     alertController.addAction(UIAlertAction(title: NSLocalizedString("Settings", comment: "Alert button to open Settings"), style: .`default`, handler: { _ in
                         UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
                     }))
@@ -157,6 +155,7 @@ extension ReaderViewController: AVCapturePhotoCaptureDelegate, AVCaptureMetadata
             // Save our captured image to photos album -- CHANGE HERE TO SAVE ONLY IN OUR APP USING CORE DATA.
             UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
             self.imageView.image = image
+            captureSession?.stopRunning()
             print("save?")
         }
     }

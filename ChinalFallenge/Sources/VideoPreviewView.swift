@@ -16,7 +16,6 @@ class VideoPreviewView: UIView {
         guard let layer = layer as? AVCaptureVideoPreviewLayer else {
             fatalError("Expected `AVCaptureVideoPreviewLayer` type for layer. Check PreviewView.layerClass implementation.")
         }
-        
         return layer
     }
     
@@ -30,7 +29,6 @@ class VideoPreviewView: UIView {
     }
     
     // MARK: UIView
-    
     override class var layerClass: AnyClass {
         return AVCaptureVideoPreviewLayer.self
     }

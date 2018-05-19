@@ -9,7 +9,10 @@
 import UIKit
 
 class DiscoverViewController: UIViewController {
-
+    
+    @IBOutlet weak var titleAppLabel: UILabel!
+    @IBOutlet weak var photoButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }

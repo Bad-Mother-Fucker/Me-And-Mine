@@ -81,10 +81,9 @@ extension ReaderViewController: AVCapturePhotoCaptureDelegate, AVCaptureMetadata
             return
         }
         // Add photo output.
-        photoOutput = AVCapturePhotoOutput()
-        if (session.canAddOutput(photoOutput!)) {
-            session.addOutput(photoOutput!)
-            self.photoOutput?.isHighResolutionCaptureEnabled = true
+        if (session.canAddOutput(photoOutput)) {
+            session.addOutput(photoOutput)
+            self.photoOutput.isHighResolutionCaptureEnabled = true
         } else {
             print("Could not add photo output to the session")
             setupResult = .configurationFailed
@@ -132,31 +131,43 @@ extension ReaderViewController: AVCapturePhotoCaptureDelegate, AVCaptureMetadata
     
     //CALLED WHEN THE USER TAP THE BUTTON "TAKE A PHOTO"
     func onTapTakePhoto() {
-        guard let photoOutput = self.photoOutput else {return} // Make sure capturePhotoOutput is valid
-        // Set photo settings for our need
-        photoSettings.flashMode = self.flashMode
-        photoSettings.isAutoStillImageStabilizationEnabled = true
-        photoSettings.isHighResolutionPhotoEnabled = true
-        let settings = AVCapturePhotoSettings.init(from: photoSettings)
-        // Call capturePhoto method by passing our photo settings and a delegate implementing AVCapturePhotoCaptureDelegate
-        photoOutput.capturePhoto(with: settings, delegate: self)
+        let videoPreviewLayerOrientation = self.cameraView.videoPreviewLayer.connection?.videoOrientation
+        sessionQueue.async {
+            // Update the photo output's connection to match the video orientation of the video preview layer.
+            if let photoOutputConnection = self.photoOutput.connection(with: .video) {
+                photoOutputConnection.videoOrientation = videoPreviewLayerOrientation!
+            }
+            // Set photo settings for our need
+            var photoSettings = AVCapturePhotoSettings()
+            if (self.videoDeviceInput?.device.isFlashAvailable)! {
+                photoSettings.flashMode = self.flashMode
+            }
+            photoSettings.isHighResolutionPhotoEnabled = true
+            if !photoSettings.__availablePreviewPhotoPixelFormatTypes.isEmpty {
+                photoSettings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: photoSettings.__availablePreviewPhotoPixelFormatTypes.first!]
+            }
+            photoSettings.isAutoStillImageStabilizationEnabled = true
+            // Call capturePhoto method by passing our photo settings and a delegate implementing AVCapturePhotoCaptureDelegate
+            self.photoOutput.capturePhoto(with: photoSettings, delegate: self)
+        }
     }
     
     //PHOTO OUTPUT FUNCTION
-    func photoOutput(_ captureOutput: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error:Error?) {
-        // get captured image - Make sure we get some photo sample buffer
-        guard error != nil else {print("Error capturing photo: \(error!)"); return}
+    func photoOutput(_ captureOutput: AVCapturePhotoOutput, didFinishProcessingPhoto photoSampleBuffer: CMSampleBuffer?, previewPhoto previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
+        // Make sure we get some photo sample buffer
+        guard error == nil, let photoSampleBuffer = photoSampleBuffer else {
+            print("Error capturing photo: \(String(describing: error))")
+            return
+        }
         // Convert photo same buffer to a jpeg image data by using // AVCapturePhotoOutput
-        guard let imageData = photo.fileDataRepresentation() else {return}
-        
+        guard let imageData = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: photoSampleBuffer, previewPhotoSampleBuffer: previewPhotoSampleBuffer) else {return}
         // Initialise a UIImage with our image data
-        let capturedImage = UIImage.init(data: imageData , scale: 1.0)
-        if let image = capturedImage {
-            // Save our captured image to photos album -- CHANGE HERE TO SAVE ONLY IN OUR APP USING CORE DATA.
+        //let capturedImage = UIImage.init(data: imageData , scale: 1.0)
+        if let image = UIImage.init(data: imageData , scale: 1.0) {
+            // Save our captured image to photos album
             UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
             self.imageView.image = image
-            captureSession?.stopRunning()
-            print("save?")
+            print("photoOutput")
         }
     }
     

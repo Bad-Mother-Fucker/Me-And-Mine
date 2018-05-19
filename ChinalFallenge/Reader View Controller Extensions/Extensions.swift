@@ -65,14 +65,26 @@ extension ReaderViewController {
         }
     }
     
-    @objc func startSpeech() {
-        startRecordingSpeech()
+    func focus(with focusMode: AVCaptureDevice.FocusMode, exposureMode: AVCaptureDevice.ExposureMode, at devicePoint: CGPoint, monitorSubjectAreaChange: Bool) {
+        sessionQueue.async {
+            let device = self.videoDeviceInput?.device
+            do {
+                try device?.lockForConfiguration()
+                if (device?.isFocusPointOfInterestSupported)! && (device?.isFocusModeSupported(focusMode))! {
+                    device?.focusPointOfInterest = devicePoint
+                    device?.focusMode = focusMode
+                }
+                if (device?.isExposurePointOfInterestSupported)! && (device?.isExposureModeSupported(exposureMode))! {
+                    device?.exposurePointOfInterest = devicePoint
+                    device?.exposureMode = exposureMode
+                }
+                device?.isSubjectAreaChangeMonitoringEnabled = monitorSubjectAreaChange
+                device?.unlockForConfiguration()
+            } catch {
+                print("Could not lock device for configuration: \(error)")
+            }
+        }
     }
-    
-    @objc func stopSpeech() {
-        stopRecordingSpeech()
-    }
-    
 }
 
 

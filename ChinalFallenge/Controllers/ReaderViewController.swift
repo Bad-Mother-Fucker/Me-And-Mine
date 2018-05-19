@@ -18,9 +18,7 @@ class ReaderViewController: UIViewController {
     var videoDeviceInput: AVCaptureDeviceInput?
     let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInTrueDepthCamera, .builtInDualCamera, .builtInWideAngleCamera], mediaType: .video, position: .unspecified)
     var isCaptureSessionConfigured = false // Instance proprerty on this view controller class
-    var photoOutput: AVCapturePhotoOutput?
-    let photoSettings = AVCapturePhotoSettings()
-   
+    let photoOutput = AVCapturePhotoOutput()
     
     //ATTRIBUTES FOR SPEECH RECOGNITION
     let speechRecognizer = SFSpeechRecognizer.init(locale: Locale.current)
@@ -40,7 +38,7 @@ class ReaderViewController: UIViewController {
     
     //OTHER ATTRIBUTES
     var speech: [String]?
-    let sessionQueue = DispatchQueue(label: "session queue") //Communicate with the session and other session objects on this queue.
+    let sessionQueue = DispatchQueue(label: "session queue")
     var setupResult: SessionSetupResult = .success
     var isSessionRunning = false
     var imageView: UIImageView!
@@ -93,6 +91,19 @@ class ReaderViewController: UIViewController {
         }
     }
     
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        if let videoPreviewLayerConnection = self.cameraView.videoPreviewLayer.connection {
+            let deviceOrientation = UIDevice.current.orientation
+            guard let newVideoOrientation = AVCaptureVideoOrientation(deviceOrientation: deviceOrientation),
+                deviceOrientation.isPortrait || deviceOrientation.isLandscape else {
+                    return
+            }
+            videoPreviewLayerConnection.videoOrientation = newVideoOrientation
+        }
+    }
+    
     //FUNCTION TO HIDE KEYBOARD
     @objc func dismissKeyboard() {
         self.cameraView.endEditing(true)
@@ -114,7 +125,6 @@ class ReaderViewController: UIViewController {
     
     @IBAction func dismissFromCameraViewButton(_ sender: Any) {
         self.performSegue(withIdentifier: "unwindToDiscoverView", sender: self)
-        
     }
     
     @IBAction func flashlightOnOff(_ sender: Any) {
@@ -128,6 +138,10 @@ class ReaderViewController: UIViewController {
         self.imageView.image = nil
     }
     
+    @IBAction func focusAndExposeTap(_ gestureRecognizer: UITapGestureRecognizer) {
+        let devicePoint = self.cameraView.videoPreviewLayer.captureDevicePointConverted(fromLayerPoint: gestureRecognizer.location(in: gestureRecognizer.view))
+        focus(with: .autoFocus, exposureMode: .autoExpose, at: devicePoint, monitorSubjectAreaChange: true)
+    }
 }
 
 

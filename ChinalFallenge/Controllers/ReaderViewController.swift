@@ -132,7 +132,6 @@ class ReaderViewController: UIViewController {
     }
     
     @IBAction func trushFunction(_ sender: Any) {
-        captureSession?.startRunning()
         setButtonOnCameraView()
         self.imageView.removeFromSuperview()
         self.imageView.image = nil

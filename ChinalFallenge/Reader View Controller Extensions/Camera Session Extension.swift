@@ -138,7 +138,7 @@ extension ReaderViewController: AVCapturePhotoCaptureDelegate, AVCaptureMetadata
                 photoOutputConnection.videoOrientation = videoPreviewLayerOrientation!
             }
             // Set photo settings for our need
-            var photoSettings = AVCapturePhotoSettings()
+            let photoSettings = AVCapturePhotoSettings()
             if (self.videoDeviceInput?.device.isFlashAvailable)! {
                 photoSettings.flashMode = self.flashMode
             }

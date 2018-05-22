@@ -14,7 +14,7 @@
         <!--Reader View Controller-->
         <scene sceneID="hj6-sb-C7c">
             <objects>
-                <viewController storyboardIdentifier="cameraViewController" id="Xbw-T4-Y9f" customClass="ReaderViewController" customModule="ChinalFallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="cameraViewController" modalTransitionStyle="flipHorizontal" id="Xbw-T4-Y9f" customClass="ReaderViewController" customModule="ChinalFallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Vpp-Rg-Vsc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -180,7 +180,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-759" y="-27"/>
+            <point key="canvasLocation" x="-807" y="-27"/>
         </scene>
         <!--Discover-->
         <scene sceneID="SiS-xF-T42">
@@ -277,11 +277,6 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                     </tabBar>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="defaultIndex">
-                            <integer key="value" value="1"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
                     <connections>
                         <segue destination="UIz-14-MN9" kind="relationship" relationship="viewControllers" id="RTk-QR-Mg6"/>
                         <segue destination="FjD-E7-dfY" kind="relationship" relationship="viewControllers" id="u2l-ZT-8EJ"/>
@@ -308,7 +303,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ToJ-hK-S7X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-759" y="-824"/>
+            <point key="canvasLocation" x="-1087" y="-824"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

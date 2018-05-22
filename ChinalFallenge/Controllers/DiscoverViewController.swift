@@ -10,8 +10,7 @@ import UIKit
 
 class DiscoverViewController: UIViewController {
     
-    @IBOutlet weak var titleAppLabel: UILabel!
-    @IBOutlet weak var photoButton: UIButton!
+    @IBOutlet weak var cameraButtonDiscoverView: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +19,7 @@ class DiscoverViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.isStatusBarHidden = false
+        self.cameraButtonDiscoverView.setBackgroundImage(#imageLiteral(resourceName: "Camera"), for: .normal, barMetrics: .default)
     }
     
     @IBAction func goToReaderViewController(_ sender: Any) {

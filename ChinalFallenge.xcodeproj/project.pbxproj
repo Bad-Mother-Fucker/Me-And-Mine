@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FC04BB43208DE3FE00B6C2FF /* SlideAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC04BB42208DE3FD00B6C2FF /* SlideAnimator.swift */; };
 		FC28807220AA313100A03300 /* Text View Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC28807120AA313100A03300 /* Text View Extension.swift */; };
+		FC3D0AEE20B59519004B3236 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3D0AED20B59519004B3236 /* MasterViewController.swift */; };
 		FC4B790920A989B200A6AC4A /* Speech Recognition.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B790620A989B200A6AC4A /* Speech Recognition.swift */; };
 		FC4B790A20A989B200A6AC4A /* Camera Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B790720A989B200A6AC4A /* Camera Session.swift */; };
 		FC4B790B20A989B200A6AC4A /* Extensions Functions Reader View Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B790820A989B200A6AC4A /* Extensions Functions Reader View Controller.swift */; };
@@ -44,8 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		FC04BB42208DE3FD00B6C2FF /* SlideAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideAnimator.swift; sourceTree = "<group>"; };
 		FC28807120AA313100A03300 /* Text View Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text View Extension.swift"; sourceTree = "<group>"; };
+		FC3D0AED20B59519004B3236 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MasterViewController.swift; path = ChinalFallenge/Sources/MasterViewController.swift; sourceTree = SOURCE_ROOT; };
 		FC4B790620A989B200A6AC4A /* Speech Recognition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Speech Recognition.swift"; sourceTree = "<group>"; };
 		FC4B790720A989B200A6AC4A /* Camera Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Camera Session.swift"; sourceTree = "<group>"; };
 		FC4B790820A989B200A6AC4A /* Extensions Functions Reader View Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions Functions Reader View Controller.swift"; sourceTree = "<group>"; };
@@ -97,7 +97,7 @@
 		FC04BB41208DE3DF00B6C2FF /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				FC04BB42208DE3FD00B6C2FF /* SlideAnimator.swift */,
+				FC3D0AED20B59519004B3236 /* MasterViewController.swift */,
 				FCAB744020AB6F7F00E3E9AF /* VideoPreviewView.swift */,
 				FCAB744220AD728400E3E9AF /* frameworksCell.swift */,
 			);
@@ -334,10 +334,10 @@
 				FCCA8B4B20AF6768006BE120 /* DiscoverViewController.swift in Sources */,
 				FC4B790A20A989B200A6AC4A /* Camera Session.swift in Sources */,
 				FC4B790B20A989B200A6AC4A /* Extensions Functions Reader View Controller.swift in Sources */,
-				FC04BB43208DE3FE00B6C2FF /* SlideAnimator.swift in Sources */,
 				FC8C44CE20873F36004160C6 /* ReaderViewController.swift in Sources */,
 				FCAB744120AB6F7F00E3E9AF /* VideoPreviewView.swift in Sources */,
 				FC4B790920A989B200A6AC4A /* Speech Recognition.swift in Sources */,
+				FC3D0AEE20B59519004B3236 /* MasterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,27 +13,24 @@ import Speech
 
 class ReaderViewController: UIViewController {
     
-    //ATTRIBUTES FOR CAMERA
+    //MARK: ATTRIBUTES FOR CAMERA
     var captureSession: AVCaptureSession?
     var videoDeviceInput: AVCaptureDeviceInput?
     let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInTrueDepthCamera, .builtInDualCamera, .builtInWideAngleCamera], mediaType: .video, position: .unspecified)
     var isCaptureSessionConfigured = false // Instance proprerty on this view controller class
     let photoOutput = AVCapturePhotoOutput()
     
-    //ATTRIBUTES FOR SPEECH RECOGNITION
-    let speechRecognizer = SFSpeechRecognizer.init(locale: Locale.current)
-    var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
-    var recognitionTask: SFSpeechRecognitionTask?
-    let audioEngine = AVAudioEngine()
+    //MARK: ATTRIBUTE FOR SPEECH RECOGNITION
+    let speechRec = SpeechRecognitionEngine()
     
-    //VIEW
+    //MARK: VIEW
     @IBOutlet weak var cameraView: VideoPreviewView!
     @IBOutlet weak var trashButton: UIButton!
     
-    //TEXT VIEW
+    //MARK: TEXT VIEW
     @IBOutlet weak var SpeechText: UITextView!
     
-    //COLLECTION VIEW
+    //MARK: COLLECTION VIEW
     @IBOutlet weak var frameworksCollectionView: UICollectionView!
     
     //OTHER ATTRIBUTES
@@ -76,10 +73,10 @@ class ReaderViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.isStatusBarHidden = true
-        setNavigationAndTabBarController()
+        tabBarController?.tabBar.isHidden = true
         session()
         settingTextView()
-        gestureDismissKeyboard()
+        gesturesReaderView()
         self.imageView = UIImageView(frame: self.cameraView.frame)
     }
     
@@ -93,20 +90,7 @@ class ReaderViewController: UIViewController {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        
-        if let videoPreviewLayerConnection = self.cameraView.videoPreviewLayer.connection {
-            let deviceOrientation = UIDevice.current.orientation
-            guard let newVideoOrientation = AVCaptureVideoOrientation(deviceOrientation: deviceOrientation),
-                deviceOrientation.isPortrait || deviceOrientation.isLandscape else {
-                    return
-            }
-            videoPreviewLayerConnection.videoOrientation = newVideoOrientation
-        }
-    }
-    
-    //FUNCTION TO HIDE KEYBOARD
-    @objc func dismissKeyboard() {
-        self.cameraView.endEditing(true)
+        displayVideoPreviewLayer()
     }
     
 //    override var prefersStatusBarHidden: Bool {
@@ -118,7 +102,6 @@ class ReaderViewController: UIViewController {
     }
     
     @IBAction func takePhoto(_ sender: Any) {
-        captureSession?.stopRunning()
         onTapTakePhoto()
         setSwipeGestureFrameworksAndOtherButtons()
     }
@@ -132,6 +115,7 @@ class ReaderViewController: UIViewController {
     }
     
     @IBAction func trushFunction(_ sender: Any) {
+        self.captureSession?.startRunning()
         setButtonOnCameraView()
         self.imageView.removeFromSuperview()
         self.imageView.image = nil

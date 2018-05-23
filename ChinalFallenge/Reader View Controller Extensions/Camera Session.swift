@@ -1,5 +1,5 @@
 //
-//  Camera Session Extension.swift
+//  Camera Session.swift
 //  ChinalFallenge
 //
 //  Created by Simone Fiorentino on 11/05/2018.

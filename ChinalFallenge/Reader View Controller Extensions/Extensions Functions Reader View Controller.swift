@@ -1,5 +1,5 @@
 //
-//  Extensions.swift
+//  Extensions Functions Reader View Controller
 //  ChinalFallenge
 //
 //  Created by Simone Fiorentino on 11/05/2018.
@@ -13,15 +13,15 @@ import AVFoundation
 
 extension ReaderViewController {
     
-    func setNavigationAndTabBarController() {
-        tabBarController?.tabBar.isHidden = true
-        navigationController?.navigationBar.isHidden = true
-    }
-    
     //HIDE KEYBOARD TAPPING EVERYWHERE
-    func gestureDismissKeyboard() {
+    func gesturesReaderView() {
         let tapGestureDismissKeyboard = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         self.cameraView.addGestureRecognizer(tapGestureDismissKeyboard)
+    }
+    
+    //FUNCTION TO HIDE KEYBOARD
+    @objc func dismissKeyboard() {
+        self.cameraView.endEditing(true)
     }
     
     //HIDE AND IS NOT EDITABLE TEXT VIEW.
@@ -83,6 +83,17 @@ extension ReaderViewController {
             } catch {
                 print("Could not lock device for configuration: \(error)")
             }
+        }
+    }
+    
+    func displayVideoPreviewLayer() {
+        if let videoPreviewLayerConnection = self.cameraView.videoPreviewLayer.connection {
+            let deviceOrientation = UIDevice.current.orientation
+            guard let newVideoOrientation = AVCaptureVideoOrientation(deviceOrientation: deviceOrientation),
+                deviceOrientation.isPortrait || deviceOrientation.isLandscape else {
+                    return
+            }
+            videoPreviewLayerConnection.videoOrientation = newVideoOrientation
         }
     }
 }

@@ -14,7 +14,7 @@
         <!--Reader View Controller-->
         <scene sceneID="hj6-sb-C7c">
             <objects>
-                <viewController storyboardIdentifier="cameraViewController" modalTransitionStyle="flipHorizontal" id="Xbw-T4-Y9f" customClass="ReaderViewController" customModule="ChinalFallenge" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="cameraViewController" id="Xbw-T4-Y9f" customClass="ReaderViewController" customModule="ChinalFallenge" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Vpp-Rg-Vsc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -196,13 +196,13 @@
                                 <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <items>
                                     <navigationItem title="Me &amp; Mine" id="taS-HY-gRm">
-                                        <barButtonItem key="leftBarButtonItem" title=" " style="plain" id="jZO-Z8-uuG">
+                                        <barButtonItem key="leftBarButtonItem" id="1bE-J8-r6i">
+                                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <connections>
-                                                <action selector="goToReaderViewController:" destination="UIz-14-MN9" id="loL-Ko-v1m"/>
-                                                <segue destination="Xbw-T4-Y9f" kind="show" identifier="ReaderViewController" id="4C5-pq-qod"/>
+                                                <action selector="goToReaderViewController:" destination="UIz-14-MN9" id="SHA-m4-eHl"/>
+                                                <segue destination="Xbw-T4-Y9f" kind="show" identifier="ReaderViewController" id="ieb-8L-sJh"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" id="Sbh-Ym-FNJ"/>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -212,7 +212,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Discover" id="PDo-wT-wDk"/>
                     <connections>
-                        <outlet property="cameraButtonDiscoverView" destination="jZO-Z8-uuG" id="17h-Oy-X8V"/>
+                        <outlet property="cameraButtonDiscoverView" destination="1bE-J8-r6i" id="va2-xs-Ibc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZbA-4e-eqd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -255,27 +255,5 @@
             </objects>
             <point key="canvasLocation" x="1254" y="-823"/>
         </scene>
-        <!--Camera-->
-        <scene sceneID="W9f-h0-1Zn">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ed1-tB-AYl" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" tag="1" title="Camera" id="LvR-Ql-CKd"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="HPu-0I-ynf">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="Xbw-T4-Y9f" kind="relationship" relationship="rootViewController" id="LFQ-S4-Jku"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ToJ-hK-S7X" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-506" y="-807"/>
-        </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="4C5-pq-qod"/>
-    </inferredMetricsTieBreakers>
 </document>

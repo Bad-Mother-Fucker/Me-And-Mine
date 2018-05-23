@@ -19,7 +19,7 @@ class DiscoverViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.isStatusBarHidden = false
-        self.cameraButtonDiscoverView.setBackgroundImage(#imageLiteral(resourceName: "Camera"), for: .normal, barMetrics: .default)
+        self.cameraButtonDiscoverView.setBackgroundImage(#imageLiteral(resourceName: "cameraSymbol"), for: .normal, barMetrics: .default)
     }
     
     @IBAction func goToReaderViewController(_ sender: Any) {

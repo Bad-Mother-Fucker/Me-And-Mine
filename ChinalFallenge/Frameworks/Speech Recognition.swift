@@ -1,5 +1,5 @@
 //
-//  Speech Recognition Extension.swift
+//  Speech Recognition.swift
 //  ChinalFallenge
 //
 //  Created by Simone Fiorentino on 11/05/2018.
@@ -12,7 +12,12 @@ import Speech
 
 // ############### SPEECH RECOGNITION ###############
 
-extension ReaderViewController: SFSpeechRecognizerDelegate, AVAudioRecorderDelegate {
+class SpeechRecognitionEngine {
+    
+    let speechRecognizer = SFSpeechRecognizer.init(locale: Locale.current)
+    var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
+    var recognitionTask: SFSpeechRecognitionTask?
+    let audioEngine = AVAudioEngine()
     
     //REQUEST AUTHORIZATION FOR SPEECH RECOGNITION
     func requestSpeechAuthorization() {
@@ -31,7 +36,7 @@ extension ReaderViewController: SFSpeechRecognizerDelegate, AVAudioRecorderDeleg
     }
     
     //START RECORDING SPEECH FUNCTION
-    func startRecordingSpeech() {
+    func startRecordingSpeech(speechTextView: UITextView) {
         if (self.recognitionTask != nil) {
             self.recognitionTask?.cancel()
             self.recognitionTask = nil
@@ -56,7 +61,7 @@ extension ReaderViewController: SFSpeechRecognizerDelegate, AVAudioRecorderDeleg
             if (speechResult != nil) {
                 isFinal = (speechResult?.isFinal)!
                 let speech = speechResult?.bestTranscription.formattedString
-                self.handleSpeechText(speech!)
+                self.handleSpeechText(speech!, speechTextView: speechTextView)
             }
             if (error != nil || isFinal) {
                 debugPrint(speechResult?.bestTranscription.formattedString as Any)
@@ -88,9 +93,9 @@ extension ReaderViewController: SFSpeechRecognizerDelegate, AVAudioRecorderDeleg
         debugPrint("stop recording.")
     }
     
-    func handleSpeechText(_ speech: String) {
-        self.view.addSubview(self.SpeechText)
-        self.SpeechText.text = speech
-        self.SpeechText.isEditable = true
+    func handleSpeechText(_ speech: String, speechTextView: UITextView) {
+        speechTextView.isHidden = false
+        speechTextView.text = speech
+        speechTextView.isEditable = true
     }
 }

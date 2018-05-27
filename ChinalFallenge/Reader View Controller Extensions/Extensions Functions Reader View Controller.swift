@@ -115,6 +115,15 @@ extension ReaderViewController {
             videoPreviewLayerConnection.videoOrientation = newVideoOrientation
         }
     }
+    
+    func setScrollView(){
+         scrollView.frame.size.width = cameraView.frame.width * CGFloat(itemPhotos.count)
+        for imageView in itemPhotos{
+            scrollView.addSubview(imageView)
+            imageView.frame.origin.x = CGFloat(itemPhotos.count - 1) * scrollView.frame.width
+        }
+        
+    }
 }
 
 

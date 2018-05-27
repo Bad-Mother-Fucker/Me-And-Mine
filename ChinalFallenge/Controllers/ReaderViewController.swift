@@ -29,8 +29,8 @@ class ReaderViewController: UIViewController {
     
     //MARK: VIEW
     
-    @IBOutlet weak var scrollView: UIImageView!
-    @IBOutlet weak var imagePreview: UIImageView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     @IBOutlet weak var cameraView: VideoPreviewView!
     @IBOutlet weak var trashButton: UIButton!
     
@@ -49,8 +49,10 @@ class ReaderViewController: UIViewController {
     let sessionQueue = DispatchQueue(label: "session queue")
     var setupResult: SessionSetupResult = .success
     var isSessionRunning = false
+    
     var imageView: UIImageView!
-    var itemPhotos:[UIImage] = []
+    var itemPhotos:[UIImageView] = []
+    
     var flashMode = AVCaptureDevice.FlashMode.off
     var flagOnSpeech = false
     let nameFrameworks = ["Smart Read","Dictation","Extract"]
@@ -71,8 +73,6 @@ class ReaderViewController: UIViewController {
     @IBOutlet weak var photoButton: UIButton!
     @IBOutlet weak var dismissButton: UIButton!
     @IBOutlet weak var flashlightButton: UIButton!
-    
-    @IBOutlet weak var pageController: UIPageControl!
     @IBOutlet weak var mlButton: UIButton!
     //TYPE QR/BAR CODE SCANNING
     struct codeType {
@@ -84,7 +84,7 @@ class ReaderViewController: UIViewController {
         super.viewDidLoad()
         cameraAuthorization()
         setButtonOnCameraView()
-        self.imageView = UIImageView(frame: self.imagePreview.frame)
+        self.imageView = UIImageView(frame: self.scrollView.frame)
     }
     
     //VIEW WILL APPEAR
@@ -95,9 +95,9 @@ class ReaderViewController: UIViewController {
         session()
         settingTextView()
         gesturesReaderView()
-        
+        setScrollView()
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if self.setupResult == .success {
@@ -116,6 +116,8 @@ class ReaderViewController: UIViewController {
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
     }
+    
+    
     
     @IBAction func takePhoto(_ sender: Any) {
         onTapTakePhoto()

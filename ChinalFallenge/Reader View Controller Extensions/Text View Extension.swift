@@ -12,6 +12,7 @@ import UIKit
 // ############### HANDLE TEXT VIEW ###############
 
 extension ReaderViewController: UITextViewDelegate {
+    
     func moveTextView(textView: UITextView, moveDistance: Int, up: Bool) {
         let moveDuration = 0.3
         let movement: CGFloat = CGFloat(up ? moveDistance : -moveDistance)

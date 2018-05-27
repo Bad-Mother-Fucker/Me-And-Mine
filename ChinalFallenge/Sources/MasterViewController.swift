@@ -27,6 +27,8 @@ class MasterViewController: UIPageViewController, UIPageViewControllerDelegate, 
         return viewControllers.count
     }
     
+    
+    
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         guard let index = viewControllers.index(of: viewController) else {return nil}
         
@@ -49,7 +51,17 @@ class MasterViewController: UIPageViewController, UIPageViewControllerDelegate, 
     }
     
     func newViewController(_ identifier: String) -> UIViewController {
-        return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: identifier)
+        let viewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: identifier)
+        if identifier == "tabBarControllerID"{
+            let tbc = viewController as! UITabBarController
+            if let discoverVC = tbc.viewControllers?.first! as? DiscoverViewController{
+                discoverVC.parentPVC = self
+            }
+        }else {
+            let cameraVC = viewController as! ReaderViewController
+            cameraVC.parentPVC = self
+        }
+        return viewController
     }
-    
+
 }

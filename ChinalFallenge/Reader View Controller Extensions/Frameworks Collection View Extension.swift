@@ -11,35 +11,37 @@ import UIKit
 extension ReaderViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.nameFrameworks.count
+        return self.attributes.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "customCell", for: indexPath) as! frameworksCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "customCell", for: indexPath)
+        let attributeButton = cell.viewWithTag(2) as! UIButton
         
-        cell.frameworksNameButton.setTitleColor(UIColor.white, for: .normal)
-        cell.frameworksNameButton.setTitle(self.nameFrameworks[indexPath.row], for: .normal)
+        attributeButton.setTitleColor(UIColor.white, for: .normal)
+        attributeButton.setTitle(attributes[indexPath.row], for: .normal)
         
         return cell
     }
-    
-    func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-        switch indexPath.row {
-        case 0:
-            break
-        case 1:
-            break
-        case 2:
-            //self.flagOnSpeech = !self.flagOnSpeech ??????????????????????????????? TIAGO EXPLAIN ME PLEASE
-            //I have to use Tiago' code instead mine.. 😭😭😭 I need to understand
-            self.photoButton.setBackgroundImage(#imageLiteral(resourceName: "cameraWithMicrophoneButton"), for: .normal)
-            self.photoButton.isHidden = false
-        case 3:
-            break
-        default:
-            break
-        }
-    }
+//
+//    func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
+//        switch indexPath.row {
+//        case 0:
+//            break
+//        case 1:
+//            break
+//        case 2:
+//            //self.flagOnSpeech = !self.flagOnSpeech ??????????????????????????????? TIAGO EXPLAIN ME PLEASE
+//            //I have to use Tiago' code instead mine.. 😭😭😭 I need to understand
+//
+//            self.photoButton.setBackgroundImage(#imageLiteral(resourceName: "cameraWithMicrophoneButton"), for: .normal)
+//            self.photoButton.isHidden = false
+//        case 3:
+//            break
+//        default:
+//            break
+//        }
+//    }
     
     var collectionViewMargin: UIEdgeInsets{
         
@@ -53,7 +55,7 @@ extension ReaderViewController: UICollectionViewDelegate, UICollectionViewDataSo
         return (CGFloat(5), CGFloat(0))
     }
 
-    //  Size of itens
+    //  Size of items
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 128, height: 44)
     }

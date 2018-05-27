@@ -7,15 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		196D341D20B7F52900FA184A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196D341C20B7F52900FA184A /* Extensions.swift */; };
 		FC28807220AA313100A03300 /* Text View Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC28807120AA313100A03300 /* Text View Extension.swift */; };
 		FC3D0AEE20B59519004B3236 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3D0AED20B59519004B3236 /* MasterViewController.swift */; };
-		FC4B790920A989B200A6AC4A /* Speech Recognition.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B790620A989B200A6AC4A /* Speech Recognition.swift */; };
-		FC4B790A20A989B200A6AC4A /* Camera Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B790720A989B200A6AC4A /* Camera Session.swift */; };
+		FC4B790920A989B200A6AC4A /* SpeechRecognition.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B790620A989B200A6AC4A /* SpeechRecognition.swift */; };
+		FC4B790A20A989B200A6AC4A /* CameraSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B790720A989B200A6AC4A /* CameraSession.swift */; };
 		FC4B790B20A989B200A6AC4A /* Extensions Functions Reader View Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B790820A989B200A6AC4A /* Extensions Functions Reader View Controller.swift */; };
 		FC74449B208B498500095D3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC74449A208B498500095D3D /* Assets.xcassets */; };
 		FC8C44CE20873F36004160C6 /* ReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8C44CD20873F36004160C6 /* ReaderViewController.swift */; };
 		FCAB744120AB6F7F00E3E9AF /* VideoPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAB744020AB6F7F00E3E9AF /* VideoPreviewView.swift */; };
-		FCAB744320AD728400E3E9AF /* frameworksCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAB744220AD728400E3E9AF /* frameworksCell.swift */; };
 		FCAB744520AD730200E3E9AF /* Frameworks Collection View Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAB744420AD730200E3E9AF /* Frameworks Collection View Extension.swift */; };
 		FCC2E3A32080E22A000C3974 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC2E3A22080E22A000C3974 /* AppDelegate.swift */; };
 		FCC2E3A82080E22A000C3974 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCC2E3A62080E22A000C3974 /* Main.storyboard */; };
@@ -44,15 +44,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		196D341C20B7F52900FA184A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FC28807120AA313100A03300 /* Text View Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Text View Extension.swift"; sourceTree = "<group>"; };
 		FC3D0AED20B59519004B3236 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MasterViewController.swift; path = ChinalFallenge/Sources/MasterViewController.swift; sourceTree = SOURCE_ROOT; };
-		FC4B790620A989B200A6AC4A /* Speech Recognition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Speech Recognition.swift"; sourceTree = "<group>"; };
-		FC4B790720A989B200A6AC4A /* Camera Session.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Camera Session.swift"; sourceTree = "<group>"; };
+		FC4B790620A989B200A6AC4A /* SpeechRecognition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechRecognition.swift; sourceTree = "<group>"; };
+		FC4B790720A989B200A6AC4A /* CameraSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraSession.swift; sourceTree = "<group>"; };
 		FC4B790820A989B200A6AC4A /* Extensions Functions Reader View Controller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extensions Functions Reader View Controller.swift"; sourceTree = "<group>"; };
 		FC74449A208B498500095D3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC8C44CD20873F36004160C6 /* ReaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReaderViewController.swift; path = ChinalFallenge/Controllers/ReaderViewController.swift; sourceTree = SOURCE_ROOT; };
 		FCAB744020AB6F7F00E3E9AF /* VideoPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VideoPreviewView.swift; path = ChinalFallenge/Sources/VideoPreviewView.swift; sourceTree = SOURCE_ROOT; };
-		FCAB744220AD728400E3E9AF /* frameworksCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = frameworksCell.swift; path = ChinalFallenge/Sources/frameworksCell.swift; sourceTree = SOURCE_ROOT; };
 		FCAB744420AD730200E3E9AF /* Frameworks Collection View Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Frameworks Collection View Extension.swift"; sourceTree = "<group>"; };
 		FCC2E39F2080E229000C3974 /* ChinalFallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChinalFallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCC2E3A22080E22A000C3974 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -97,9 +97,10 @@
 		FC04BB41208DE3DF00B6C2FF /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				196D341C20B7F52900FA184A /* Extensions.swift */,
 				FC3D0AED20B59519004B3236 /* MasterViewController.swift */,
 				FCAB744020AB6F7F00E3E9AF /* VideoPreviewView.swift */,
-				FCAB744220AD728400E3E9AF /* frameworksCell.swift */,
+				FC4B790720A989B200A6AC4A /* CameraSession.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -126,7 +127,7 @@
 		FC3D0AEC20B58F3D004B3236 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FC4B790620A989B200A6AC4A /* Speech Recognition.swift */,
+				FC4B790620A989B200A6AC4A /* SpeechRecognition.swift */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -135,7 +136,6 @@
 			isa = PBXGroup;
 			children = (
 				FC4B790820A989B200A6AC4A /* Extensions Functions Reader View Controller.swift */,
-				FC4B790720A989B200A6AC4A /* Camera Session.swift */,
 				FC28807120AA313100A03300 /* Text View Extension.swift */,
 				FCAB744420AD730200E3E9AF /* Frameworks Collection View Extension.swift */,
 			);
@@ -330,13 +330,13 @@
 				FCAB744520AD730200E3E9AF /* Frameworks Collection View Extension.swift in Sources */,
 				FC28807220AA313100A03300 /* Text View Extension.swift in Sources */,
 				FCC2E3A32080E22A000C3974 /* AppDelegate.swift in Sources */,
-				FCAB744320AD728400E3E9AF /* frameworksCell.swift in Sources */,
 				FCCA8B4B20AF6768006BE120 /* DiscoverViewController.swift in Sources */,
-				FC4B790A20A989B200A6AC4A /* Camera Session.swift in Sources */,
+				FC4B790A20A989B200A6AC4A /* CameraSession.swift in Sources */,
 				FC4B790B20A989B200A6AC4A /* Extensions Functions Reader View Controller.swift in Sources */,
+				196D341D20B7F52900FA184A /* Extensions.swift in Sources */,
 				FC8C44CE20873F36004160C6 /* ReaderViewController.swift in Sources */,
 				FCAB744120AB6F7F00E3E9AF /* VideoPreviewView.swift in Sources */,
-				FC4B790920A989B200A6AC4A /* Speech Recognition.swift in Sources */,
+				FC4B790920A989B200A6AC4A /* SpeechRecognition.swift in Sources */,
 				FC3D0AEE20B59519004B3236 /* MasterViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -511,7 +511,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CVX3K5R89C;
+				DEVELOPMENT_TEAM = D4L4S7MAUX;
 				INFOPLIST_FILE = ChinalFallenge/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -529,7 +529,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CVX3K5R89C;
+				DEVELOPMENT_TEAM = D4L4S7MAUX;
 				INFOPLIST_FILE = ChinalFallenge/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

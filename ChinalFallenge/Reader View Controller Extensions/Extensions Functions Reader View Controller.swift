@@ -35,20 +35,39 @@ extension ReaderViewController {
         self.photoButton.isHidden = false
         self.dismissButton.setBackgroundImage(#imageLiteral(resourceName: "arrowRight"), for: .normal)
         self.dismissButton.isHidden = false
-        self.flashlightButton.setBackgroundImage(#imageLiteral(resourceName: "flashOff"), for: .normal)
+        self.flashlightButton.setBackgroundImage(#imageLiteral(resourceName: "flashAuto"), for: .normal)
         self.flashlightButton.isHidden = false
-        self.frameworksCollectionView.isHidden = true
+        self.attributesCollectionView.isHidden = true
         self.trashButton.isHidden = true
+        self.settingsButton.isHidden = false
+        self.cameraRollPicker.isHidden = false
+        self.mlButton.isHidden = false
+        self.ocrButton.isHidden = false
+        self.frameworks.isHidden = false
+        self.dictation.isHidden = true
+        self.dictation.setBackgroundImage(#imageLiteral(resourceName: "cameraWithMicrophoneButton"), for: .normal)
+
+        //TODO: set assets for this
+//        self.settingsButton.setBackgroundImage(<#T##image: UIImage?##UIImage?#>, for: .normal)
+//        self.cameraRollPicker.setBackgroundImage(<#T##image: UIImage?##UIImage?#>, for: .normal)
+//        self.ocrButton.setBackgroundImage(<#T##image: UIImage?##UIImage?#>, for: .normal)
+//        self.mlButton.setBackgroundImage(<#T##image: UIImage?##UIImage?#>, for: .normal)
+        
     }
     
-    func setSwipeGestureFrameworksAndOtherButtons() {
+    func setButtonsAfterPhoto() {
         self.photoButton.isHidden = true
         self.dismissButton.isHidden = true
         self.flashlightButton.isHidden = true
-        self.frameworksCollectionView.backgroundColor = UIColor.white.withAlphaComponent(0)
-        self.frameworksCollectionView.isHidden = false
+        self.settingsButton.isHidden = true
+        self.frameworks.isHidden = true
+        self.cameraRollPicker.isHidden = true
+        self.attributesCollectionView.backgroundColor = .clear
+        self.attributesCollectionView.isHidden = false
         self.trashButton.setBackgroundImage(#imageLiteral(resourceName: "trashButton"), for: .normal)
         self.trashButton.isHidden = false
+        self.dictation.isHidden = false
+
     }
     
     func setFlashlight() {
@@ -58,10 +77,10 @@ extension ReaderViewController {
             self.flashlightButton.setBackgroundImage(#imageLiteral(resourceName: "flashAuto"), for: .normal)
         case .auto:
             self.flashMode = .on
-            self.flashlightButton.setBackgroundImage(#imageLiteral(resourceName: "flashOn"), for: .normal)
+            self.flashlightButton.setBackgroundImage(#imageLiteral(resourceName: "FlashOn"), for: .normal)
         case .on:
             self.flashMode = .off
-            self.flashlightButton.setBackgroundImage(#imageLiteral(resourceName: "flashOff"), for: .normal)
+            self.flashlightButton.setBackgroundImage(#imageLiteral(resourceName: "FlashOff"), for: .normal)
         }
     }
     

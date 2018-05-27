@@ -13,6 +13,9 @@ import Speech
 
 class ReaderViewController: UIViewController {
     
+    var attributes:[String] = []
+
+    
     //MARK: ATTRIBUTES FOR CAMERA
     var captureSession: AVCaptureSession?
     var videoDeviceInput: AVCaptureDeviceInput?
@@ -20,18 +23,26 @@ class ReaderViewController: UIViewController {
     var isCaptureSessionConfigured = false // Instance proprerty on this view controller class
     let photoOutput = AVCapturePhotoOutput()
     
+    var parentPVC:MasterViewController!
     //MARK: ATTRIBUTE FOR SPEECH RECOGNITION
     let speechRec = SpeechRecognitionEngine()
     
     //MARK: VIEW
+    
+    @IBOutlet weak var scrollView: UIImageView!
+    @IBOutlet weak var imagePreview: UIImageView!
     @IBOutlet weak var cameraView: VideoPreviewView!
     @IBOutlet weak var trashButton: UIButton!
     
     //MARK: TEXT VIEW
     @IBOutlet weak var SpeechText: UITextView!
     
-    //MARK: COLLECTION VIEW
-    @IBOutlet weak var frameworksCollectionView: UICollectionView!
+    @IBOutlet weak var attributesCollectionView: UICollectionView!{
+        didSet{
+            attributesCollectionView.delegate = self
+            attributesCollectionView.dataSource = self
+        }
+    }
     
     //OTHER ATTRIBUTES
     var speech: [String]?
@@ -39,6 +50,7 @@ class ReaderViewController: UIViewController {
     var setupResult: SessionSetupResult = .success
     var isSessionRunning = false
     var imageView: UIImageView!
+    var itemPhotos:[UIImage] = []
     var flashMode = AVCaptureDevice.FlashMode.off
     var flagOnSpeech = false
     let nameFrameworks = ["Smart Read","Dictation","Extract"]
@@ -51,10 +63,17 @@ class ReaderViewController: UIViewController {
     }
     
     //BUTTONS
+    @IBOutlet weak var dictation: UIButton!
+    @IBOutlet weak var frameworks: UIStackView!
+    @IBOutlet weak var ocrButton: UIButton!
+    @IBOutlet weak var cameraRollPicker: UIButton!
+    @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var photoButton: UIButton!
     @IBOutlet weak var dismissButton: UIButton!
     @IBOutlet weak var flashlightButton: UIButton!
     
+    @IBOutlet weak var pageController: UIPageControl!
+    @IBOutlet weak var mlButton: UIButton!
     //TYPE QR/BAR CODE SCANNING
     struct codeType {
         static let supportedTypes = [AVMetadataObject.ObjectType.upce, AVMetadataObject.ObjectType.code39, AVMetadataObject.ObjectType.code39Mod43, AVMetadataObject.ObjectType.code93, AVMetadataObject.ObjectType.code128, AVMetadataObject.ObjectType.ean8, AVMetadataObject.ObjectType.ean13, AVMetadataObject.ObjectType.aztec, AVMetadataObject.ObjectType.pdf417, AVMetadataObject.ObjectType.itf14, AVMetadataObject.ObjectType.dataMatrix, AVMetadataObject.ObjectType.interleaved2of5, AVMetadataObject.ObjectType.qr]
@@ -65,8 +84,7 @@ class ReaderViewController: UIViewController {
         super.viewDidLoad()
         cameraAuthorization()
         setButtonOnCameraView()
-        frameworksCollectionView.delegate = self
-        frameworksCollectionView.dataSource = self
+        self.imageView = UIImageView(frame: self.imagePreview.frame)
     }
     
     //VIEW WILL APPEAR
@@ -77,7 +95,7 @@ class ReaderViewController: UIViewController {
         session()
         settingTextView()
         gesturesReaderView()
-        self.imageView = UIImageView(frame: self.cameraView.frame)
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -93,9 +111,7 @@ class ReaderViewController: UIViewController {
         displayVideoPreviewLayer()
     }
     
-//    override var prefersStatusBarHidden: Bool {
-//        return true
-//    } I don't need this method anymore becase I do the same in viewWillAppear with the line: UIApplication.shared...
+
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
@@ -103,18 +119,18 @@ class ReaderViewController: UIViewController {
     
     @IBAction func takePhoto(_ sender: Any) {
         onTapTakePhoto()
-        setSwipeGestureFrameworksAndOtherButtons()
+        setButtonsAfterPhoto()
     }
     
     @IBAction func dismissFromCameraViewButton(_ sender: Any) {
-        self.performSegue(withIdentifier: "unwindToDiscoverView", sender: self)
+        parentPVC.setViewControllers([parentPVC.viewControllers[1]], direction: .forward, animated: true, completion: nil)
     }
     
     @IBAction func flashlightOnOff(_ sender: Any) {
         setFlashlight()
     }
     
-    @IBAction func trushFunction(_ sender: Any) {
+    @IBAction func trash(_ sender: Any) {
         self.captureSession?.startRunning()
         setButtonOnCameraView()
         self.imageView.removeFromSuperview()

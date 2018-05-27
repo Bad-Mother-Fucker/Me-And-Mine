@@ -12,23 +12,29 @@ class DiscoverViewController: UIViewController {
     
     @IBOutlet weak var cameraButtonDiscoverView: UIBarButtonItem!
     
+  
+    
+    var parentPVC: MasterViewController!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+       
     }
+   
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.shared.isStatusBarHidden = false
         self.cameraButtonDiscoverView.setBackgroundImage(#imageLiteral(resourceName: "cameraSymbol"), for: .normal, barMetrics: .default)
+        self.cameraButtonDiscoverView.title = nil
     }
     
     @IBAction func goToReaderViewController(_ sender: Any) {
-        self.performSegue(withIdentifier: "ReaderViewController", sender: self)
+        parentPVC.setViewControllers([parentPVC.viewControllers[0]], direction: .reverse, animated: true, completion: nil)
     }
     
-    @IBAction func unwindToDiscoverView(segue: UIStoryboardSegue) {
-    }
+  
     
-   
+    
     
 }

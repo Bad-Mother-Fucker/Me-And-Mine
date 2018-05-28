@@ -13,9 +13,6 @@ import Speech
 
 class ReaderViewController: UIViewController {
     
-    var attributes:[String] = []
-
-    
     //MARK: ATTRIBUTES FOR CAMERA
     var captureSession: AVCaptureSession?
     var videoDeviceInput: AVCaptureDeviceInput?
@@ -23,20 +20,18 @@ class ReaderViewController: UIViewController {
     var isCaptureSessionConfigured = false // Instance proprerty on this view controller class
     let photoOutput = AVCapturePhotoOutput()
     
-    var parentPVC:MasterViewController!
     //MARK: ATTRIBUTE FOR SPEECH RECOGNITION
     let speechRec = SpeechRecognitionEngine()
     
-    //MARK: VIEW
-    
+    //MARK: VideoPreviewView Outlet
     @IBOutlet weak var cameraView: VideoPreviewView!
-    @IBOutlet weak var trashButton: UIButton!
     
     //MARK: TEXT VIEW
     @IBOutlet weak var SpeechText: UITextView!
     
-    @IBOutlet weak var attributesCollectionView: UICollectionView!{
-        didSet{
+    //MARK: COLLECTION VIEW
+    @IBOutlet weak var attributesCollectionView: UICollectionView! {
+        didSet {
             attributesCollectionView.delegate = self
             attributesCollectionView.dataSource = self
         }
@@ -47,13 +42,12 @@ class ReaderViewController: UIViewController {
     let sessionQueue = DispatchQueue(label: "session queue")
     var setupResult: SessionSetupResult = .success
     var isSessionRunning = false
-    
     var imageView: UIImageView!
     var itemPhotos:[UIImageView] = []
-    
     var flashMode = AVCaptureDevice.FlashMode.off
     var flagOnSpeech = false
-    let nameFrameworks = ["Smart Read","Dictation","Extract"]
+    var parentPVC: MasterViewController!
+    var attributes: [String] = []
     
     //ENUM
     enum SessionSetupResult {
@@ -62,13 +56,14 @@ class ReaderViewController: UIViewController {
         case configurationFailed
     }
     
-    //BUTTONS
-  
+    //MARK: BUTTONS
     @IBOutlet weak var rightButton: UIButton!
     @IBOutlet weak var leftButton: UIButton!
     @IBOutlet weak var settingsButton: UIButton!
     @IBOutlet weak var centerButton: UIButton!
     @IBOutlet weak var dismissButton: UIButton!
+    @IBOutlet weak var trashButton: UIButton!
+    
     //TYPE QR/BAR CODE SCANNING
     struct codeType {
         static let supportedTypes = [AVMetadataObject.ObjectType.upce, AVMetadataObject.ObjectType.code39, AVMetadataObject.ObjectType.code39Mod43, AVMetadataObject.ObjectType.code93, AVMetadataObject.ObjectType.code128, AVMetadataObject.ObjectType.ean8, AVMetadataObject.ObjectType.ean13, AVMetadataObject.ObjectType.aztec, AVMetadataObject.ObjectType.pdf417, AVMetadataObject.ObjectType.itf14, AVMetadataObject.ObjectType.dataMatrix, AVMetadataObject.ObjectType.interleaved2of5, AVMetadataObject.ObjectType.qr]
@@ -123,6 +118,23 @@ class ReaderViewController: UIViewController {
         return .portrait
     }
     
+    //MARK: IBAction FUNCTIONS.
+    @IBAction func focusAndExposeTap(_ gestureRecognizer: UITapGestureRecognizer) {
+        let devicePoint = self.cameraView.videoPreviewLayer.captureDevicePointConverted(fromLayerPoint: gestureRecognizer.location(in: gestureRecognizer.view))
+        focus(with: .autoFocus, exposureMode: .autoExpose, at: devicePoint, monitorSubjectAreaChange: true)
+    }
+    
+    @IBAction func dismissFromCameraViewButton(_ sender: Any) {
+        parentPVC.setViewControllers([parentPVC.viewControllers[1]], direction: .forward, animated: true, completion: nil)
+    }
+    
+    @IBAction func trash(_ sender: Any) {
+        self.captureSession?.startRunning()
+        setButtonOnCameraView()
+        self.imageView.removeFromSuperview()
+        self.imageView.image = nil
+    }
+    
     @IBAction func centerButton(_ sender: UIButton) {
         switch sender.tag {
         case 0:
@@ -134,11 +146,19 @@ class ReaderViewController: UIViewController {
         default:
             break
         }
-        
     }
     
-    @IBAction func dismissFromCameraViewButton(_ sender: Any) {
-        parentPVC.setViewControllers([parentPVC.viewControllers[1]], direction: .forward, animated: true, completion: nil)
+    @IBAction func rightButton(_ sender: UIButton) {
+        switch sender.tag {
+        case 0:
+//            PickImageFromCameraRoll() ---> Should be PickImageFromOurApp()
+            break
+        case 1:
+//            ML()
+            break
+        default:
+            break
+        }
     }
     
     @IBAction func leftButton(_ sender: UIButton) {
@@ -151,37 +171,7 @@ class ReaderViewController: UIViewController {
         default:
             break
         }
-        
     }
-    
-    @IBAction func trash(_ sender: Any) {
-        self.captureSession?.startRunning()
-        setButtonOnCameraView()
-        self.imageView.removeFromSuperview()
-        self.imageView.image = nil
-    }
-    
-    @IBAction func focusAndExposeTap(_ gestureRecognizer: UITapGestureRecognizer) {
-        let devicePoint = self.cameraView.videoPreviewLayer.captureDevicePointConverted(fromLayerPoint: gestureRecognizer.location(in: gestureRecognizer.view))
-        focus(with: .autoFocus, exposureMode: .autoExpose, at: devicePoint, monitorSubjectAreaChange: true)
-    }
-    
-    @IBAction func rightButton(_ sender: UIButton) {
-        switch sender.tag {
-        case 0:
-//            PickImageFromCameraRoll()
-            break
-        case 1:
-//            ML()
-            break
-        default:
-            break
-        }
-    
-    }
-    
-    
-    
 }
 
 

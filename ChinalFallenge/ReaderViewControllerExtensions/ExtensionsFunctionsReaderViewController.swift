@@ -60,9 +60,6 @@ extension ReaderViewController {
 //        leftButton.setImage(<#T##image: UIImage?##UIImage?#>, for: .normal) (OCR icon)
 //        rightButton.setImage(<#T##image: UIImage?##UIImage?#>, for: .normal) (ML icon)
 //        centerButton.setImage(<#T##image: UIImage?##UIImage?#>, for: .normal) (dictation inactive icon)
-        
-        
-
     }
     
     func setFlashlight() {
@@ -110,7 +107,7 @@ extension ReaderViewController {
             videoPreviewLayerConnection.videoOrientation = newVideoOrientation
         }
     }
-//
+
 //    func setScrollView(){
 //         scrollView.frame.size.width = cameraView.frame.width * CGFloat(itemPhotos.count)
 //        for imageView in itemPhotos{

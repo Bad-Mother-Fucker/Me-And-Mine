@@ -22,9 +22,6 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lVM-TV-nl9" customClass="VideoPreviewView" customModule="ChinalFallenge" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <userGuides>
-                                    <userLayoutGuide location="186" affinity="minX"/>
-                                </userGuides>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hYA-vb-9uU">
                                         <rect key="frame" x="325" y="28" width="30" height="40"/>
@@ -233,7 +230,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-684" y="-27.436281859070466"/>
+            <point key="canvasLocation" x="-607" y="-27"/>
         </scene>
         <!--Discover-->
         <scene sceneID="SiS-xF-T42">

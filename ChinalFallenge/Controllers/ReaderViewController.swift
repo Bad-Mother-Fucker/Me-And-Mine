@@ -59,10 +59,10 @@ class ReaderViewController: UIViewController {
     //MARK: BUTTONS
     @IBOutlet weak var rightButton: UIButton!
     @IBOutlet weak var leftButton: UIButton!
-    @IBOutlet weak var settingsButton: UIButton!
+    @IBOutlet weak var conrnerLeftButton: UIButton!
     @IBOutlet weak var centerButton: UIButton!
     @IBOutlet weak var dismissButton: UIButton!
-    @IBOutlet weak var trashButton: UIButton!
+   
     
     //TYPE QR/BAR CODE SCANNING
     struct codeType {
@@ -84,10 +84,11 @@ class ReaderViewController: UIViewController {
         let heightConstraint = NSLayoutConstraint(item: imageView, attribute: .height, relatedBy: .equal, toItem: cameraView, attribute: .height, multiplier: 1, constant: 0)
         let widthConstraint = NSLayoutConstraint(item: imageView, attribute: .width, relatedBy: .equal, toItem: cameraView, attribute: .width, multiplier: 1, constant: 0)
         let xAlignmentConstraint = NSLayoutConstraint(item: imageView, attribute: .centerX, relatedBy: .equal, toItem: cameraView, attribute: .centerX, multiplier: 1, constant: 0)
-        let yAlignmentConstraint = NSLayoutConstraint(item: imageView, attribute: .centerY, relatedBy: .equal, toItem: cameraView, attribute: .centerX, multiplier: 1, constant: 0)
+        let yAlignmentConstraint = NSLayoutConstraint(item: imageView, attribute: .centerY, relatedBy: .equal, toItem: cameraView, attribute: .centerY, multiplier: 1, constant: 0)
         let constraints = [heightConstraint,widthConstraint,xAlignmentConstraint,yAlignmentConstraint]
-        imageView.addConstraints(constraints)
         cameraView.addSubview(imageView)
+        cameraView.addConstraints(constraints)
+        
     }
     
     //VIEW WILL APPEAR
@@ -128,11 +129,21 @@ class ReaderViewController: UIViewController {
         parentPVC.setViewControllers([parentPVC.viewControllers[1]], direction: .forward, animated: true, completion: nil)
     }
     
-    @IBAction func trash(_ sender: Any) {
-        self.captureSession?.startRunning()
-        setButtonOnCameraView()
-        self.imageView.removeFromSuperview()
-        self.imageView.image = nil
+    @IBAction func cornerLeft(_ sender: UIButton) {
+        switch sender.tag {
+        case 0:
+//       settings
+            break
+        case 1:
+            self.captureSession?.startRunning()
+            setButtonOnCameraView()
+            self.imageView.removeFromSuperview()
+            self.imageView.image = nil
+            break
+        default:
+            break
+        }
+  
     }
     
     @IBAction func centerButton(_ sender: UIButton) {
@@ -141,7 +152,8 @@ class ReaderViewController: UIViewController {
             onTapTakePhoto()
             setButtonsAfterPhoto()
         case 1:
-//            Dictation()
+            centerButton.setImage(#imageLiteral(resourceName: "cameraWithMicrophoneButton"), for: .selected)
+            speechRec.startRecordingSpeech(speechTextView: SpeechText)
             break
         default:
             break
@@ -151,7 +163,7 @@ class ReaderViewController: UIViewController {
     @IBAction func rightButton(_ sender: UIButton) {
         switch sender.tag {
         case 0:
-//            PickImageFromCameraRoll() ---> Should be PickImageFromOurApp()
+//            PickImageFromCameraRoll() ---> Should be PickImageFromOurApp() ????? why?
             break
         case 1:
 //            ML()

@@ -36,30 +36,21 @@ extension ReaderViewController {
         self.dismissButton.isHidden = false
         self.leftButton.setBackgroundImage(#imageLiteral(resourceName: "flashAuto"), for: .normal)
         self.attributesCollectionView.isHidden = true
-        self.trashButton.isHidden = true
-        self.settingsButton.isHidden = false
-        
         //TODO: set assets for this
-//        self.settingsButton.setBackgroundImage(<#T##image: UIImage?##UIImage?#>, for: .normal)
+//        self.cornerLeftButton.setBackgroundImage(<#T##image: UIImage?##UIImage?#>, for: .normal) (settings)
 //        self.rightButton.setBackgroundImage(<#T##image: UIImage?##UIImage?#>, for: .normal) (imagePickerIcon)
-
-        
     }
     
     func setButtonsAfterPhoto() {
         dismissButton.isHidden = true
-        settingsButton.isHidden = true
         attributesCollectionView.backgroundColor = .clear
         attributesCollectionView.isHidden = false
-        trashButton.setBackgroundImage(#imageLiteral(resourceName: "trashButton"), for: .normal)
-        trashButton.isHidden = false
-        centerButton.setImage(#imageLiteral(resourceName: "cameraWithMicrophoneButton"), for: .selected)
+        conrnerLeftButton.setBackgroundImage(#imageLiteral(resourceName: "trashButton"), for: .normal)
+        centerButton.setImage(#imageLiteral(resourceName: "dictation inactive"), for: .normal)
         
 //        TODO: Set Assets for these
-        
 //        leftButton.setImage(<#T##image: UIImage?##UIImage?#>, for: .normal) (OCR icon)
 //        rightButton.setImage(<#T##image: UIImage?##UIImage?#>, for: .normal) (ML icon)
-//        centerButton.setImage(<#T##image: UIImage?##UIImage?#>, for: .normal) (dictation inactive icon)
     }
     
     func setFlashlight() {

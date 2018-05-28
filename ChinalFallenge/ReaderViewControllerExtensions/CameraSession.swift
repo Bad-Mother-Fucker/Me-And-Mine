@@ -166,6 +166,7 @@ extension ReaderViewController: AVCapturePhotoCaptureDelegate, AVCaptureMetadata
         //let capturedImage = UIImage.init(data: imageData , scale: 1.0)
         if let image = UIImage.init(data: imageData , scale: 1.0) {
             // Save our captured image to photos album
+            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
             imageView.image = image
             itemPhotos.append(imageView)
         }

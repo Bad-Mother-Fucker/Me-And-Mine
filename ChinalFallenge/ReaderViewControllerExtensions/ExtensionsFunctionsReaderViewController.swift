@@ -46,7 +46,7 @@ extension ReaderViewController {
         attributesCollectionView.backgroundColor = .clear
         attributesCollectionView.isHidden = false
         conrnerLeftButton.setBackgroundImage(#imageLiteral(resourceName: "trashButton"), for: .normal)
-        centerButton.setImage(#imageLiteral(resourceName: "dictation inactive"), for: .normal)
+        centerButton.setBackgroundImage(#imageLiteral(resourceName: "dictation inactive"), for: .normal)
         
 //        TODO: Set Assets for these
 //        leftButton.setImage(<#T##image: UIImage?##UIImage?#>, for: .normal) (OCR icon)
@@ -97,6 +97,21 @@ extension ReaderViewController {
             }
             videoPreviewLayerConnection.videoOrientation = newVideoOrientation
         }
+    }
+    
+    func setImagePreviewView(){
+        //Set a view on which the preview of the photo will be shown
+        self.imageView = UIImageView(frame: self.cameraView.frame)
+        
+        //Set constraints to keep it locked to the view when it is going to resize
+        let heightConstraint = NSLayoutConstraint(item: imageView, attribute: .height, relatedBy: .equal, toItem: cameraView, attribute: .height, multiplier: 1, constant: 0)
+        let widthConstraint = NSLayoutConstraint(item: imageView, attribute: .width, relatedBy: .equal, toItem: cameraView, attribute: .width, multiplier: 1, constant: 0)
+        let xAlignmentConstraint = NSLayoutConstraint(item: imageView, attribute: .centerX, relatedBy: .equal, toItem: cameraView, attribute: .centerX, multiplier: 1, constant: 0)
+        let yAlignmentConstraint = NSLayoutConstraint(item: imageView, attribute: .centerY, relatedBy: .equal, toItem: cameraView, attribute: .centerY, multiplier: 1, constant: 0)
+        let constraints = [heightConstraint,widthConstraint,xAlignmentConstraint,yAlignmentConstraint]
+        
+        cameraView.addSubview(imageView)
+        cameraView.addConstraints(constraints)
     }
 
 //    func setScrollView(){

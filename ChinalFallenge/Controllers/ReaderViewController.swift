@@ -42,8 +42,8 @@ class ReaderViewController: UIViewController {
     let sessionQueue = DispatchQueue(label: "session queue")
     var setupResult: SessionSetupResult = .success
     var isSessionRunning = false
-    var imageView: UIImageView!
-    var itemPhotos:[UIImageView] = []
+    var imageView = UIImageView()
+    var itemPhotos: [UIImageView] = []
     var flashMode = AVCaptureDevice.FlashMode.off
     var flagOnSpeech = false
     var parentPVC: MasterViewController!
@@ -74,21 +74,8 @@ class ReaderViewController: UIViewController {
         super.viewDidLoad()
         cameraAuthorization()
         setButtonOnCameraView()
-        setImagePreviewView()
-    }
-    
-    func setImagePreviewView(){
-//        Set a view on which the preview of the photo will be shwon
-        self.imageView = UIImageView(frame: self.cameraView.frame)
-//        Set constraints to keep it locked to the view when it is going to resize
-        let heightConstraint = NSLayoutConstraint(item: imageView, attribute: .height, relatedBy: .equal, toItem: cameraView, attribute: .height, multiplier: 1, constant: 0)
-        let widthConstraint = NSLayoutConstraint(item: imageView, attribute: .width, relatedBy: .equal, toItem: cameraView, attribute: .width, multiplier: 1, constant: 0)
-        let xAlignmentConstraint = NSLayoutConstraint(item: imageView, attribute: .centerX, relatedBy: .equal, toItem: cameraView, attribute: .centerX, multiplier: 1, constant: 0)
-        let yAlignmentConstraint = NSLayoutConstraint(item: imageView, attribute: .centerY, relatedBy: .equal, toItem: cameraView, attribute: .centerY, multiplier: 1, constant: 0)
-        let constraints = [heightConstraint,widthConstraint,xAlignmentConstraint,yAlignmentConstraint]
-        cameraView.addSubview(imageView)
-        cameraView.addConstraints(constraints)
-        
+        //setImagePreviewView()
+        self.SpeechText.delegate = self
     }
     
     //VIEW WILL APPEAR
@@ -98,7 +85,7 @@ class ReaderViewController: UIViewController {
         session()
         settingTextView()
         gesturesReaderView()
-//        setScrollView()
+        //setScrollView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -127,23 +114,23 @@ class ReaderViewController: UIViewController {
     
     @IBAction func dismissFromCameraViewButton(_ sender: Any) {
         parentPVC.setViewControllers([parentPVC.viewControllers[1]], direction: .forward, animated: true, completion: nil)
+        self.centerButton.tag = 0
     }
     
     @IBAction func cornerLeft(_ sender: UIButton) {
         switch sender.tag {
+//        case 0:
+//            //settings
+//            break
         case 0:
-//       settings
-            break
-        case 1:
             self.captureSession?.startRunning()
             setButtonOnCameraView()
             self.imageView.removeFromSuperview()
             self.imageView.image = nil
-            break
+            self.centerButton.tag = 0
         default:
             break
         }
-  
     }
     
     @IBAction func centerButton(_ sender: UIButton) {
@@ -151,11 +138,19 @@ class ReaderViewController: UIViewController {
         case 0:
             onTapTakePhoto()
             setButtonsAfterPhoto()
+            sender.tag = 1
         case 1:
-            centerButton.setImage(#imageLiteral(resourceName: "cameraWithMicrophoneButton"), for: .selected)
+            centerButton.setBackgroundImage(#imageLiteral(resourceName: "cameraWithMicrophoneButton"), for: .normal)
             speechRec.startRecordingSpeech(speechTextView: SpeechText)
-            break
+            sender.tag = 2
+            print("case1")
+        case 2:
+            centerButton.setBackgroundImage(#imageLiteral(resourceName: "dictation inactive"), for: .normal)
+            speechRec.stopRecordingSpeech()
+            sender.tag = 1
+            print("case2")
         default:
+            //colore bottone black/gray
             break
         }
     }
@@ -163,10 +158,10 @@ class ReaderViewController: UIViewController {
     @IBAction func rightButton(_ sender: UIButton) {
         switch sender.tag {
         case 0:
-//            PickImageFromCameraRoll() ---> Should be PickImageFromOurApp() ????? why?
+            //PickImageFromCameraRoll()
             break
         case 1:
-//            ML()
+            //ML()
             break
         default:
             break
@@ -178,7 +173,7 @@ class ReaderViewController: UIViewController {
         case 0:
             setFlashlight()
         case 1:
-//            OCR()
+            //OCR()
             break
         default:
             break

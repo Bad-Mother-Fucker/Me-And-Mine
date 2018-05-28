@@ -14,6 +14,4 @@ class ShareViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    
-    
 }

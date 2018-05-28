@@ -12,15 +12,12 @@ class DiscoverViewController: UIViewController {
     
     @IBOutlet weak var cameraButtonDiscoverView: UIBarButtonItem!
     
-  
-    
     var parentPVC: MasterViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
        
     }
-   
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -32,9 +29,4 @@ class DiscoverViewController: UIViewController {
     @IBAction func goToReaderViewController(_ sender: Any) {
         parentPVC.setViewControllers([parentPVC.viewControllers[0]], direction: .reverse, animated: true, completion: nil)
     }
-    
-  
-    
-    
-    
 }

@@ -90,20 +90,20 @@ class ReaderViewController: UIViewController {
     //VIEW WILL APPEAR
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        UIApplication.shared.isStatusBarHidden = true
         tabBarController?.tabBar.isHidden = true
         session()
         settingTextView()
         gesturesReaderView()
         setScrollView()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        UIApplication.shared.isStatusBarHidden = true
+    }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        if self.setupResult == .success {
-            self.captureSession?.stopRunning()
-            self.isSessionRunning = (self.captureSession?.isRunning)!
-        }
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -111,13 +111,9 @@ class ReaderViewController: UIViewController {
         displayVideoPreviewLayer()
     }
     
-
-    
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
     }
-    
-    
     
     @IBAction func takePhoto(_ sender: Any) {
         onTapTakePhoto()

@@ -29,8 +29,6 @@ class ReaderViewController: UIViewController {
     
     //MARK: VIEW
     
-    @IBOutlet weak var scrollView: UIScrollView!
-    
     @IBOutlet weak var cameraView: VideoPreviewView!
     @IBOutlet weak var trashButton: UIButton!
     
@@ -65,15 +63,12 @@ class ReaderViewController: UIViewController {
     }
     
     //BUTTONS
-    @IBOutlet weak var dictation: UIButton!
-    @IBOutlet weak var frameworks: UIStackView!
-    @IBOutlet weak var ocrButton: UIButton!
-    @IBOutlet weak var cameraRollPicker: UIButton!
+  
+    @IBOutlet weak var rightButton: UIButton!
+    @IBOutlet weak var leftButton: UIButton!
     @IBOutlet weak var settingsButton: UIButton!
-    @IBOutlet weak var photoButton: UIButton!
+    @IBOutlet weak var centerButton: UIButton!
     @IBOutlet weak var dismissButton: UIButton!
-    @IBOutlet weak var flashlightButton: UIButton!
-    @IBOutlet weak var mlButton: UIButton!
     //TYPE QR/BAR CODE SCANNING
     struct codeType {
         static let supportedTypes = [AVMetadataObject.ObjectType.upce, AVMetadataObject.ObjectType.code39, AVMetadataObject.ObjectType.code39Mod43, AVMetadataObject.ObjectType.code93, AVMetadataObject.ObjectType.code128, AVMetadataObject.ObjectType.ean8, AVMetadataObject.ObjectType.ean13, AVMetadataObject.ObjectType.aztec, AVMetadataObject.ObjectType.pdf417, AVMetadataObject.ObjectType.itf14, AVMetadataObject.ObjectType.dataMatrix, AVMetadataObject.ObjectType.interleaved2of5, AVMetadataObject.ObjectType.qr]
@@ -84,7 +79,20 @@ class ReaderViewController: UIViewController {
         super.viewDidLoad()
         cameraAuthorization()
         setButtonOnCameraView()
-        self.imageView = UIImageView(frame: self.scrollView.frame)
+        setImagePreviewView()
+    }
+    
+    func setImagePreviewView(){
+//        Set a view on which the preview of the photo will be shwon
+        self.imageView = UIImageView(frame: self.cameraView.frame)
+//        Set constraints to keep it locked to the view when it is going to resize
+        let heightConstraint = NSLayoutConstraint(item: imageView, attribute: .height, relatedBy: .equal, toItem: cameraView, attribute: .height, multiplier: 1, constant: 0)
+        let widthConstraint = NSLayoutConstraint(item: imageView, attribute: .width, relatedBy: .equal, toItem: cameraView, attribute: .width, multiplier: 1, constant: 0)
+        let xAlignmentConstraint = NSLayoutConstraint(item: imageView, attribute: .centerX, relatedBy: .equal, toItem: cameraView, attribute: .centerX, multiplier: 1, constant: 0)
+        let yAlignmentConstraint = NSLayoutConstraint(item: imageView, attribute: .centerY, relatedBy: .equal, toItem: cameraView, attribute: .centerX, multiplier: 1, constant: 0)
+        let constraints = [heightConstraint,widthConstraint,xAlignmentConstraint,yAlignmentConstraint]
+        imageView.addConstraints(constraints)
+        cameraView.addSubview(imageView)
     }
     
     //VIEW WILL APPEAR
@@ -94,7 +102,7 @@ class ReaderViewController: UIViewController {
         session()
         settingTextView()
         gesturesReaderView()
-        setScrollView()
+//        setScrollView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -115,17 +123,35 @@ class ReaderViewController: UIViewController {
         return .portrait
     }
     
-    @IBAction func takePhoto(_ sender: Any) {
-        onTapTakePhoto()
-        setButtonsAfterPhoto()
+    @IBAction func centerButton(_ sender: UIButton) {
+        switch sender.tag {
+        case 0:
+            onTapTakePhoto()
+            setButtonsAfterPhoto()
+        case 1:
+//            Dictation()
+            break
+        default:
+            break
+        }
+        
     }
     
     @IBAction func dismissFromCameraViewButton(_ sender: Any) {
         parentPVC.setViewControllers([parentPVC.viewControllers[1]], direction: .forward, animated: true, completion: nil)
     }
     
-    @IBAction func flashlightOnOff(_ sender: Any) {
-        setFlashlight()
+    @IBAction func leftButton(_ sender: UIButton) {
+        switch sender.tag {
+        case 0:
+            setFlashlight()
+        case 1:
+//            OCR()
+            break
+        default:
+            break
+        }
+        
     }
     
     @IBAction func trash(_ sender: Any) {
@@ -139,6 +165,23 @@ class ReaderViewController: UIViewController {
         let devicePoint = self.cameraView.videoPreviewLayer.captureDevicePointConverted(fromLayerPoint: gestureRecognizer.location(in: gestureRecognizer.view))
         focus(with: .autoFocus, exposureMode: .autoExpose, at: devicePoint, monitorSubjectAreaChange: true)
     }
+    
+    @IBAction func rightButton(_ sender: UIButton) {
+        switch sender.tag {
+        case 0:
+//            PickImageFromCameraRoll()
+            break
+        case 1:
+//            ML()
+            break
+        default:
+            break
+        }
+    
+    }
+    
+    
+    
 }
 
 

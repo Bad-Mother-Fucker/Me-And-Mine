@@ -118,6 +118,7 @@ class ReaderViewController: UIViewController {
         return .portrait
     }
     
+    //MARK: IBAction FUNCTIONS.
     @IBAction func focusAndExposeTap(_ gestureRecognizer: UITapGestureRecognizer) {
         let devicePoint = self.cameraView.videoPreviewLayer.captureDevicePointConverted(fromLayerPoint: gestureRecognizer.location(in: gestureRecognizer.view))
         focus(with: .autoFocus, exposureMode: .autoExpose, at: devicePoint, monitorSubjectAreaChange: true)

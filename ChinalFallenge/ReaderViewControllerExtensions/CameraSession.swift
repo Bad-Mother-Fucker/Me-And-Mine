@@ -149,7 +149,6 @@ extension ReaderViewController: AVCapturePhotoCaptureDelegate, AVCaptureMetadata
             photoSettings.isAutoStillImageStabilizationEnabled = true
             // Call capturePhoto method by passing our photo settings and a delegate implementing AVCapturePhotoCaptureDelegate
             self.photoOutput.capturePhoto(with: photoSettings, delegate: self)
-            self.captureSession?.stopRunning()
         }
     }
     
@@ -169,6 +168,7 @@ extension ReaderViewController: AVCapturePhotoCaptureDelegate, AVCaptureMetadata
             UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
             imageView.image = image
             itemPhotos.append(imageView)
+            self.captureSession?.stopRunning()
         }
     }
     

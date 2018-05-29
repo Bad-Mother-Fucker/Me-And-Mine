@@ -40,6 +40,7 @@ class ReaderViewController: UIViewController {
     //OTHER ATTRIBUTES
     var speech: [String]?
     let sessionQueue = DispatchQueue(label: "com.DeCrapifiers.ChinalFallenge.sessionQueue")
+    let speechQueue = DispatchQueue(label: "com.Decrapifiers.ChinalFallenge.speechQueue", qos: .default)
     var setupResult: SessionSetupResult = .success
     var isSessionRunning = false
     var imageView = UIImageView()
@@ -74,8 +75,9 @@ class ReaderViewController: UIViewController {
         super.viewDidLoad()
         cameraAuthorization()
         setButtonOnCameraView()
-        setImagePreviewView()
         self.SpeechText.delegate = self
+        self.centerButton.addTarget(self, action: #selector(touchUp), for: .touchUpInside)
+        self.centerButton.addTarget(self, action: #selector(touchDown), for: .touchDown)
     }
     
     //VIEW WILL APPEAR
@@ -133,25 +135,6 @@ class ReaderViewController: UIViewController {
         }
     }
     
-    //Set touch up and touch down function (No IBAction needed)
-    
-    func centerButton(_ sender: UIButton) {
-        switch sender.tag {
-        case 0:
-            onTapTakePhoto()
-            setButtonsAfterPhoto()
-            sender.tag = 1
-        case 1:
-            centerButton.setBackgroundImage(#imageLiteral(resourceName: "cameraWithMicrophoneButton"), for: .normal)
-            speechRec.startRecordingSpeech(speechTextView: SpeechText)
-            sender.tag = 2
-            print("case1")
-        default:
-            //colore bottone black/gray
-            break
-        }
-    }
-    
     @IBAction func rightButton(_ sender: UIButton) {
         switch sender.tag {
         case 0:
@@ -180,43 +163,21 @@ class ReaderViewController: UIViewController {
         }
     }
     
-    
-    func touchDown(at point: CGPoint){
-        if centerButton.frame.contains(point){
-            centerButton(centerButton)
+    @IBAction func centerButton(_ sender: UIButton) {
+        switch sender.tag {
+        case 0:
+            onTapTakePhoto()
+            setButtonsAfterPhoto()
+            sender.tag = 1
+        case 1:
+            sender.tag = 2
+        default:
+            sender.tag = 1
         }
     }
-    
-    func touchUp(at point: CGPoint){
-        if centerButton.frame.contains(point){
-            if centerButton.tag == 2{
-                centerButton.setBackgroundImage(#imageLiteral(resourceName: "dictation inactive"), for: .normal)
-                speechRec.stopRecordingSpeech()
-                centerButton.tag = 1
-            }
-        }
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else {return}
-        let location = touch.location(in: view)//Does it work if the view is not in foreground? I need to check on the view because the cameraView is going to resize
-        self.touchDown(at: location)
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        guard let touch = touches.first else {return}
-        let location = touch.location(in: view)//Does it work if the view is not in foreground? I need to check on the view because the cameraView is going to resize
-        self.touchUp(at: location)
-    }
-    
     
     
 }
-
-
-
-
-
 
 
 

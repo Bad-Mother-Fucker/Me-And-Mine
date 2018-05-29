@@ -26,8 +26,42 @@ extension ReaderViewController {
     
     //HIDE AND IS NOT EDITABLE TEXT VIEW.
     func settingTextView() {
+        self.SpeechText.text = ""
         self.SpeechText.isHidden = true
         self.SpeechText.isSelectable = false
+    }
+    
+    func centerButtonSwitch(_ sender: UIButton) {
+        switch sender.tag {
+        case 0:
+            onTapTakePhoto()
+            setButtonsAfterPhoto()
+            sender.tag = 1
+        case 1:
+            sender.tag = 2
+            print("case1")
+        default:
+            //colore bottone black/gray
+            break
+        }
+    }
+    
+    @objc func touchDown() {
+        if self.centerButton.tag == 1 {
+            print(centerButton.state)
+            self.centerButton.setBackgroundImage(#imageLiteral(resourceName: "cameraWithMicrophoneButton"), for: .selected)
+        }
+        
+        speechQueue.async {
+             self.speechRec.startRecordingSpeech(speechTextView: self.SpeechText)
+        }
+    }
+    
+    @objc func touchUp() {
+        if self.centerButton.tag == 2 {
+            self.speechRec.stopRecordingSpeech()
+            self.centerButton.setBackgroundImage(#imageLiteral(resourceName: "dictation inactive"), for: .normal)
+        }
     }
     
     func setButtonOnCameraView() {
@@ -70,7 +104,7 @@ extension ReaderViewController {
         }
     }
     
-    func setButtonsTag(to tag:Int){
+    func setButtonsTag(to tag: Int) {
         centerButton.tag = tag
         leftButton.tag = tag
         conrnerLeftButton.tag = tag
@@ -109,7 +143,7 @@ extension ReaderViewController {
         }
     }
     
-    func setImagePreviewView(){
+    func setImagePreviewView() {
         //Set a view on which the preview of the photo will be shown
         self.imageView = UIImageView(frame: self.cameraView.frame)
         
@@ -119,6 +153,7 @@ extension ReaderViewController {
         let xAlignmentConstraint = NSLayoutConstraint(item: imageView, attribute: .centerX, relatedBy: .equal, toItem: cameraView, attribute: .centerX, multiplier: 1, constant: 0)
         let yAlignmentConstraint = NSLayoutConstraint(item: imageView, attribute: .centerY, relatedBy: .equal, toItem: cameraView, attribute: .centerY, multiplier: 1, constant: 0)
         let constraints = [heightConstraint,widthConstraint,xAlignmentConstraint,yAlignmentConstraint]
+        
         cameraView.addSubview(imageView)
         cameraView.addConstraints(constraints)
     }

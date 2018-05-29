@@ -104,6 +104,9 @@
                                                 <include reference="4DV-zB-Uln"/>
                                             </mask>
                                         </variation>
+                                        <connections>
+                                            <action selector="centerButton:" destination="Xbw-T4-Y9f" eventType="touchUpInside" id="Rlf-WM-XUy"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pxQ-bC-goS">
                                         <rect key="frame" x="88" y="555" width="20" height="25"/>

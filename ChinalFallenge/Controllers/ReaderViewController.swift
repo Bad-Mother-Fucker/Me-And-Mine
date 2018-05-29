@@ -39,7 +39,7 @@ class ReaderViewController: UIViewController {
     
     //OTHER ATTRIBUTES
     var speech: [String]?
-    let sessionQueue = DispatchQueue(label: "session queue")
+    let sessionQueue = DispatchQueue(label: "com.DeCrapifiers.ChinalFallenge.sessionQueue")
     var setupResult: SessionSetupResult = .success
     var isSessionRunning = false
     var imageView = UIImageView()
@@ -74,7 +74,7 @@ class ReaderViewController: UIViewController {
         super.viewDidLoad()
         cameraAuthorization()
         setButtonOnCameraView()
-        //setImagePreviewView()
+        setImagePreviewView()
         self.SpeechText.delegate = self
     }
     
@@ -119,10 +119,10 @@ class ReaderViewController: UIViewController {
     
     @IBAction func cornerLeft(_ sender: UIButton) {
         switch sender.tag {
-//        case 0:
-//            //settings
-//            break
         case 0:
+            //settings
+            break
+        case 1:
             self.captureSession?.startRunning()
             setButtonOnCameraView()
             self.imageView.removeFromSuperview()
@@ -133,7 +133,9 @@ class ReaderViewController: UIViewController {
         }
     }
     
-    @IBAction func centerButton(_ sender: UIButton) {
+    //Set touch up and touch down function (No IBAction needed)
+    
+    func centerButton(_ sender: UIButton) {
         switch sender.tag {
         case 0:
             onTapTakePhoto()
@@ -144,11 +146,6 @@ class ReaderViewController: UIViewController {
             speechRec.startRecordingSpeech(speechTextView: SpeechText)
             sender.tag = 2
             print("case1")
-        case 2:
-            centerButton.setBackgroundImage(#imageLiteral(resourceName: "dictation inactive"), for: .normal)
-            speechRec.stopRecordingSpeech()
-            sender.tag = 1
-            print("case2")
         default:
             //colore bottone black/gray
             break
@@ -158,9 +155,11 @@ class ReaderViewController: UIViewController {
     @IBAction func rightButton(_ sender: UIButton) {
         switch sender.tag {
         case 0:
+            // TODO: ImagePicker
             //PickImageFromCameraRoll()
             break
         case 1:
+            // TODO: ImageDetection
             //ML()
             break
         default:
@@ -173,12 +172,45 @@ class ReaderViewController: UIViewController {
         case 0:
             setFlashlight()
         case 1:
+            // TODO: OCR
             //OCR()
             break
         default:
             break
         }
     }
+    
+    
+    func touchDown(at point: CGPoint){
+        if centerButton.frame.contains(point){
+            centerButton(centerButton)
+        }
+    }
+    
+    func touchUp(at point: CGPoint){
+        if centerButton.frame.contains(point){
+            if centerButton.tag == 2{
+                centerButton.setBackgroundImage(#imageLiteral(resourceName: "dictation inactive"), for: .normal)
+                speechRec.stopRecordingSpeech()
+                centerButton.tag = 1
+            }
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else {return}
+        let location = touch.location(in: view)//Does it work if the view is not in foreground? I need to check on the view because the cameraView is going to resize
+        self.touchDown(at: location)
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else {return}
+        let location = touch.location(in: view)//Does it work if the view is not in foreground? I need to check on the view because the cameraView is going to resize
+        self.touchUp(at: location)
+    }
+    
+    
+    
 }
 
 

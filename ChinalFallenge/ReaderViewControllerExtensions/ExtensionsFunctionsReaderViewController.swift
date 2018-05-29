@@ -31,6 +31,7 @@ extension ReaderViewController {
     }
     
     func setButtonOnCameraView() {
+        setButtonsTag(to: 0)
         self.centerButton.setBackgroundImage(#imageLiteral(resourceName: "buttonCamera"), for: .normal)
         self.dismissButton.setBackgroundImage(#imageLiteral(resourceName: "arrowRight"), for: .normal)
         self.dismissButton.isHidden = false
@@ -41,12 +42,14 @@ extension ReaderViewController {
 //        self.rightButton.setBackgroundImage(<#T##image: UIImage?##UIImage?#>, for: .normal) (imagePickerIcon)
     }
     
+    
     func setButtonsAfterPhoto() {
         dismissButton.isHidden = true
         attributesCollectionView.backgroundColor = .clear
         attributesCollectionView.isHidden = false
         conrnerLeftButton.setBackgroundImage(#imageLiteral(resourceName: "trashButton"), for: .normal)
         centerButton.setBackgroundImage(#imageLiteral(resourceName: "dictation inactive"), for: .normal)
+        setButtonsTag(to: 1)
         
 //        TODO: Set Assets for these
 //        leftButton.setImage(<#T##image: UIImage?##UIImage?#>, for: .normal) (OCR icon)
@@ -65,6 +68,13 @@ extension ReaderViewController {
             self.flashMode = .off
             self.leftButton.setBackgroundImage(#imageLiteral(resourceName: "FlashOff"), for: .normal)
         }
+    }
+    
+    func setButtonsTag(to tag:Int){
+        centerButton.tag = tag
+        leftButton.tag = tag
+        conrnerLeftButton.tag = tag
+        rightButton.tag = tag
     }
     
     func focus(with focusMode: AVCaptureDevice.FocusMode, exposureMode: AVCaptureDevice.ExposureMode, at devicePoint: CGPoint, monitorSubjectAreaChange: Bool) {
@@ -109,7 +119,6 @@ extension ReaderViewController {
         let xAlignmentConstraint = NSLayoutConstraint(item: imageView, attribute: .centerX, relatedBy: .equal, toItem: cameraView, attribute: .centerX, multiplier: 1, constant: 0)
         let yAlignmentConstraint = NSLayoutConstraint(item: imageView, attribute: .centerY, relatedBy: .equal, toItem: cameraView, attribute: .centerY, multiplier: 1, constant: 0)
         let constraints = [heightConstraint,widthConstraint,xAlignmentConstraint,yAlignmentConstraint]
-        
         cameraView.addSubview(imageView)
         cameraView.addConstraints(constraints)
     }

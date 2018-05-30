@@ -48,17 +48,17 @@ extension ReaderViewController {
     
     @objc func touchDown() {
         if self.centerButton.tag == 1 {
-            print(centerButton.state)
-            self.centerButton.setBackgroundImage(#imageLiteral(resourceName: "cameraWithMicrophoneButton"), for: .selected)
+            centerButton.isSelected = true
+            speechQueue.async {
+                self.speechRec.startRecordingSpeech(speechTextView: self.SpeechText)
+            }
         }
-        
-        speechQueue.async {
-             self.speechRec.startRecordingSpeech(speechTextView: self.SpeechText)
-        }
+       
     }
     
     @objc func touchUp() {
         if self.centerButton.tag == 2 {
+            self.centerButton.isSelected = false
             self.speechRec.stopRecordingSpeech()
             self.centerButton.setBackgroundImage(#imageLiteral(resourceName: "dictation inactive"), for: .normal)
         }
@@ -83,6 +83,7 @@ extension ReaderViewController {
         attributesCollectionView.isHidden = false
         conrnerLeftButton.setBackgroundImage(#imageLiteral(resourceName: "trashButton"), for: .normal)
         centerButton.setBackgroundImage(#imageLiteral(resourceName: "dictation inactive"), for: .normal)
+        centerButton.setBackgroundImage(#imageLiteral(resourceName: "dictation active"), for: .selected)
         setButtonsTag(to: 1)
         
 //        TODO: Set Assets for these

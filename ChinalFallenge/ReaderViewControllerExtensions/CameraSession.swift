@@ -168,6 +168,7 @@ extension ReaderViewController: AVCapturePhotoCaptureDelegate, AVCaptureMetadata
             UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
             imageView.image = image
             itemPhotos.append(imageView)
+            detectionEngine.updateClassifications(for: image) { self.SpeechText.text = $0.0 }
             self.captureSession?.stopRunning()
         }
     }

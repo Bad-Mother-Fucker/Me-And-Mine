@@ -19,6 +19,7 @@ class ReaderViewController: UIViewController {
     let discoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInTrueDepthCamera, .builtInDualCamera, .builtInWideAngleCamera], mediaType: .video, position: .unspecified)
     var isCaptureSessionConfigured = false // Instance proprerty on this view controller class
     let photoOutput = AVCapturePhotoOutput()
+    let detectionEngine = DetectionEngine()
     
     //MARK: ATTRIBUTE FOR SPEECH RECOGNITION
     let speechRec = SpeechRecognitionEngine()

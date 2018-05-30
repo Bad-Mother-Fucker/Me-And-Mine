@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		191617D720BDA0E100202A29 /* ObjectRecognitionFramework.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191617D620BDA0E100202A29 /* ObjectRecognitionFramework.swift */; };
+		191617D920BDA1E800202A29 /* MobileNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 191617D820BDA1E800202A29 /* MobileNet.mlmodel */; };
 		196D341D20B7F52900FA184A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196D341C20B7F52900FA184A /* Extensions.swift */; };
 		1977ED4D20BC8A6400625266 /* FrameworksCollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1977ED4920BC8A5D00625266 /* FrameworksCollectionViewExtension.swift */; };
 		1977ED4E20BC8A6400625266 /* TextViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1977ED4A20BC8A6400625266 /* TextViewExtension.swift */; };
@@ -44,6 +46,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		191617D620BDA0E100202A29 /* ObjectRecognitionFramework.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectRecognitionFramework.swift; sourceTree = "<group>"; };
+		191617D820BDA1E800202A29 /* MobileNet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNet.mlmodel; sourceTree = "<group>"; };
 		196D341C20B7F52900FA184A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1977ED4920BC8A5D00625266 /* FrameworksCollectionViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FrameworksCollectionViewExtension.swift; path = ChinalFallenge/ReaderViewControllerExtensions/FrameworksCollectionViewExtension.swift; sourceTree = SOURCE_ROOT; };
 		1977ED4A20BC8A6400625266 /* TextViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextViewExtension.swift; path = ChinalFallenge/ReaderViewControllerExtensions/TextViewExtension.swift; sourceTree = SOURCE_ROOT; };
@@ -97,6 +101,7 @@
 		FC04BB41208DE3DF00B6C2FF /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				191617D620BDA0E100202A29 /* ObjectRecognitionFramework.swift */,
 				196D341C20B7F52900FA184A /* Extensions.swift */,
 				FC3D0AED20B59519004B3236 /* MasterViewController.swift */,
 				FCAB744020AB6F7F00E3E9AF /* VideoPreviewView.swift */,
@@ -165,6 +170,7 @@
 		FCC2E3A12080E229000C3974 /* ChinalFallenge */ = {
 			isa = PBXGroup;
 			children = (
+				191617D820BDA1E800202A29 /* MobileNet.mlmodel */,
 				FC74449A208B498500095D3D /* Assets.xcassets */,
 				FCC2E3AE2080E22A000C3974 /* Info.plist */,
 				FCC2E3A22080E22A000C3974 /* AppDelegate.swift */,
@@ -326,9 +332,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				191617D720BDA0E100202A29 /* ObjectRecognitionFramework.swift in Sources */,
 				FCCA8B4D20AF722E006BE120 /* ShareViewController.swift in Sources */,
 				1977ED5020BC8A6400625266 /* ExtensionsFunctionsReaderViewController.swift in Sources */,
 				1977ED4E20BC8A6400625266 /* TextViewExtension.swift in Sources */,
+				191617D920BDA1E800202A29 /* MobileNet.mlmodel in Sources */,
 				FCC2E3A32080E22A000C3974 /* AppDelegate.swift in Sources */,
 				FCCA8B4B20AF6768006BE120 /* DiscoverViewController.swift in Sources */,
 				1977ED4D20BC8A6400625266 /* FrameworksCollectionViewExtension.swift in Sources */,
@@ -511,7 +519,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CVX3K5R89C;
+				DEVELOPMENT_TEAM = D4L4S7MAUX;
 				INFOPLIST_FILE = ChinalFallenge/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -529,7 +537,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = CVX3K5R89C;
+				DEVELOPMENT_TEAM = D4L4S7MAUX;
 				INFOPLIST_FILE = ChinalFallenge/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

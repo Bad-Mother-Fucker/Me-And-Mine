@@ -72,8 +72,8 @@ extension ReaderViewController {
         self.leftButton.setBackgroundImage(#imageLiteral(resourceName: "flashAuto"), for: .normal)
         self.attributesCollectionView.isHidden = true
         //TODO: set assets for this
-//        self.cornerLeftButton.setBackgroundImage(<#T##image: UIImage?##UIImage?#>, for: .normal) (settings)
-//        self.rightButton.setBackgroundImage(<#T##image: UIImage?##UIImage?#>, for: .normal) (imagePickerIcon)
+        //self.cornerLeftButton.setBackgroundImage(<#T##image: UIImage?##UIImage?#>, for: .normal) (settings)
+        //self.rightButton.setBackgroundImage(<#T##image: UIImage?##UIImage?#>, for: .normal) (imagePickerIcon)
     }
     
     
@@ -84,11 +84,9 @@ extension ReaderViewController {
         conrnerLeftButton.setBackgroundImage(#imageLiteral(resourceName: "trashButton"), for: .normal)
         centerButton.setBackgroundImage(#imageLiteral(resourceName: "dictation inactive"), for: .normal)
         centerButton.setBackgroundImage(#imageLiteral(resourceName: "dictation active"), for: .selected)
+        rightButton.setBackgroundImage(#imageLiteral(resourceName: "OCR"), for: .normal)
+        leftButton.setBackgroundImage(#imageLiteral(resourceName: "MLButton"), for: .normal)
         setButtonsTag(to: 1)
-        
-//        TODO: Set Assets for these
-//        leftButton.setImage(<#T##image: UIImage?##UIImage?#>, for: .normal) (OCR icon)
-//        rightButton.setImage(<#T##image: UIImage?##UIImage?#>, for: .normal) (ML icon)
     }
     
     func setFlashlight() {

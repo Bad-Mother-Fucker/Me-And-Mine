@@ -10,7 +10,7 @@ import AVFoundation
 import UIKit
 import Speech
 
-// ############### SPEECH RECOGNITION ###############
+// ############### CLASS SPEECH RECOGNITION ###############
 
 class SpeechRecognitionEngine {
     

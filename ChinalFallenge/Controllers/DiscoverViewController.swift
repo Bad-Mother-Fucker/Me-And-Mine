@@ -6,6 +6,8 @@
 //  Copyright © 2018 Simone Fiorentino. All rights reserved.
 //
 
+// ############### DISCOVER VIEW CONTROLLER ###############
+
 import UIKit
 
 class DiscoverViewController: UIViewController {

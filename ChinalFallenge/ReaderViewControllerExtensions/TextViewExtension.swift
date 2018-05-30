@@ -6,10 +6,9 @@
 //  Copyright © 2018 Simone Fiorentino. All rights reserved.
 //
 
-import UIKit
-
-
 // ############### HANDLE TEXT VIEW ###############
+
+import UIKit
 
 extension ReaderViewController: UITextViewDelegate {
     

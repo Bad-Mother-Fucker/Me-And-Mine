@@ -6,10 +6,10 @@
 //  Copyright © 2018 Simone Fiorentino. All rights reserved.
 //
 
+// ############### CAMERA SESSION ###############
+
 import AVFoundation
 import UIKit
-
-// ############### CAMERA SESSION ###############
 
 extension ReaderViewController: AVCapturePhotoCaptureDelegate, AVCaptureMetadataOutputObjectsDelegate {
     

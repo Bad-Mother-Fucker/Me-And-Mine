@@ -6,12 +6,12 @@
 //  Copyright © 2018 Simone Fiorentino. All rights reserved.
 //
 
+// ############### CLASS DETECTION ENGINE ###############
+
 import Foundation
 import Vision
 import AVFoundation
 import UIKit
-
-
 
 class DetectionEngine {
     
@@ -22,7 +22,7 @@ class DetectionEngine {
 //    }
     
     
-    var result:(String,VNConfidence)?
+    var result: (String,VNConfidence)?
     
     /// - Tag: MLModelSetup
     lazy var classificationRequest: VNCoreMLRequest = {

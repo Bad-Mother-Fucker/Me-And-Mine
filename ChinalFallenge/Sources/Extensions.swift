@@ -6,9 +6,12 @@
 //  Copyright © 2018 Simone Fiorentino. All rights reserved.
 //
 
+// ############### EXTENSIONS ###############
+
 import Foundation
 import UIKit
 import ImageIO
+
 extension UIImageView{
     
     func shrink() {
@@ -26,21 +29,17 @@ extension UIImageView{
             self.layer.masksToBounds = true
         }
     }
+    
 }
 
-extension UIImage{
+extension UIImage {
     func scale(){
-        
     }
+    
 }
+
 extension CGImagePropertyOrientation {
-    /**
-     Converts a UIImageOrientation to a corresponding
-     CGImagePropertyOrientation. The cases for each
-     orientation are represented by different raw values.
-     
-     - Tag: ConvertOrientation
-     */
+    
     init(_ orientation: UIImageOrientation) {
         switch orientation {
         case .up: self = .up

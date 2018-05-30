@@ -6,10 +6,10 @@
 //  Copyright © 2018 Simone Fiorentino. All rights reserved.
 //
 
+// ############### READER VIEW CONTROLLER EXTENSION ###############
+
 import UIKit
 import AVFoundation
-
-// ############### READER VIEW CONTROLLER EXTENSION ###############
 
 extension ReaderViewController {
     

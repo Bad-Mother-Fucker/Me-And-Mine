@@ -16,13 +16,10 @@ import UIKit
 class DetectionEngine {
     
     // MARK: - Image Classification
-//    var view:UIView
-//    init (on view:UIView){
-//        self.view = view
-//    }
+   var view:UIView?
     
     
-    var result: (String,VNConfidence)?
+   var result: (String,VNConfidence)?
     
     /// - Tag: MLModelSetup
     lazy var classificationRequest: VNCoreMLRequest = {
@@ -45,7 +42,7 @@ class DetectionEngine {
     }()
     
     /// - Tag: PerformRequests
-    func updateClassifications(for image: UIImage,completionHandler: @escaping ((String,VNConfidence))->()) {
+    func updateClassifications(for image: UIImage) {
         
        print("Classifying...")
         
@@ -64,7 +61,7 @@ class DetectionEngine {
                  */
                 print("Failed to perform classification.\n\(error.localizedDescription)")
             }
-            completionHandler(self.result!)
+           
         }
         
         

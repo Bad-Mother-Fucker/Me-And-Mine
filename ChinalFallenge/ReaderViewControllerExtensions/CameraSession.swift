@@ -164,11 +164,9 @@ extension ReaderViewController: AVCapturePhotoCaptureDelegate, AVCaptureMetadata
         // Initialise a UIImage with our image data
         //let capturedImage = UIImage.init(data: imageData , scale: 1.0)
         if let image = UIImage.init(data: imageData , scale: 1.0) {
-            // Save our captured image to photos album
-            UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
-            imageView.image = image
-            itemPhotos.append(imageView)
-            detectionEngine.updateClassifications(for: image) { self.SpeechText.text = $0.0 }
+//            detectionEngine.updateClassifications(for: image)
+//            print (detectionEngine.result?.0)
+            self.presentedImage = image
             self.captureSession?.stopRunning()
         }
     }

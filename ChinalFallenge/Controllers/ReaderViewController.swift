@@ -52,6 +52,8 @@ class ReaderViewController: UIViewController {
     var flagOnSpeech = false
     var parentPVC: MasterViewController!
     var attributes: [String] = []
+    var presentedImage: UIImage?
+   
     
     //ENUM
     enum SessionSetupResult {
@@ -145,8 +147,8 @@ class ReaderViewController: UIViewController {
             //PickImageFromCameraRoll()
             break
         case 1:
-            // TODO: ImageDetection
-            //ML()
+            // TODO: OCR
+            //OCR()
             break
         default:
             break
@@ -158,9 +160,9 @@ class ReaderViewController: UIViewController {
         case 0:
             setFlashlight()
         case 1:
-            // TODO: OCR
-            //OCR()
-            break
+            guard let _ = presentedImage else {break}
+            detectionEngine.updateClassifications(for: presentedImage!)
+
         default:
             break
         }

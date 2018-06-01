@@ -167,6 +167,7 @@ extension ReaderViewController: AVCapturePhotoCaptureDelegate, AVCaptureMetadata
 //            detectionEngine.updateClassifications(for: image)
 //            print (detectionEngine.result?.0)
             self.presentedImage = image
+            self.currentItem.photos?.append(image)
             self.captureSession?.stopRunning()
         }
     }

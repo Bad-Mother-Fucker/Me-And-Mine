@@ -17,9 +17,14 @@ class DetectionEngine {
     
     // MARK: - Image Classification
    var view:UIView?
+    private var result:(String,VNConfidence)?
     
-    
-   var result: (String,VNConfidence)?
+    var classificationResult: (String,VNConfidence){
+        get{
+            guard let _ = result else {return ("identifier",0)}
+            return self.result!
+        }
+    }
     
     /// - Tag: MLModelSetup
     lazy var classificationRequest: VNCoreMLRequest = {
@@ -89,8 +94,10 @@ class DetectionEngine {
                     
                     return String(format: "  (%.2f) %@", classification.confidence, classification.identifier)
                 }
-                print( "Classification:\n" + descriptions.joined(separator: "\n"))
-                self.result = (classifications.first!.identifier,classifications.first!.confidence)
+//                print( "Classification:\n" + descriptions.joined(separator: "\n"))
+                let string = classifications.first!.identifier.split(separator: ",")
+                let identifier = String(string.first!)
+                self.result = (identifier,classifications.first!.confidence)
             }
         }
     }

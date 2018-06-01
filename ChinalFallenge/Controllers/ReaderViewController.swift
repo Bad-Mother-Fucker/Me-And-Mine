@@ -51,9 +51,9 @@ class ReaderViewController: UIViewController {
     var flashMode = AVCaptureDevice.FlashMode.off
     var flagOnSpeech = false
     var parentPVC: MasterViewController!
-    var attributes: [String] = []
     var presentedImage: UIImage?
-   
+    var currentItem = MyItem()
+ 
     
     //ENUM
     enum SessionSetupResult {
@@ -162,7 +162,8 @@ class ReaderViewController: UIViewController {
         case 1:
             guard let _ = presentedImage else {break}
             detectionEngine.updateClassifications(for: presentedImage!)
-
+            currentItem.identifier = detectionEngine.classificationResult.0
+            attributesCollectionView.reloadData()
         default:
             break
         }

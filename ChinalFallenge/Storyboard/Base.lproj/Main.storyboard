@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hqq-t9-KhV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hqq-t9-KhV">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -34,9 +34,9 @@
                                         </connections>
                                     </button>
                                     <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9hA-bo-yxM">
-                                        <rect key="frame" x="24" y="609" width="326" height="31"/>
+                                        <rect key="frame" x="24" y="609" width="326" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="31" id="uWj-ga-aAy"/>
+                                            <constraint firstAttribute="height" constant="50" id="uWj-ga-aAy"/>
                                         </constraints>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="SZ5-Ov-KsQ">
                                             <size key="itemSize" width="127" height="31"/>
@@ -144,7 +144,7 @@
                                     <constraint firstItem="9hA-bo-yxM" firstAttribute="top" secondItem="7r5-nf-Fc7" secondAttribute="bottom" constant="29" id="eY3-X8-rY5"/>
                                     <constraint firstItem="9hA-bo-yxM" firstAttribute="leading" secondItem="h1r-FP-K3F" secondAttribute="leading" id="fFZ-JQ-Mb8"/>
                                     <constraint firstItem="hYA-vb-9uU" firstAttribute="trailing" secondItem="fmn-Gb-5EU" secondAttribute="trailing" id="gV4-Ud-AXV"/>
-                                    <constraint firstAttribute="bottom" secondItem="9hA-bo-yxM" secondAttribute="bottom" constant="27" id="hZq-Rv-eTu"/>
+                                    <constraint firstAttribute="bottom" secondItem="9hA-bo-yxM" secondAttribute="bottom" constant="8" id="hZq-Rv-eTu"/>
                                     <constraint firstItem="9hA-bo-yxM" firstAttribute="leading" secondItem="fmn-Gb-5EU" secondAttribute="leading" id="pTF-1e-hL0"/>
                                     <constraint firstAttribute="trailing" secondItem="hYA-vb-9uU" secondAttribute="trailing" constant="20" id="q0E-FC-1f4"/>
                                 </constraints>
@@ -196,7 +196,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-607" y="-27"/>
+            <point key="canvasLocation" x="-607.20000000000005" y="-27.436281859070466"/>
         </scene>
         <!--Discover-->
         <scene sceneID="SiS-xF-T42">
@@ -214,7 +214,7 @@
                                 <color key="barTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <items>
                                     <navigationItem title="Me &amp; Mine" id="taS-HY-gRm">
-                                        <barButtonItem key="leftBarButtonItem" title="Item" id="9Jf-i8-Wtk">
+                                        <barButtonItem key="leftBarButtonItem" image="cameraSymbol" id="9Jf-i8-Wtk">
                                             <connections>
                                                 <action selector="goToReaderViewController:" destination="UIz-14-MN9" id="xnS-o6-uIq"/>
                                             </connections>
@@ -314,4 +314,7 @@
             <point key="canvasLocation" x="1254" y="-823"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="cameraSymbol" width="26" height="21"/>
+    </resources>
 </document>

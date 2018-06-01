@@ -13,7 +13,7 @@ import UIKit
 extension ReaderViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.attributes.count
+        return self.currentItem.attributes.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -21,10 +21,15 @@ extension ReaderViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let attributeButton = cell.viewWithTag(2) as! UIButton
         
         attributeButton.setTitleColor(UIColor.white, for: .normal)
-        attributeButton.setTitle(attributes[indexPath.row], for: .normal)
+        
+        if currentItem.attributes.count >= indexPath.row{
+        attributeButton.setTitle(currentItem.attributes[indexPath.row], for: .normal)
+        }
         
         return cell
     }
+    
+    
 //
 //    func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
 //        switch indexPath.row {

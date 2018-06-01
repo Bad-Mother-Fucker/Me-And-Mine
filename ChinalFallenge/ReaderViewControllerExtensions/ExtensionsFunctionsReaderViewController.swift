@@ -67,9 +67,9 @@ extension ReaderViewController {
     func setButtonOnCameraView() {
         setButtonsTag(to: 0)
         self.centerButton.setBackgroundImage(#imageLiteral(resourceName: "buttonCamera"), for: .normal)
-        self.dismissButton.setBackgroundImage(#imageLiteral(resourceName: "arrowRight"), for: .normal)
+        self.dismissButton.setBackgroundImage(#imageLiteral(resourceName: "arrowRightRound"), for: .normal)
         self.dismissButton.isHidden = false
-        self.leftButton.setBackgroundImage(#imageLiteral(resourceName: "flashAuto"), for: .normal)
+        self.leftButton.setBackgroundImage(#imageLiteral(resourceName: "flash"), for: .normal)
         self.attributesCollectionView.isHidden = true
         //TODO: set assets for this
         //self.cornerLeftButton.setBackgroundImage(<#T##image: UIImage?##UIImage?#>, for: .normal) (settings)
@@ -79,6 +79,7 @@ extension ReaderViewController {
     
     func setButtonsAfterPhoto() {
         dismissButton.isHidden = true
+        attributesCollectionView.isHidden = false
         attributesCollectionView.backgroundColor = .clear
         attributesCollectionView.isHidden = false
         conrnerLeftButton.setBackgroundImage(#imageLiteral(resourceName: "trashButton"), for: .normal)

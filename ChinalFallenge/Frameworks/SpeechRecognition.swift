@@ -18,6 +18,7 @@ class SpeechRecognitionEngine {
     var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     var recognitionTask: SFSpeechRecognitionTask?
     let audioEngine = AVAudioEngine()
+    var groupWords: [String] = []
     
     //REQUEST AUTHORIZATION FOR SPEECH RECOGNITION
     func requestSpeechAuthorization() {
@@ -61,11 +62,26 @@ class SpeechRecognitionEngine {
             if (speechResult != nil) {
                 isFinal = (speechResult?.isFinal)!
                 let speech = speechResult?.bestTranscription.formattedString
-                self.handleSpeechText(speech!, speechTextView: speechTextView)
-            }
+        }
             if (error != nil || isFinal) {
                 debugPrint(speechResult?.bestTranscription.formattedString as Any)
                 inputNode.removeTap(onBus: 0)
+                let speech = speechResult?.bestTranscription.formattedString 
+//                self.handleSpeechText(speech!, speechTextView: speechTextView)
+                let tagger = NSLinguisticTagger(tagSchemes: [.lexicalClass], options: 0)
+                tagger.string = speech
+                let range = NSRange(location: 0, length: (speech?.utf16.count)!)
+                let options: NSLinguisticTagger.Options = [.omitPunctuation, .omitWhitespace]
+                tagger.enumerateTags(in: range, unit: .word, scheme: .lexicalClass, options: options) { tag, tokenRange, _ in
+                    if let tag = tag {
+                        if tag.rawValue == "Adjective" || tag.rawValue == "Noun" {
+                            let word = (speech! as NSString).substring(with: tokenRange)
+                            self.groupWords.append(word)
+                            speechTextView.text = self.groupWords.joined(separator: " , ")
+                            print("groupWords:\(self.groupWords)")
+                        }
+                    }
+                }
                 self.recognitionRequest = nil
                 self.recognitionTask = nil
             }
@@ -95,7 +111,6 @@ class SpeechRecognitionEngine {
     
     func handleSpeechText(_ speech: String, speechTextView: UITextView) {
         speechTextView.isHidden = false
-        speechTextView.text = speech
         speechTextView.isEditable = true
     }
 }

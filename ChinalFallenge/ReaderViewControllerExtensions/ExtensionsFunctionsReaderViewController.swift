@@ -24,6 +24,10 @@ extension ReaderViewController {
         self.cameraView.endEditing(true)
     }
     
+    @objc func reloadCVData(){
+        attributesCollectionView.reloadData()
+    }
+    
     //HIDE AND IS NOT EDITABLE TEXT VIEW.
     func settingTextView() {
         self.SpeechText.text = ""

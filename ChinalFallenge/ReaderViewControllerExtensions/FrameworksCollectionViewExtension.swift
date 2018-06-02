@@ -19,13 +19,8 @@ extension ReaderViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "customCell", for: indexPath)
         let attributeButton = cell.viewWithTag(2) as! UIButton
-        
         attributeButton.setTitleColor(UIColor.white, for: .normal)
-        
-        if currentItem.attributes.count >= indexPath.row{
         attributeButton.setTitle(currentItem.attributes[indexPath.row], for: .normal)
-        }
-        
         return cell
     }
     

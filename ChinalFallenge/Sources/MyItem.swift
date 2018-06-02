@@ -21,7 +21,8 @@ class MyItem {
     var isFavourite: Bool?
     var rating: Int?
     var details: [String:Any]?
-    var attributes:[String]{
+    
+    var attributes: [String] {
         get{
             let identifier = self.identifier ?? "identifier"
             let brand = self.brand ?? "brand"
@@ -32,10 +33,8 @@ class MyItem {
     
     var color: String {
         get{
-            guard let _ = colors else{return ""}
-           return self.colors.map {colore in
-                return String(format: "  (%.2f) %@",colore)
-            }!
+            guard let _ = colors else{return "color"}
+            return self.colors.map {colore in return "\(colore)"}!
         }
     }
        

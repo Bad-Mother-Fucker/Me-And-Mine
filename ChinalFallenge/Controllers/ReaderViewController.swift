@@ -83,6 +83,7 @@ class ReaderViewController: UIViewController {
         self.SpeechText.delegate = self
         self.centerButton.addTarget(self, action: #selector(touchUp), for: .touchUpInside)
         self.centerButton.addTarget(self, action: #selector(touchDown), for: .touchDown)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadCVData), name: NSNotification.Name("classification completed"), object: nil)
     }
     
     //VIEW WILL APPEAR
@@ -163,7 +164,6 @@ class ReaderViewController: UIViewController {
             guard let _ = presentedImage else {break}
             detectionEngine.updateClassifications(for: presentedImage!)
             currentItem.identifier = detectionEngine.classificationResult.0
-            attributesCollectionView.reloadData()
         default:
             break
         }

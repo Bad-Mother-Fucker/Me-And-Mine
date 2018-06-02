@@ -98,6 +98,8 @@ class DetectionEngine {
                 let string = classifications.first!.identifier.split(separator: ",")
                 let identifier = String(string.first!)
                 self.result = (identifier,classifications.first!.confidence)
+                let notification = Notification(name: NSNotification.Name("classification completed"), object: nil)
+                NotificationCenter.default.post(notification)
             }
         }
     }

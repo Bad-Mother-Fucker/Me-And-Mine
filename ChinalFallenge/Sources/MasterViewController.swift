@@ -22,7 +22,6 @@ class MasterViewController: UIPageViewController, UIPageViewControllerDelegate, 
         delegate = self
         let firstViewController = viewControllers[1]
         setViewControllers([firstViewController], direction: .reverse, animated: true, completion: nil)
-        
     }
     
     func presentationCount(for pageViewController: UIPageViewController) -> Int {

@@ -13,6 +13,7 @@ import UIKit
 extension ReaderViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print("CV Items \(currentItem.attributes.count)")
         return self.currentItem.attributes.count
     }
     

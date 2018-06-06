@@ -133,9 +133,10 @@ class ReaderViewController: UIViewController {
         case 1:
             self.captureSession?.startRunning()
             setButtonOnCameraView()
+             
             self.imageView.removeFromSuperview()
             self.imageView.image = nil
-            self.centerButton.tag = 0
+            
         default:
             break
         }
@@ -163,7 +164,6 @@ class ReaderViewController: UIViewController {
         case 1:
             guard let _ = presentedImage else {break}
             detectionEngine.updateClassifications(for: presentedImage!)
-            currentItem.identifier = detectionEngine.classificationResult.0
         default:
             break
         }

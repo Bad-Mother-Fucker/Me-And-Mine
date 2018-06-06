@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		191617D720BDA0E100202A29 /* ObjectRecognitionFramework.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191617D620BDA0E100202A29 /* ObjectRecognitionFramework.swift */; };
 		191617D920BDA1E800202A29 /* MobileNet.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 191617D820BDA1E800202A29 /* MobileNet.mlmodel */; };
+		195D60E020C5603900AF8714 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 195D60DF20C5603900AF8714 /* Assets.xcassets */; };
 		1962DDF420C07B4E00A0FFAC /* MyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1962DDF320C07B4E00A0FFAC /* MyItem.swift */; };
 		196D341D20B7F52900FA184A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 196D341C20B7F52900FA184A /* Extensions.swift */; };
 		1977ED4D20BC8A6400625266 /* FrameworksCollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1977ED4920BC8A5D00625266 /* FrameworksCollectionViewExtension.swift */; };
@@ -17,7 +18,6 @@
 		1977ED5020BC8A6400625266 /* ExtensionsFunctionsReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1977ED4C20BC8A6400625266 /* ExtensionsFunctionsReaderViewController.swift */; };
 		FC3D0AEE20B59519004B3236 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3D0AED20B59519004B3236 /* MasterViewController.swift */; };
 		FC4B790920A989B200A6AC4A /* SpeechRecognition.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B790620A989B200A6AC4A /* SpeechRecognition.swift */; };
-		FC74449B208B498500095D3D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC74449A208B498500095D3D /* Assets.xcassets */; };
 		FC8C44CE20873F36004160C6 /* ReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC8C44CD20873F36004160C6 /* ReaderViewController.swift */; };
 		FCAB744120AB6F7F00E3E9AF /* VideoPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAB744020AB6F7F00E3E9AF /* VideoPreviewView.swift */; };
 		FCC2E3A32080E22A000C3974 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC2E3A22080E22A000C3974 /* AppDelegate.swift */; };
@@ -49,6 +49,7 @@
 /* Begin PBXFileReference section */
 		191617D620BDA0E100202A29 /* ObjectRecognitionFramework.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectRecognitionFramework.swift; sourceTree = "<group>"; };
 		191617D820BDA1E800202A29 /* MobileNet.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNet.mlmodel; sourceTree = "<group>"; };
+		195D60DF20C5603900AF8714 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1962DDF320C07B4E00A0FFAC /* MyItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyItem.swift; sourceTree = "<group>"; };
 		196D341C20B7F52900FA184A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		1977ED4920BC8A5D00625266 /* FrameworksCollectionViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FrameworksCollectionViewExtension.swift; path = ChinalFallenge/ReaderViewControllerExtensions/FrameworksCollectionViewExtension.swift; sourceTree = SOURCE_ROOT; };
@@ -57,7 +58,6 @@
 		1977ED4C20BC8A6400625266 /* ExtensionsFunctionsReaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ExtensionsFunctionsReaderViewController.swift; path = ChinalFallenge/ReaderViewControllerExtensions/ExtensionsFunctionsReaderViewController.swift; sourceTree = SOURCE_ROOT; };
 		FC3D0AED20B59519004B3236 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MasterViewController.swift; path = ChinalFallenge/Sources/MasterViewController.swift; sourceTree = SOURCE_ROOT; };
 		FC4B790620A989B200A6AC4A /* SpeechRecognition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechRecognition.swift; sourceTree = "<group>"; };
-		FC74449A208B498500095D3D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC8C44CD20873F36004160C6 /* ReaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ReaderViewController.swift; path = ChinalFallenge/Controllers/ReaderViewController.swift; sourceTree = SOURCE_ROOT; };
 		FCAB744020AB6F7F00E3E9AF /* VideoPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = VideoPreviewView.swift; path = ChinalFallenge/Sources/VideoPreviewView.swift; sourceTree = SOURCE_ROOT; };
 		FCC2E39F2080E229000C3974 /* ChinalFallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChinalFallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -103,7 +103,6 @@
 		FC04BB41208DE3DF00B6C2FF /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				191617D620BDA0E100202A29 /* ObjectRecognitionFramework.swift */,
 				196D341C20B7F52900FA184A /* Extensions.swift */,
 				FC3D0AED20B59519004B3236 /* MasterViewController.swift */,
 				FCAB744020AB6F7F00E3E9AF /* VideoPreviewView.swift */,
@@ -135,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				FC4B790620A989B200A6AC4A /* SpeechRecognition.swift */,
+				191617D620BDA0E100202A29 /* ObjectRecognitionFramework.swift */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -173,8 +173,8 @@
 		FCC2E3A12080E229000C3974 /* ChinalFallenge */ = {
 			isa = PBXGroup;
 			children = (
+				195D60DF20C5603900AF8714 /* Assets.xcassets */,
 				191617D820BDA1E800202A29 /* MobileNet.mlmodel */,
-				FC74449A208B498500095D3D /* Assets.xcassets */,
 				FCC2E3AE2080E22A000C3974 /* Info.plist */,
 				FCC2E3A22080E22A000C3974 /* AppDelegate.swift */,
 				FC129854208488410095A2AF /* Storyboard */,
@@ -309,7 +309,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCC2E3AD2080E22A000C3974 /* LaunchScreen.storyboard in Resources */,
-				FC74449B208B498500095D3D /* Assets.xcassets in Resources */,
+				195D60E020C5603900AF8714 /* Assets.xcassets in Resources */,
 				FCC2E3A82080E22A000C3974 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -523,7 +523,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WPA5A7G662;
+				DEVELOPMENT_TEAM = D4L4S7MAUX;
 				INFOPLIST_FILE = ChinalFallenge/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -541,7 +541,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = WPA5A7G662;
+				DEVELOPMENT_TEAM = D4L4S7MAUX;
 				INFOPLIST_FILE = ChinalFallenge/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

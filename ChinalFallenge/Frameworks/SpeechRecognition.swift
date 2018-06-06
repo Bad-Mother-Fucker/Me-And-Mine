@@ -19,6 +19,7 @@ class SpeechRecognitionEngine {
     var recognitionTask: SFSpeechRecognitionTask?
     let audioEngine = AVAudioEngine()
     var groupWords: [String] = []
+    var organizationsGroup: [String]?
     
     //REQUEST AUTHORIZATION FOR SPEECH RECOGNITION
     func requestSpeechAuthorization() {
@@ -59,33 +60,20 @@ class SpeechRecognitionEngine {
         
         recognitionTask = speechRecognizer?.recognitionTask(with: recognitionRequest!, resultHandler: { (speechResult, error) in
             var isFinal = false
-            if (speechResult != nil) {
-                isFinal = (speechResult?.isFinal)!
-                let speech = speechResult?.bestTranscription.formattedString
-        }
+            guard (speechResult != nil) else {return}
+                isFinal = speechResult!.isFinal
             if (error != nil || isFinal) {
                 debugPrint(speechResult?.bestTranscription.formattedString as Any)
                 inputNode.removeTap(onBus: 0)
-                let speech = speechResult?.bestTranscription.formattedString 
-//                self.handleSpeechText(speech!, speechTextView: speechTextView)
-                let tagger = NSLinguisticTagger(tagSchemes: [.lexicalClass], options: 0)
-                tagger.string = speech
-                let range = NSRange(location: 0, length: (speech?.utf16.count)!)
-                let options: NSLinguisticTagger.Options = [.omitPunctuation, .omitWhitespace]
-                tagger.enumerateTags(in: range, unit: .word, scheme: .lexicalClass, options: options) { tag, tokenRange, _ in
-                    if let tag = tag {
-                        if tag.rawValue == "Adjective" || tag.rawValue == "Noun" {
-                            let word = (speech! as NSString).substring(with: tokenRange)
-                            self.groupWords.append(word)
-                            speechTextView.text = self.groupWords.joined(separator: " , ")
-                            print("groupWords:\(self.groupWords)")
-                        }
-                    }
-                }
+                let speech = speechResult?.bestTranscription.formattedString
+                self.NLPLexicalClassification(on: speech)
+                self.NLPNameTypeClassification(on: speech)
+                 self.handleSpeechText(self.groupWords.joined(separator: ","), speechTextView: speechTextView)
                 self.recognitionRequest = nil
                 self.recognitionTask = nil
             }
         })
+        
         let recordingFormat = inputNode.outputFormat(forBus: 0)
         inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer, when) in
             self.recognitionRequest?.append(buffer)
@@ -112,5 +100,40 @@ class SpeechRecognitionEngine {
     func handleSpeechText(_ speech: String, speechTextView: UITextView) {
         speechTextView.isHidden = false
         speechTextView.isEditable = true
+        speechTextView.text = speech
+    }
+    
+    func NLPLexicalClassification(on speech:String?){
+        let tagger = NSLinguisticTagger(tagSchemes: [.lexicalClass], options: 0)
+        tagger.string = speech
+        let range = NSRange(location: 0, length: (speech?.utf16.count)!)
+        let options: NSLinguisticTagger.Options = [.omitPunctuation, .omitWhitespace]
+        tagger.enumerateTags(in: range, unit: .word, scheme: .lexicalClass, options: options) { tag, tokenRange, _ in
+            if let tag = tag {
+                if tag.rawValue == "Adjective" || tag.rawValue == "Noun" {
+                    let word = (speech! as NSString).substring(with: tokenRange)
+                    self.groupWords.append(word)
+                    print("groupWords:\(self.groupWords)")
+                }
+            }
+        }
+    }
+    
+    
+    func NLPNameTypeClassification(on speech:String?){
+        let tagger = NSLinguisticTagger(tagSchemes: [.nameType], options: 0)
+        tagger.string = speech
+        let range = NSRange(location:0, length: (speech?.utf16.count)!)
+        let options: NSLinguisticTagger.Options = [.omitPunctuation, .omitWhitespace, .joinNames]
+        let tags: [NSLinguisticTag] = [.personalName, .placeName, .organizationName]
+        tagger.enumerateTags(in: range, unit: .word, scheme: .nameType, options: options) { tag, tokenRange, stop in
+            if let tag = tag, tags.contains(tag) {
+                let name = (speech! as NSString).substring(with: tokenRange)
+                if tag.rawValue == "organizationName"{
+                    organizationsGroup?.append(name)
+                    print(organizationsGroup)
+                }
+            }
+        }
     }
 }

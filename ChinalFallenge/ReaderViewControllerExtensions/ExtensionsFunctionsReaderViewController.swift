@@ -25,6 +25,7 @@ extension ReaderViewController {
     }
     
     @objc func reloadCVData(){
+        currentItem.identifier = detectionEngine.classificationResult.0
         attributesCollectionView.reloadData()
     }
     
@@ -53,9 +54,7 @@ extension ReaderViewController {
     @objc func touchDown() {
         if self.centerButton.tag == 1 {
             centerButton.isSelected = true
-            speechQueue.async {
-                self.speechRec.startRecordingSpeech(speechTextView: self.SpeechText)
-            }
+            self.speechRec.startRecordingSpeech(speechTextView: self.SpeechText)
         }
        
     }
@@ -70,14 +69,18 @@ extension ReaderViewController {
     
     func setButtonOnCameraView() {
         setButtonsTag(to: 0)
+         leftButton.frame.size = CGSize(width: 30, height: 40)
+        SpeechText.text = ""
+        SpeechText.isHidden = true
+        SpeechText.isEditable = false
         self.centerButton.setBackgroundImage(#imageLiteral(resourceName: "buttonCamera"), for: .normal)
-        self.dismissButton.setBackgroundImage(#imageLiteral(resourceName: "arrowRightRound"), for: .normal)
+        self.dismissButton.setBackgroundImage(#imageLiteral(resourceName: "arrow"), for: .normal)
         self.dismissButton.isHidden = false
-        self.leftButton.setBackgroundImage(#imageLiteral(resourceName: "flash"), for: .normal)
+        self.flashMode = .auto
+        self.leftButton.setBackgroundImage(#imageLiteral(resourceName: "flash auto"), for: .normal)
         self.attributesCollectionView.isHidden = true
-        //TODO: set assets for this
-        //self.cornerLeftButton.setBackgroundImage(<#T##image: UIImage?##UIImage?#>, for: .normal) (settings)
-        //self.rightButton.setBackgroundImage(<#T##image: UIImage?##UIImage?#>, for: .normal) (imagePickerIcon)
+        self.conrnerLeftButton.setBackgroundImage(#imageLiteral(resourceName: "settings"), for: .normal)
+        self.rightButton.setBackgroundImage(#imageLiteral(resourceName: "picker"), for: .normal)
     }
     
     
@@ -86,11 +89,12 @@ extension ReaderViewController {
         attributesCollectionView.isHidden = false
         attributesCollectionView.backgroundColor = .clear
         attributesCollectionView.isHidden = false
+        leftButton.frame.size = CGSize(width: 40, height: 40)
         conrnerLeftButton.setBackgroundImage(#imageLiteral(resourceName: "trashButton"), for: .normal)
         centerButton.setBackgroundImage(#imageLiteral(resourceName: "dictation inactive"), for: .normal)
         centerButton.setBackgroundImage(#imageLiteral(resourceName: "dictation active"), for: .selected)
         rightButton.setBackgroundImage(#imageLiteral(resourceName: "OCR"), for: .normal)
-        leftButton.setBackgroundImage(#imageLiteral(resourceName: "MLButton"), for: .normal)
+        leftButton.setBackgroundImage(#imageLiteral(resourceName: "ML"), for: .normal)
         setButtonsTag(to: 1)
     }
     
@@ -98,13 +102,13 @@ extension ReaderViewController {
         switch self.flashMode {
         case .off:
             self.flashMode = .auto
-            self.leftButton.setBackgroundImage(#imageLiteral(resourceName: "flashAuto"), for: .normal)
+            self.leftButton.setBackgroundImage(#imageLiteral(resourceName: "flash auto"), for: .normal)
         case .auto:
             self.flashMode = .on
-            self.leftButton.setBackgroundImage(#imageLiteral(resourceName: "FlashOn"), for: .normal)
+            self.leftButton.setBackgroundImage(#imageLiteral(resourceName: "flash"), for: .normal)
         case .on:
             self.flashMode = .off
-            self.leftButton.setBackgroundImage(#imageLiteral(resourceName: "FlashOff"), for: .normal)
+            self.leftButton.setBackgroundImage(#imageLiteral(resourceName: "flash off"), for: .normal)
         }
     }
     
